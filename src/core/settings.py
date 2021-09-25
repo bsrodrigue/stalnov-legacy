@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # Created Apps
-    "core",
     "apps.accounts",
     "apps.novels",
     # Third Party Apps
@@ -146,3 +145,6 @@ AUTH_USER_MODEL = "accounts.StallionUser"
 # LOGIN REDIRECTION
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
+
+
+DEFAULT_AUTO_FIELD="django.db.models.AutoField"

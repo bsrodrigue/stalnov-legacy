@@ -2,4 +2,4 @@ from django.apps import AppConfig
 
 
 class NovelsConfig(AppConfig):
-    name = "novels"
+    name = "apps.novels"
