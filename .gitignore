@@ -6,6 +6,10 @@
 db.sqlite3
 media
 
+
+# Poetry
+poetry.lock
+
 # Backup files # 
 *.bak 
 
