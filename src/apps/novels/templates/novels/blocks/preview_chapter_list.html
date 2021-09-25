@@ -1,0 +1,26 @@
+{% load static %}
+{% load novel_extras %}
+<div id="chapters" class="novel-chapter-list">
+    {% if chapters %}
+
+    <form action="" method="post"></form>
+    {% for chapter in chapters %}
+    <div class="novel-chapter-li">
+        <a href="{% url 'preview_chapter' novel.id forloop.counter  %}"class="novel-chapter-li-title {% if chapter.id == current_chapter.id %}active-chapter{% endif %}">
+            {{ chapter.title }}
+        </a>
+        <p class="novel-chapter-li-date"> publié: {{ chapter.created_at }} </p>
+        {% if novel.id|is_my_novel:user.id %}
+             <a href=" {% url 'edit_chapter' chapter.id %} ">Éditer</a>
+             /
+             <a href=" {% url 'delete_chapter' chapter.id %} ">Supprimer</a>
+            {% endif %}
+    </div>
+    <hr />
+    {% endfor %}
+
+
+    {% else %}
+    <h5>Pas de chapitres disponibles</h5>
+    {% endif %}
+</div>

@@ -1,0 +1,169 @@
+[{
+        "model": "novels.novel",
+        "pk": 1,
+        "fields": {
+            "title": "Ultimate Antihero",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-1.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+    {
+        "model": "novels.novel",
+        "pk": 2,
+        "fields": {
+            "title": "Mock Adventures",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-1.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+    {
+        "model": "novels.novel",
+        "pk": 3,
+        "fields": {
+            "title": "The Greater Wak",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-3.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+    {
+        "model": "novels.novel",
+        "pk": 4,
+        "fields": {
+            "title": "Mamadou is Overcheated!",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-4.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+    {
+        "model": "novels.novel",
+        "pk": 5,
+        "fields": {
+            "title": "Overlord",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-5.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+    {
+        "model": "novels.novel",
+        "pk": 6,
+        "fields": {
+            "title": "Yasmine is dreaming",
+            "description": "A good story sure...",
+            "cover": "novel_covers/ln-cover-6.jpg",
+            "reads": 0,
+            "likes": 0,
+            "adult": false,
+            "category": 1,
+            "created_at": "2020-10-21T18:25:43.511Z"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 1,
+        "fields": {
+            "title": "Yasmine is dreaming",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-19"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 2,
+        "fields": {
+            "title": "Getting along with the devil",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-20"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 3,
+        "fields": {
+            "title": "Truth or dare?",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-21"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 4,
+        "fields": {
+            "title": "Discovery in the new world",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-21"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 5,
+        "fields": {
+            "title": "The god of Sparta",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-21"
+        }
+    },
+
+    {
+        "model": "novels.chapter",
+        "pk": 6,
+        "fields": {
+            "title": "A new comrade",
+            "content": "A good story sure...",
+            "order": "0",
+            "reads": 0,
+            "likes": 0,
+            "novel": 1,
+            "created_at": "2020-10-21"
+        }
+    }
+]

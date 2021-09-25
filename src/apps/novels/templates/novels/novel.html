@@ -1,0 +1,24 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block additional_stylesheets %}
+<link rel="stylesheet" href="{% static 'novels/css/novel.css' %}">
+{% endblock additional_stylesheets %}
+{% block active_container %}container{% endblock active_container %}
+{% block content %}
+<!-- Chapter List -->
+<section>
+    <h1 class="section-title">Chapitres</h1>
+    <div class="section-title-underbar underbar"></div>
+    <div class="section-content">
+        <div class="row">
+            <div class="col-md-6">
+                 <!-- Chapter List -->
+                    {% include 'novels/blocks/chapter_list.html' %}
+            </div>
+            <div class="col-md-6">
+                <img class="novel-cover" src=" {{ novel.cover.url }} " alt="">
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

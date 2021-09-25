@@ -1,0 +1,41 @@
+.novel-chapter-list{
+    height: 500px;
+    overflow-y: scroll;
+    padding: 20px 0px;
+}
+
+.novel-chapter-list::-webkit-scrollbar{
+    display: none;
+}
+
+.novel-chapter-li-title{
+    color: #2f2519;
+    transition: all 0.5s ease;
+}
+
+.novel-chapter-li-title:hover{
+    color: #ff4301;
+    margin-left: 20px;
+    transition: all 0.5s ease;
+}
+
+.novel-chapter-li-date{
+    color: dimgray;
+    font-size: 12px;
+    margin: 5px 0px;
+}
+
+.novel-cover{
+    height: 500px;
+    width: 100%;
+    object-fit: cover;
+    object-position: 0% 0%;
+    border-radius: 0px 10px 10px 0px;
+    transition: all 0.5s ease;
+}
+
+.novel-cover:hover{
+    object-position: 100% 100%;
+    transition: all 0.5s ease;
+}
+

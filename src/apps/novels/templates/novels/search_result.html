@@ -1,0 +1,16 @@
+{% extends 'global/base.html' %}
+{% block active_container %}container{% endblock active_container %}
+{% block content %}
+<!-- New Novels -->
+<section>
+    <h1 class="section-title">Résultats de recherche</h1>
+    <div class="section-title-underbar underbar"></div>
+    <div class="section-content">
+        {% if found_novels %}
+        {% include 'novels/blocks/novel_cards.html' with novels=found_novels %}
+        {% else %}
+        <h1>Aucun Résultat trouvé</h1>
+        {% endif %}
+    </div>
+</section>
+{% endblock content %}

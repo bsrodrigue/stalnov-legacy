@@ -1,0 +1,84 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block active_container %}container{% endblock active_container %}
+
+
+{% block additional_stylesheets %}
+<link href=" {% static 'novels/css/quill.snow.css' %} " rel="stylesheet">
+<link href=" {% static 'novels/css/novel_form.css' %} " rel="stylesheet">
+{% endblock additional_stylesheets %}
+
+
+{% block additional_scripts %}
+<script src="{% static 'novels/js/quill.min.js' %}"></script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Décrivez votre nouvelle histoire, donnez leur envie de la lire...',
+  });
+</script>
+<script src=" {% static 'novels/js/novel_form.js' %} "></script>
+{% endblock additional_scripts %}
+
+{% block content %}
+<form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <!-- Novel Cover Selection -->
+    <div class="default-covers">
+	    <img class="default-cover" data-index=1 src="{% static 'novels/images/default-covers/default1.jpg' %}"/>
+	    <img class="default-cover" data-index=2 src="{% static 'novels/images/default-covers/default2.jpg' %}"/>
+	    <img class="default-cover" data-index=3 src="{% static 'novels/images/default-covers/default3.jpg' %}"/>
+	    <img class="default-cover" data-index=4 src="{% static 'novels/images/default-covers/default4.jpg' %}"/>
+
+	    <!-- Hidden Radioboxes -->
+	    <input type="radio" id="default-cover-radio1" name="default_cover" value="1" hidden>
+	    <input type="radio" id="default-cover-radio2" name="default_cover" value="2" hidden>
+	    <input type="radio" id="default-cover-radio3" name="default_cover" value="3" hidden>
+	    <input type="radio" id="default-cover-radio4" name="default_cover" value="4" hidden>
+
+	</div>
+            <small style="color: grey; margin: 0.5em 0em;">
+                *Vous pouvez sélectionner une couverture par défaut pour votre roman
+            </small>
+
+
+        <!-- Upload your own cover  -->
+        <div class="upload-your-cover" title="Importer votre propre couverture">
+            <i class="fas fa-file-upload"></i>
+        </div>
+       <small class="upload-your-cover-subtext" style="color: #00adb5; margin: 1em 0;">Importez votre propre couverture</small>
+
+
+        <input accept="image/*" id="novel-form-cover-input" name="cover" type="file" form="novel_form" hidden>
+    <!-- Novel Title Input -->
+  <input class="novel-form-title-input" value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+
+    <div class="novel-form-genre">
+        {{ form.genre.label_tag }}
+        {{ form.genre }}
+    </div>
+
+        {% comment %}This element does not have a style and acts just as an information receiver{% endcomment %}
+  <input id="novel_description_input" type="text" name="description" id="" hidden>
+
+  <!-- QuillJS Novel Description Input -->
+  <div id="editor">
+   {% if novel %}
+   {% autoescape on %}
+    {{ novel.description|safe }}
+  {% endautoescape %}
+   {% endif %}
+  </div>
+
+  <div id="novel_form_checkboxes">
+    <label for="public">Rendre public:</label>
+    <input {% if novel.public %} checked {% endif %} type="checkbox" name="public" id="novel_public_checkbox">
+    <br>
+    <small>Ce livre sera disponible au public si au moins un chapitre est public </small>
+ 
+  </div>
+
+    <input id="novel_save_button" class="btn btn-dark"type="submit" value="Sauvegarder">
+</form>
+{% endblock content %}

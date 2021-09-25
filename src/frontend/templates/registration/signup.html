@@ -1,0 +1,136 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+
+{% block additional_scripts %}
+    <script src="{% static 'global/js/signup.js' %}" type="text/javascript"></script>
+{% endblock additional_scripts %}
+
+{% block content %}
+
+    <div class="container">
+
+        <!--- Multistep Signup Form --->
+        <form id="signup-form" method="post">
+            {% csrf_token %}
+
+            <!--- First Step: Personal --->
+            <div class="signup-form-step signup-form-step-1">
+                <h1 class="signup-form-step-title">---1---</h1>
+
+                <!--- Firstname --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.firstname.id_for_label }}">Nom de famille</label>
+                        <input type="text" class="form-control" id="{{ form.firstname.id_for_label }}" name="{{ form.firstname.html_name }}" placeholder="Veuillez entrer votre nom de famille" >
+                    </div>
+                        {{ form.firstname.errors }}
+                </div>
+
+                <!--- Lastname --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.firstname.id_for_label }}">Prenom(s)</label>
+                        <input type="text" class="form-control" id="{{ form.lastname.id_for_label }}" name="{{ form.lastname.html_name }}" placeholder="Veuillez entrer vos prenom(s)" >
+                    </div>
+                        {{ form.lastname.errors }}
+                </div>
+
+                <!--- Gender --->
+                <div class="mb-3">
+                    <div class="custom-radio-group">
+                        <label>Sexe</label>
+                        <div>
+
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="H" type="radio" id="gender-male" name="gender" class="custom-control-input">
+                                <label class="custom-control-label" for="gender-male">Homme</label>
+                            </div>
+                            <div class="custom-control custom-radio custom-control-inline">
+                                <input value="F" type="radio" id="gender-female" name="gender" class="custom-control-input">
+                                <label class="custom-control-label" for="gender-female">Femme</label>
+                            </div>
+                        </div>
+                    </div>
+                    {{ form.gender.errors }}
+                </div>
+
+                <!--- Bio --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.bio.id_for_label }}">Parlez-nous de vous</label>
+                        <textarea id="{{ form.bio.id_for_label }}" name="{{ form.bio.html_name }}" class="form-control" maxlength="256" rows="5"></textarea>
+                    </div>
+                    {{ form.bio.errors }}
+                </div>
+
+                <div class="signup-form-nav-buttons">
+                    <button class="btn btn-primary  signup-form-next" data-step="1">Suivant</button>
+                </div>
+            </div>
+
+
+
+
+
+            <!--- Second Step: Authentication --->
+            <div class="signup-form-step signup-form-step-2" hidden>
+                <h1 class="signup-form-step-title">---2---</h1>
+
+                <!--- Email --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.email.id_for_label }}">Adresse Email</label>
+                        <input type="text" class="form-control" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" placeholder="Veuillez entrer votre adresse email" >
+                    </div>
+                        {{ form.email.errors }}
+                </div>
+
+                <!--- Username --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" placeholder="Veuillez choisir un nom d'utilisateur pour votre compte" >
+                    </div>
+                        {{ form.username.errors }}
+                </div>
+
+
+                <!--- Password --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.password1.id_for_label }}">Mot de passe</label>
+                        <input type="password" class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" placeholder="Veuillez choisir un mot de passe puissant" >
+                    </div>
+                        {{ form.password1.errors }}
+                </div>
+
+                <!--- Password Confirmation --->
+                <div class="mb-3">
+                    <div class="custom-input-field">
+                        <label for="{{ form.password2.id_for_label }}">Confirmation du mot de passe</label>
+                        <input type="password" class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" placeholder="Veuillez saisir a nouveau votre mot de passe" >
+                    </div>
+                        {{ form.password2.errors }}
+                </div>
+                <div class="signup-form-nav-buttons">
+                    <button class="btn btn-primary  signup-form-previous" data-step="2">Precedant</button>
+                    <button class="btn btn-primary  signup-form-next" data-step="2">Suivant</button>
+                </div>
+            </div>
+
+
+            <!--- Thirs Step: Recommendation --->
+            <div class="signup-form-step signup-form-step-3" hidden>
+                <h1 class="signup-form-step-title">---3---</h1>
+                <div class="signup-form-nav-buttons">
+                    <button class="btn btn-primary signup-form-previous" data-step="3">Precedant</button>
+                    <button type="submit" class="btn btn-success signup-form-next" data-step="3">S'inscrire</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+
+{% endblock %}
