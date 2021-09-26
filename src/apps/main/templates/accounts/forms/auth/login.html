@@ -1,0 +1,48 @@
+{% extends 'global/base.html' %} {% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container">
+        <div class="signup-form-step signup-form-step-2">
+            <!--- Username --->
+            <div class="mb-3">
+                <div class="custom-input-field">
+                    <label for="{{ form.username.id_for_label }}"
+                        >Nom d'utilisateur</label
+                    >
+                    <input
+                        type="text"
+                        class="form-control"
+                        id="{{ form.username.id_for_label }}"
+                        name="username"
+                        placeholder="Veuillez saisir un nom d'utilisateur"
+                    />
+                </div>
+                {{ form.username.errors }}
+            </div>
+
+            <!--- Password --->
+            <div class="mb-3">
+                <div class="custom-input-field">
+                    <label for="{{ form.password.id_for_label }}"
+                        >Mot de passe</label
+                    >
+                    <input
+                        type="password"
+                        class="form-control"
+                        id="{{ form.password.id_for_label }}"
+                        name="password"
+                        placeholder="Veuillez saisir votre mot de passe"
+                    />
+                </div>
+                {{ form.password.errors }}
+            </div>
+
+            <div class="signup-form-nav-buttons">
+                <button class="btn btn-primary btn-block signup-form-next" data-step="2">
+                    Me connecter
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock %}

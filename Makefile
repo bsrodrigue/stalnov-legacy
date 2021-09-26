@@ -5,7 +5,7 @@ delmigrations:
 	find ./src -path "*/migrations/*.py" -exec rm {} \;
 
 delpyc:
-	find .src -name "*.pyc" -exec rm {} \;
+	find ./src -name "*.pyc" -exec rm {} \;
 
 mkmigrations:
 	python ./src/manage.py makemigrations

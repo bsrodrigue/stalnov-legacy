@@ -37,13 +37,10 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    "livereload",
     "django.contrib.staticfiles",
-    # Created Apps
-    "apps.accounts",
-    "apps.novels",
-    # Third Party Apps
+    "apps.main",
     "notifications",
-    "djrichtextfield",
 ]
 
 MIDDLEWARE = [
@@ -55,6 +52,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    'livereload.middleware.LiveReloadScript',
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -96,13 +94,6 @@ DATABASES = {
     },
 }
 
-
-# Password validation
-# https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
-
-AUTH_PASSWORD_VALIDATORS = []
-
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
@@ -125,22 +116,8 @@ STATICFILES_DIRS = [BASE_DIR / "frontend/static"]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-
-DJRICHTEXTFIELD_CONFIG = {
-    "js": [
-        "//cdn.tiny.cloud/1/bdj6enu3ljfgm2iflhx0esi1d7dpt0k3a0ijr7zi754f77jt/tinymce/5/tinymce.min.js"
-    ],
-    "init_template": "djrichtextfield/init/tinymce.js",
-    "settings": {
-        "menubar": True,
-        "plugins": "link image",
-        "toolbar": "bold italic | link image | removeformat",
-        "width": 700,
-    },
-}
-
 # Custom User Model
-AUTH_USER_MODEL = "accounts.StallionUser"
+AUTH_USER_MODEL = "main.StallionUser"
 
 # LOGIN REDIRECTION
 LOGIN_REDIRECT_URL = "home"
