@@ -1,5 +1,4 @@
-{% extends 'global/base.html' %} {% block content %}
-
+{% extends 'global/base.html' %} {% load static %} {% block content %}
 <!--- New Novels --->
 
 <section class="novel-section">
@@ -12,7 +11,118 @@
         <div class="section-title-bottom"></div>
     </div>
     <!--- SECTION-CONTENT --->
-    <div class="section-content material-shadow"></div>
+    <div class="section-content material-shadow">
+        <div class="novel-cards">
+            <div class="novel-card">
+                <div class="novel-card-overlay">
+                    <p class="novel-card-overlay-title">
+                        Les Aventures de Samba Diallo
+                    </p>
+                    <p class="novel-card-overlay-description">
+                        Consectetur fuga eligendi deleniti praesentium adipisci
+                        recusandae Suscipit maxime error exercitationem delectus
+                        rerum Voluptatem reiciendis ullam nobis ipsa saepe
+                        sequi. Laboriosam non beatae cumque accusamus alias
+                        Voluptates saepe nesciunt obcaecati
+                    </p>
+                </div>
+
+                <img
+                    class="novel-card-cover"
+                    src=" {% static 'global/img/covs/cov1.jpg' %} "
+                    alt=""
+                />
+            </div>
+
+            <div class="novel-card">
+                <div class="novel-card-overlay">
+                    <p class="novel-card-overlay-title">
+                        Les Aventures de Samba Diallo
+                    </p>
+                    <p class="novel-card-overlay-description">
+                        Consectetur fuga eligendi deleniti praesentium adipisci
+                        recusandae Suscipit maxime error exercitationem delectus
+                        rerum Voluptatem reiciendis ullam nobis ipsa saepe
+                        sequi. Laboriosam non beatae cumque accusamus alias
+                        Voluptates saepe nesciunt obcaecati
+                    </p>
+                    <div class="novel-card-overlay-stats">
+                        <div class="stats stats-views">
+                            <i class="fas fa-eye"></i>
+                            <small> 145 </small>
+                        </div>
+
+                        <div class="stats stats-chapters">
+                            <i class="fas fa-bars"></i>
+                            <small> 34 </small>
+                        </div>
+
+                        <div class="stats stats-likes">
+                            <i class="fas fa-heart"></i>
+                            <small> 342 </small>
+                        </div>
+
+                        <div class="stats stats-comments">
+                            <i class="fas fa-comments"></i>
+                            <small> 233 </small>
+                        </div>
+                    </div>
+                    <div class="novel-card-overlay-actions">
+                        <a class="read" href="">Lire</a>
+                        <a class="add_libraryd" href="">Ajouter</a>
+                    </div>
+                </div>
+
+                <img
+                    class="novel-card-cover"
+                    src=" {% static 'global/img/covs/cov2.jpg' %} "
+                    alt=""
+                />
+            </div>
+
+            <div class="novel-card">
+                <div class="novel-card-overlay">
+                    <p class="novel-card-overlay-title">
+                        Les Aventures de Samba Diallo
+                    </p>
+                    <p class="novel-card-overlay-description">
+                        Consectetur fuga eligendi deleniti praesentium adipisci
+                        recusandae Suscipit maxime error exercitationem delectus
+                        rerum Voluptatem reiciendis ullam nobis ipsa saepe
+                        sequi. Laboriosam non beatae cumque accusamus alias
+                        Voluptates saepe nesciunt obcaecati
+                    </p>
+                </div>
+
+                <img
+                    class="novel-card-cover"
+                    src=" {% static 'global/img/covs/cov3.jpg' %} "
+                    alt=""
+                />
+            </div>
+
+            <div class="novel-card">
+                <div class="novel-card-overlay">
+                    <p class="novel-card-overlay-title">
+                        Les Aventures de Samba Diallo
+                    </p>
+                    <p class="novel-card-overlay-description">
+                        Consectetur fuga eligendi deleniti praesentium adipisci
+                        recusandae Suscipit maxime error exercitationem delectus
+                        rerum Voluptatem reiciendis ullam nobis ipsa saepe
+                        sequi. Laboriosam non beatae cumque accusamus alias
+                        Voluptates saepe nesciunt obcaecati
+                    </p>
+                </div>
+
+                <img
+                    class="novel-card-cover"
+                    src=" {% static 'global/img/covs/cov4.jpg' %} "
+                    alt=""
+                />
+            </div>
+        </div>
+    </div>
 </section>
 
 {% endblock content %}

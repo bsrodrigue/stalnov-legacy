@@ -130,6 +130,7 @@ header {
 /*--- Side-Panel ---*/
 .side-panel {
     position: absolute;
+    z-index: 3;
     top: 4.5em;
     right: 0;
     display: flex;
@@ -198,6 +199,8 @@ section {
 
 .section-title-container {
     position: relative;
+    height: 2em;
+    margin-bottom: 1em;
 }
 
 .section-title-top,
@@ -226,4 +229,96 @@ section {
 .section-title {
     color: white;
     font-weight: bold;
+}
+
+.section-content {
+    background-color: white;
+    padding: 1em;
+}
+
+/*--- Novel-Cards ---*/
+
+.novel-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+
+.novel-card {
+    position: relative;
+    overflow: hidden;
+    height: 400px;
+}
+
+.novel-card-overlay {
+    position: absolute;
+    z-index: 2;
+    bottom: -400px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    transition: bottom 0.5s ease-out;
+}
+
+.novel-card-cover {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.novel-card:hover > .novel-card-overlay {
+    bottom: 0;
+    transition: bottom 0.5s ease-out;
+}
+
+.novel-card-overlay-title {
+    width: 100%;
+    padding: 0.5em;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--ternary-color);
+}
+
+
+.novel-card-overlay-description{
+    text-align: justify-content;
+    padding: 0.5em;
+}
+
+.stats small{
+    margin-bottom: 0.6em;
+}
+
+.novel-card-overlay-stats{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.novel-card-overlay-actions{
+    display: flex;
+    justify-content: space-around;
+    background-color: var(--main-color);
+    padding: 0.5em;
+}
+
+.novel-card-overlay-actions a{
+    color: white;
+    font-weight: bold;
+    border: 1px var(--ternary-color) solid;
+    padding: 0.3em 1em;
+}
+
+
+.novel-card-overlay-actions a:hover{
+    background-color: var(--ternary-color);
+}
+
+.novel-card-overlay-actions :nth-child(1){
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+.novel-card-overlay-actions :nth-child(2){
+    border-radius: 0 0.5em 0.5em 0;
 }
