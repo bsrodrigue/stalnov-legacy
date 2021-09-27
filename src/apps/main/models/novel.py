@@ -8,16 +8,6 @@ class Novel(models.Model):
     class Meta:
         ordering = ['publication_date']
 
-    GENRES = [
-        ("Inconnu", "Inconnu"),
-        ("Fantasy", "Fantasy"),
-        ("Aventure", "Aventure"),
-        ("Romance", "Romance"),
-        ("Horreur", "Horreur"),
-        ("Action", "Action"),
-        ("Historique", "Historique"),
-        ("Nouvelles", "Nouvelles"),
-    ]
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
     cover = models.ImageField(
@@ -30,7 +20,7 @@ class Novel(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
     )
-    genre = models.CharField(choices=GENRES, max_length=30, default="Inconnu")
+    genre = models.ForeignKey('main.NovelGenre', on_delete=models.CASCADE)
     objects = models.Manager()
     accessible_novels = AccessibleNovelManager()
 

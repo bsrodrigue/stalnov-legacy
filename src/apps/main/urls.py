@@ -67,7 +67,7 @@ reader_urlpatterns = [
 writer_urlpatterns = [
     path("my_creations", views.my_creations, name="my_creations"),
 
-    path("new_novel", views.new_novel, name="new_novel"),
+    path("new_novel", views.NovelCreationView.as_view(), name="new_novel"),
     path("edit_novel/<int:novel_id>",
          views.edit_novel, name="edit_novel"),
     path(

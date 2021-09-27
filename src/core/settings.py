@@ -71,8 +71,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+
                 # Custom processors
-                # "novels.context_processors.categories",
+                "apps.main.context_processors.genres",
             ],
         },
     },

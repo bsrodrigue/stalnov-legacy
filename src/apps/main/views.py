@@ -10,19 +10,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 from .models import Novel, Chapter, Comment
-from .forms import *
+from .forms import StallionUserCreationForm, StallionUserChangeForm, ChapterForm, CommentForm, NovelForm
 
-# TODO: Find a way to make this more scalable
-genres_mapping = {
-    "Inconnu": "Inconnu",
-    "Fantasy": "Fantasy",
-    "Aventure": "Aventure",
-    "Romance": "Romance",
-    "Historique": "Historique",
-    "Horreur": "Horreur",
-    "Nouvelles": "Nouvelles",
-    "Action": "Action",
-}
 
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
@@ -34,6 +23,7 @@ class SignUpView(CreateView):
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {"form": form, **self.context})
+
 
 def notifications(request):
     user = request.user
@@ -141,6 +131,31 @@ def novel_dashboard(request, novel_id):
 
 
 @method_decorator(login_required, name='dispatch')
+class NovelCreationView(View):
+    form_class = NovelForm
+    template_name = 'novels/forms/novel_form.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        extra_context = {'new_novel': 'new_novel'}
+        return render(request, self.template_name, {'form': form,  **extra_context})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.cleaned_data['cover'] = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data['default_cover'] else form.cleaned_data['cover']
+            novel = request.user.create_novel(
+                **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public', 'default_cover'}}
+            )
+            if form.cleaned_data['public']:
+                request.user.publish_novel(novel.id)
+            return HttpResponseRedirect(reverse_lazy('my_creations'))
+        extra_context = {'novel_id': 'novel_id'}
+        return render(request, self.template_name, {'form': form, **extra_context})
+
+
+@method_decorator(login_required, name='dispatch')
 class ChapterCreationView(View):
     form_class = ChapterForm
     template_name = 'novels/forms/chapter_form.html'
@@ -245,39 +260,6 @@ def edit_novel(request, novel_id):
 
 
 @login_required
-def new_novel(request):
-    if request.method == "POST":
-        form = NovelForm(request.POST, request.FILES)
-        if form.is_valid():
-            cover = f"novel_covers/default/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data.get(
-                "default_cover", '') else form.cleaned_data.get("cover")
-            request.user.create_novel(
-                title=form.cleaned_data["title"],
-                description=form.cleaned_data["description"],
-                public=form.cleaned_data["public"],
-                genre=genres_mapping[form.cleaned_data["genre"]],
-                cover=cover,
-            )
-            return HttpResponseRedirect(reverse_lazy("my_creations"))
-        else:
-            print(form.errors)
-    else:
-        form = NovelForm()
-
-    return render(
-        request,
-        "novels/forms/novel_form.html",
-        {
-            "page_title": "Nouveau roman",
-            "page_hero_title": "Nouveau roman",
-            "page_hero_description": "Inspirez des milliers de lecteurs avec une nouvelle histoire!",
-            "form": form,
-            "new_novel": "new_novel",
-        },
-    )
-
-
-@login_required
 def my_creations(request):
     my_created_novels = Novel.objects.filter(author=request.user.id)
     return render(
@@ -307,44 +289,14 @@ def home(request):
 
 
 def genre(request, genre_name):
-    genres_mapping = {
-        "Inconnu": [
-            "Autres",
-            "Des histoires probablement trop originales pour etre categorisees.",
-        ],
-        "Fantasy": [
-            "Fantasy",
-            "Plongez dans des univers fantastiques où votre imagination est la seule limite.",
-        ],
-        "Aventure": [
-            "Aventure",
-            "Échappez à la routine et vivez de grandes aventures.",
-        ],
-        "Romance": [
-            "Romance",
-            "Vous croyez en l'amour? Laissez votre coeur s'emballer avec notre collection d'histoires roses.",
-        ],
-        "Action": ["Action", "Laissez l'Adrenaline prendre le dessus!"],
-        "Horreur": ["Horreur", "Des histoires a vous glacer le sang..."],
-        "Historique": [
-            "Historique",
-            "Decouvrez des histoires basees sur des faits reel",
-        ],
-        "Nouvelles": ["Nouvelles", "Lisez des collections d'histoires courtes."],
-    }
-    requested_genre = genres_mapping[genre_name]
-
-    requested_genre_novels = Novel.objects.filter(genre=genre_name).order_by(
+    requested_genre_novels = Novel.objects.filter(genre__title=genre_name).order_by(
         "-created_at"
     )
     return render(
         request,
         "novels/lists/genre.html",
         {
-            "page_title": f"Genre {requested_genre[0]}",
             "requested_genre_novels": requested_genre_novels,
-            "page_hero_title": f"Collection {requested_genre[0]}",
-            "page_hero_description": f"{requested_genre[1]}",
         },
     )
 

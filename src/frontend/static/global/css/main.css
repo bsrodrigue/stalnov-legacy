@@ -1,0 +1,229 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+:root {
+    --main-color: #4a403a;
+    --secondary-color: #a45d5d;
+    --ternary-color: #ffc069;
+    --bg-color: #efefef;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    background-color: var(--bg-color);
+    overflow-x: hidden;
+    position: relative;
+    height: 100%;
+}
+
+body {
+    font-family: "Raleway", sans-serif;
+}
+
+/*--- Utilities ---*/
+.wrapper {
+    margin-right: auto; /* 1 */
+    margin-left: auto; /* 1 */
+
+    max-width: 1400px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left: 10px; /* 3 */
+}
+
+.material-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/*--- Global Typography ---*/
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    cursor: pointer;
+}
+
+/*--- Header ---*/
+header {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--main-color);
+    margin-bottom: 1em;
+}
+
+.upper-header,
+.lower-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+/*--- Upper-Header ---*/
+.upper-header {
+    align-items: center;
+}
+
+.logo {
+    color: white;
+    font-size: 2.5em;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    flex-grow: 2;
+    margin: 0em 1em;
+    position: relative;
+}
+
+.search-icon {
+    color: var(--secondary-color);
+    position: absolute;
+    left: 0.5em;
+}
+
+.search-input {
+    border: none;
+    border-radius: 2em;
+    flex-grow: 2;
+    height: 2.5em;
+    background-color: var(--bg-color);
+    padding-left: 2.5em;
+}
+
+.search-input:focus {
+    outline: none;
+}
+
+.profile-button {
+    background: none;
+    border: none;
+}
+
+.profile-button:hover {
+    cursor: pointer;
+}
+
+.profile-button i {
+    font-size: 2.5em;
+    color: white;
+}
+
+/*--- Lower-Header ---*/
+.lower-header {
+    background-color: var(--ternary-color);
+}
+
+.novel-genre-nav-item {
+    color: white;
+    font-weight: bold;
+    margin: 0.5em;
+}
+
+/*--- Side-Panel ---*/
+.side-panel {
+    position: absolute;
+    top: 4.5em;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 1em 2em;
+
+    transition: right 0.5s ease-out;
+}
+
+.side-panel-hidden {
+    right: -500px;
+    transition: right 0.5s ease-out;
+}
+
+.side-panel hr {
+    width: 100%;
+    opacity: 0.5;
+}
+
+.panel-section {
+    margin: 1em 0em;
+}
+
+.auth-section,
+.account-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.section-item-title {
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.register,
+.login {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: white;
+    background-color: var(--secondary-color);
+    padding: 0.3em 2em;
+    border-radius: 1em;
+    margin: 0.5em 0;
+}
+
+.account-section {
+    width: 100%;
+}
+
+.account-section-item {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0em;
+}
+
+/*--- Home-Page ---*/
+
+section {
+    margin: 2em 0;
+}
+
+.section-title-container {
+    position: relative;
+}
+
+.section-title-top,
+.section-title-bottom {
+    position: absolute;
+    z-index: 0;
+    background-color: var(--ternary-color);
+    width: 20em;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.section-title-top {
+    z-index: 1;
+    top: -1em;
+    left: 1em;
+    border-radius: 0 1em 1em 0;
+}
+
+.section-title-bottom {
+    background-color: var(--main-color);
+}
+
+.section-title {
+    color: white;
+    font-weight: bold;
+}
