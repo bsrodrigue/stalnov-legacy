@@ -144,7 +144,8 @@ class NovelCreationView(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             print(form.cleaned_data)
-            form.cleaned_data['cover'] = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data['default_cover'] else form.cleaned_data['cover']
+            form.cleaned_data['cover'] = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data[
+                'default_cover'] else form.cleaned_data['cover']
             novel = request.user.create_novel(
                 **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public', 'default_cover'}}
             )

@@ -1,0 +1,72 @@
+<!--- Second Step: Authentication --->
+<div class="signup-form-step signup-form-step-2" hidden>
+  <div class="signup-form-step-container">
+    <div class="signup-form-step-header">
+      <i class="form-step-icon fas fa-at"></i>
+      <p class="signup-form-step-header-title">
+        Informations de votre nouveau compte
+      </p>
+    </div>
+    <!--- Email --->
+    <div class="input-field">
+      <label for="{{ form.email.id_for_label }}">Adresse Email</label>
+      <input
+        type="text"
+        class="form-control"
+        id="{{ form.email.id_for_label }}"
+        name="{{ form.email.html_name }}"
+        placeholder="Veuillez entrer votre adresse email"
+      />
+      {{ form.email.errors }}
+    </div>
+
+    <!--- Username --->
+    <div class="input-field">
+      <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
+      <input
+        type="text"
+        class="form-control"
+        id="{{ form.username.id_for_label }}"
+        name="{{ form.username.html_name }}"
+        placeholder="Veuillez choisir un nom d'utilisateur pour votre compte"
+      />
+      {{ form.username.errors }}
+    </div>
+
+    <!--- Password --->
+    <div class="input-field">
+      <label for="{{ form.password1.id_for_label }}">Mot de passe</label>
+      <input
+        type="password"
+        class="form-control"
+        id="{{ form.password1.id_for_label }}"
+        name="{{ form.password1.html_name }}"
+        placeholder="Veuillez choisir un mot de passe puissant"
+      />
+      {{ form.password1.errors }}
+    </div>
+
+    <!--- Password Confirmation --->
+    <div class="input-field">
+      <label for="{{ form.password2.id_for_label }}"
+        >Confirmation du mot de passe</label
+      >
+      <input
+        type="password"
+        class="form-control"
+        id="{{ form.password2.id_for_label }}"
+        name="{{ form.password2.html_name }}"
+        placeholder="Veuillez saisir a nouveau votre mot de passe"
+      />
+      {{ form.password2.errors }}
+    </div>
+    <div class="signup-form-nav-buttons">
+      <button class="btn btn-previous signup-form-previous" data-step="2">
+        Precedant
+      </button>
+      <button class="btn btn-next signup-form-next" data-step="2">
+        Suivant
+      </button>
+    </div>
+  </div>
+</div>

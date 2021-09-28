@@ -328,6 +328,20 @@ section {
 
 /*--- Registration-Form ---*/
 
+.errorlist{
+    list-style: none;
+}
+
+.errorlist li{
+    font-size: 0.8em;
+    font-weight: bold;
+    color: white;
+    padding: 0.3em;
+    background-color: red;
+    border-radius: 0 0 0.5em 0.5em;
+    width: fit-content;
+}
+
 form.auth-form {
     background-color: white;
     display: flex;
@@ -341,13 +355,23 @@ form.auth-form {
 
 .signup-form-step {
     width: 100%;
+}
+
+.signup-form-step-container {
+    width: inherit;
+}
+
+.signup-form-step-header {
     display: flex;
-    flex-direction: column;
-    justify-content: space-around;
     align-items: center;
 }
 
-.form-step-icon{
+.signup-form-step-header-title {
+    font-weight: bold;
+    margin-left: 1em;
+}
+
+.form-step-icon {
     font-size: 4.5em;
     color: var(--ternary-color);
 }
@@ -370,42 +394,65 @@ form.auth-form {
     background-color: white;
 }
 
-.input-field input {
+.input-field input,
+.input-field textarea {
     padding: 1em 2em;
     width: inherit;
-    border: 0.3em var(--secondary-color) solid;
+    border: 0.1em var(--secondary-color) solid;
 }
 
-.input-field input:focus{
+.input-field input:focus,
+.input-field textarea:focus {
     outline: none;
 }
 
-.input-field-okay{
+.input-field-okay {
     background-color: var(--secondary-color);
 }
 
-.gender-input{
+.gender-input {
     text-align: center;
 }
 
-.gender-inputs{
+.gender-inputs {
     display: flex;
     justify-content: space-around;
     padding: 1em 0;
 }
 
-
-.gender-inputs i{
+.gender-inputs i {
     font-size: 3em;
 }
 
-
-.gender-inputs i:hover, .gender-inputs i:focus{
+.gender-inputs i:hover,
+.gender-inputs i:focus {
     color: var(--ternary-color);
     cursor: pointer;
 }
 
-
-.gender-is-selected{
+.gender-is-selected {
     color: var(--ternary-color);
+}
+
+.signup-form-nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em 0;
+}
+
+.btn {
+    border: none;
+    background-color: var(--secondary-color);
+    color: white;
+    font-weight: bold;
+    padding: 1em;
+    width: 40%;
+}
+
+.btn:hover {
+    cursor: pointer;
+}
+
+.btn-next {
+    margin-left: auto;
 }

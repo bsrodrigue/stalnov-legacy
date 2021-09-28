@@ -7,115 +7,14 @@
 {% endblock additional_scripts %}
 
 {% block content %}
-
     <div class="wrapper center-box">
-
         <!--- Multistep Signup Form --->
         <form class="auth-form material-shadow" id="signup-form" method="post">
             {% csrf_token %}
-
-            <!--- First Step: Personal --->
-            <div class="signup-form-step signup-form-step-1">
-                <i class="form-step-icon fas fa-user-circle"></i>
-
-                <!--- Firstname --->
-                    <div class="input-field">
-                        <label for="{{ form.firstname.id_for_label }}">Nom de famille</label>
-                        <input type="text" class="form-control" id="{{ form.firstname.id_for_label }}" name="{{ form.firstname.html_name }}" placeholder="Veuillez entrer votre nom de famille" >
-                        {{ form.firstname.errors }}
-                    </div>
-
-                <!--- Lastname --->
-                    <div class="input-field">
-                        <label for="{{ form.firstname.id_for_label }}">Prenom(s)</label>
-                        <input type="text" class="form-control" id="{{ form.lastname.id_for_label }}" name="{{ form.lastname.html_name }}" placeholder="Veuillez entrer vos prenom(s)" >
-                        {{ form.lastname.errors }}
-                    </div>
-
-                <!--- Gender --->
-                    <div class="input-field">
-                        <label>Sexe</label>
-                                <input value="H" type="radio" id="gender-male" name="gender" class="gender-radio" checked hidden>
-                                <input value="F" type="radio" id="gender-female" name="gender" class="gender-radio" hidden>
-                        <div class="gender-inputs">
-                            <div data-gender="H" class="gender-input">
-                                <i data-gender="H" class="fas fa-male gender-icon gender-is-selected"></i>
-                                <p class="gender-title">Homme</p>
-
-                            </div>
-                            <div data-gender="F" class="gender-input">
-                                <i data-gender="F" class="fas fa-female gender-icon"></i>
-                                <p class="gender-title">Femme</p>
-                            </div>
-                        </div>
-                    {{ form.gender.errors }}
-                    </div>
-
-                <!--- Bio --->
-                    <div class="input-field">
-                        <label for="{{ form.bio.id_for_label }}">Parlez-nous de vous</label>
-                        <textarea id="{{ form.bio.id_for_label }}" name="{{ form.bio.html_name }}" class="form-control" maxlength="256" rows="5"></textarea>
-                    {{ form.bio.errors }}
-                    </div>
-
-                <div class="signup-form-nav-buttons">
-                    <button class="btn btn-primary  signup-form-next" data-step="1">Suivant</button>
-                </div>
-            </div>
-
-
-
-
-
-            <!--- Second Step: Authentication --->
-            <div class="signup-form-step signup-form-step-2" hidden>
-                <i class="form-step-icon fas fa-at"></i>
-                <!--- Email --->
-                    <div class="input-field">
-                        <label for="{{ form.email.id_for_label }}">Adresse Email</label>
-                        <input type="text" class="form-control" id="{{ form.email.id_for_label }}" name="{{ form.email.html_name }}" placeholder="Veuillez entrer votre adresse email" >
-                        {{ form.email.errors }}
-                    </div>
-
-                <!--- Username --->
-                    <div class="input-field">
-                        <label for="{{ form.username.id_for_label }}">Nom d'utilisateur</label>
-                        <input type="text" class="form-control" id="{{ form.username.id_for_label }}" name="{{ form.username.html_name }}" placeholder="Veuillez choisir un nom d'utilisateur pour votre compte" >
-                        {{ form.username.errors }}
-                    </div>
-
-
-                <!--- Password --->
-                    <div class="input-field">
-                        <label for="{{ form.password1.id_for_label }}">Mot de passe</label>
-                        <input type="password" class="form-control" id="{{ form.password1.id_for_label }}" name="{{ form.password1.html_name }}" placeholder="Veuillez choisir un mot de passe puissant" >
-                        {{ form.password1.errors }}
-                    </div>
-
-                <!--- Password Confirmation --->
-                    <div class="input-field">
-                        <label for="{{ form.password2.id_for_label }}">Confirmation du mot de passe</label>
-                        <input type="password" class="form-control" id="{{ form.password2.id_for_label }}" name="{{ form.password2.html_name }}" placeholder="Veuillez saisir a nouveau votre mot de passe" >
-                        {{ form.password2.errors }}
-                    </div>
-                <div class="signup-form-nav-buttons">
-                    <button class="btn btn-primary  signup-form-previous" data-step="2">Precedant</button>
-                    <button class="btn btn-primary  signup-form-next" data-step="2">Suivant</button>
-                </div>
-            </div>
-
-
-            <!--- Thirs Step: Recommendation --->
-            <div class="signup-form-step signup-form-step-3" hidden>
-                <i class="form-step-icon fab fa-gratipay"></i>
-                <div class="signup-form-nav-buttons">
-                    <button class="btn btn-primary signup-form-previous" data-step="3">Precedant</button>
-                    <button type="submit" class="btn btn-success signup-form-next" data-step="3">S'inscrire</button>
-                </div>
-            </div>
-
+            {% include 'accounts/forms/auth/blocks/first_step.html' %}
+            {% include 'accounts/forms/auth/blocks/second_step.html' %}
+            {% include 'accounts/forms/auth/blocks/third_step.html' %}
         </form>
-
     </div>
 
 {% endblock %}
