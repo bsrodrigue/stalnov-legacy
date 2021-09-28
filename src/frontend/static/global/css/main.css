@@ -36,6 +36,12 @@ body {
     padding-left: 10px; /* 3 */
 }
 
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .material-shadow {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -280,45 +286,126 @@ section {
     background-color: var(--ternary-color);
 }
 
-
-.novel-card-overlay-description{
+.novel-card-overlay-description {
     text-align: justify-content;
     padding: 0.5em;
 }
 
-.stats small{
+.stats small {
     margin-bottom: 0.6em;
 }
 
-.novel-card-overlay-stats{
+.novel-card-overlay-stats {
     display: flex;
     justify-content: space-around;
 }
 
-
-.novel-card-overlay-actions{
+.novel-card-overlay-actions {
     display: flex;
     justify-content: space-around;
     background-color: var(--main-color);
     padding: 0.5em;
 }
 
-.novel-card-overlay-actions a{
+.novel-card-overlay-actions a {
     color: white;
     font-weight: bold;
     border: 1px var(--ternary-color) solid;
     padding: 0.3em 1em;
 }
 
-
-.novel-card-overlay-actions a:hover{
+.novel-card-overlay-actions a:hover {
     background-color: var(--ternary-color);
 }
 
-.novel-card-overlay-actions :nth-child(1){
+.novel-card-overlay-actions :nth-child(1) {
     border-radius: 0.5em 0 0 0.5em;
 }
 
-.novel-card-overlay-actions :nth-child(2){
-    border-radius: 0 0.5em 0.5em 0;
+.novel-card-overlay-actions :nth-child(1) {
+    border-radius: 0.5em 0 0 0.5em;
+}
+
+/*--- Registration-Form ---*/
+
+form.auth-form {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    margin: 1em;
+    width: clamp(350px, 80vw, 700px);
+}
+
+.signup-form-step {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.form-step-icon{
+    font-size: 4.5em;
+    color: var(--ternary-color);
+}
+
+.input-field {
+    position: relative;
+    margin-bottom: 1em;
+    margin-top: 0.5em;
+    width: 100%;
+}
+
+.input-field label {
+    position: absolute;
+    top: -0.5em;
+    left: 0.5em;
+    color: var(--main-color);
+    font-weight: bold;
+    font-size: 0.9em;
+    padding: 0.2em 0.5em;
+    background-color: white;
+}
+
+.input-field input {
+    padding: 1em 2em;
+    width: inherit;
+    border: 0.3em var(--secondary-color) solid;
+}
+
+.input-field input:focus{
+    outline: none;
+}
+
+.input-field-okay{
+    background-color: var(--secondary-color);
+}
+
+.gender-input{
+    text-align: center;
+}
+
+.gender-inputs{
+    display: flex;
+    justify-content: space-around;
+    padding: 1em 0;
+}
+
+
+.gender-inputs i{
+    font-size: 3em;
+}
+
+
+.gender-inputs i:hover, .gender-inputs i:focus{
+    color: var(--ternary-color);
+    cursor: pointer;
+}
+
+
+.gender-is-selected{
+    color: var(--ternary-color);
 }
