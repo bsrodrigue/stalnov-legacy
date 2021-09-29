@@ -142,10 +142,10 @@ header {
     display: flex;
     flex-direction: column;
     background-color: white;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding: 1em 2em;
-
+    height: 100%;
     transition: right 0.5s ease-out;
 }
 
@@ -238,47 +238,48 @@ section {
 }
 
 .section-content {
-    background-color: white;
     padding: 1em;
 }
 
 /*--- Novel-Cards ---*/
 
-.novel-cards {
+.nc-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    grid-auto-rows: clamp(200px, 40vh, 450px);
+    gap: 1em;
 }
 
-.novel-card {
+.nc-flex {
+    display: flex;
+}
+
+.nc {
     position: relative;
     overflow: hidden;
-    height: 400px;
 }
 
-.novel-card-overlay {
+.nc img {
+    border-radius: 1em;
+}
+
+/*--- Simple-Novel-Cards ---*/
+
+.simple-nc {
+    width: 100%;
+    height: 100%;
+}
+
+.simple-nc-overlay {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     bottom: -400px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     transition: bottom 0.5s ease-out;
 }
 
-.novel-card-cover {
-    position: absolute;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-}
-
-.novel-card:hover > .novel-card-overlay {
-    bottom: 0;
-    transition: bottom 0.5s ease-out;
-}
-
-.novel-card-overlay-title {
+.simple-nc-overlay :nth-child(1) {
     width: 100%;
     padding: 0.5em;
     text-align: center;
@@ -286,53 +287,63 @@ section {
     background-color: var(--ternary-color);
 }
 
-.novel-card-overlay-description {
+.simple-nc-overlay :nth-child(2) {
     text-align: justify-content;
     padding: 0.5em;
 }
 
-.stats small {
-    margin-bottom: 0.6em;
+.simple-nc:hover > .simple-nc-overlay {
+    bottom: 0;
+    transition: bottom 0.5s ease-out;
 }
 
-.novel-card-overlay-stats {
+.simple-nc img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*--- Detailed-Novel-Cards ---*/
+
+.detailed-nc {
+    overflow: visible;
+    background-color: white;
+    border-radius: 1em;
+    height: 450px;
+    width: 500px;
+    margin-bottom: 5em;
+}
+
+.detailed-nc-overlay {
+    position: absolute;
+    top: -1em;
+    left: -1em;
+}
+
+.detailed-nc-overlay-top {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
-.novel-card-overlay-actions {
-    display: flex;
-    justify-content: space-around;
-    background-color: var(--main-color);
-    padding: 0.5em;
+.detailed-nc-overlay-infos {
+    margin: 2em 0.5em 1em 0.5em;
 }
 
-.novel-card-overlay-actions a {
-    color: white;
+.detailed-nc-overlay-top p {
+    margin-bottom: 0.5em;
+}
+
+.detailed-nc-overlay-infos :nth-child(1) {
     font-weight: bold;
-    border: 1px var(--ternary-color) solid;
-    padding: 0.3em 1em;
-}
-
-.novel-card-overlay-actions a:hover {
-    background-color: var(--ternary-color);
-}
-
-.novel-card-overlay-actions :nth-child(1) {
-    border-radius: 0.5em 0 0 0.5em;
-}
-
-.novel-card-overlay-actions :nth-child(1) {
-    border-radius: 0.5em 0 0 0.5em;
 }
 
 /*--- Registration-Form ---*/
 
-.errorlist{
+.errorlist {
     list-style: none;
 }
 
-.errorlist li{
+.errorlist li {
     font-size: 0.8em;
     font-weight: bold;
     color: white;
