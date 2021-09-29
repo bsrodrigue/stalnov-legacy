@@ -187,6 +187,11 @@ header {
     margin: 0.5em 0;
 }
 
+.register:hover,
+.login:hover {
+    background-color: black;
+}
+
 .account-section {
     width: 100%;
 }
@@ -462,6 +467,7 @@ form.auth-form {
 
 .btn:hover {
     cursor: pointer;
+    background-color: black;
 }
 
 .btn-next {
