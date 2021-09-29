@@ -1,7 +1,11 @@
 <nav class="side-panel side-panel-hidden">
   <div class="panel-section auth-section">
+    {% if user.is_authenticated %}
+    <a class="register" href=" {% url 'logout' %} ">Me deconnecter</a>
+    {% else %}
     <a class="register" href=" {% url 'signup' %} ">S'inscrire</a>
-    <a class="login" href="{% url 'login' %}">Se connecter</a>
+    <a class="login" href="{% url 'login' %}">Me connecter</a>
+    {% endif %}
   </div>
   <hr />
 
