@@ -24,7 +24,9 @@
         <!-- Header & Navbar -->
         {% include 'global/blocks/header.html' %}
 
-        <div class="wrapper">{% block content %} {% endblock content %}</div>
+        <div class=" {% block global_wrapper %}{% endblock global_wrapper %}">
+            {% block content %} {% endblock content %}
+        </div>
 
         <!-- Footer -->
         {% include 'global/blocks/footer.html' %}
