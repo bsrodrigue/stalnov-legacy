@@ -2,7 +2,9 @@
 <header>
     {% include 'global/blocks/header/site_message.html'%}
     <div class="upper-header">
-        <i class="logo fas fa-book-reader"></i>
+        <a href=" {% url 'home' %} ">
+            <i class="logo fas fa-book-reader"></i>
+        </a>
         <form class="search-form" action="">
             <i class="search-icon fas fa-search"></i>
             <input
@@ -20,8 +22,12 @@
     <div class="lower-header">
         <nav class="novel-genre-nav">
             {% for genre in genres %}
-                <a class="novel-genre-nav-item" href=" {% url 'genre' genre.title %} ">{{ genre.title }}</a>
-             {% endfor %}
+            <a
+                class="novel-genre-nav-item"
+                href=" {% url 'genre' genre.title %} "
+                >{{ genre.title }}</a
+            >
+            {% endfor %}
         </nav>
     </div>
 
