@@ -42,8 +42,14 @@ def notifications(request):
     )
 
 
-def profile(request):
-    return render(request, "accounts/profile.html", {"page_title": "profile"})
+class ProfileView(View):
+    template_name = "accounts/pages/profile.html"
+    context = {
+            "page_title": "Mon profil"
+            }
+
+    def get(self, request, *args, **kwargs):
+        return render(request, self.template_name, self.context)
 
 
 @login_required

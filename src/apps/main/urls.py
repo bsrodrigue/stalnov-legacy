@@ -27,7 +27,7 @@ account_urlpatterns = [
         name="novel_dashboard",
     ),
     path("notifications", views.notifications, name="notifications"),
-    path("profile", views.profile, name="profile"),
+    path("my_profile", views.ProfileView.as_view(), name="my_profile"),
 ]
 
 
