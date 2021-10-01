@@ -70,6 +70,15 @@ header {
     padding: 1em;
 }
 
+/*--- Site-Message ---*/
+.site-message{
+    display: flex;
+    justify-content: space-around;
+    background-color: orange;
+    color: white;
+    font-weight: bold;
+}
+
 /*--- Upper-Header ---*/
 .upper-header {
     align-items: center;
