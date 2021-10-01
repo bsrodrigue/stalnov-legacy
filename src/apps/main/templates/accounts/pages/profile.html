@@ -1,1 +1,68 @@
-{% extends 'global/base.html' %} {% block active_container %}container{% endblock active_container %} {% block content %} {% endblock content %}
+{% extends 'global/base.html' %} {% block active_container %}container{% endblock active_container %} {% block content %} 
+{% load static %}
+<div class="profile-header">
+    <img class="profile-image" src="{% static 'global/img/covs/cov1.jpg' %}" alt="" />
+    <p class="profile-username">Absolute Writer</p>
+    <div class="profile-stats">
+        <div class="profile-stat profile-stat-works">
+            <p class="profile-stat-count">0</p>
+            <p class="profile-stat-label">Romans</p>
+        </div>
+        <div class="profile-stat profile-stat-works">
+            <p class="profile-stat-count">0</p>
+            <p class="profile-stat-label">Romans</p>
+        </div>
+        <div class="profile-stat profile-stat-works">
+            <p class="profile-stat-count">0</p>
+            <p class="profile-stat-label">Romans</p>
+        </div>
+    </div>
+</div>
+
+<div class="profile-tab-selector">
+    <button class="profile-tab-button profile-tab-button-active">
+        <i class="far fa-smile"></i>
+        A propos de moi
+    </button>
+    <button class="profile-tab-button">
+        <i style="margin-right: 0.5em" class="fas fa-cogs"></i>
+        Modifier mon profil
+    </button>
+</div>
+
+
+<div class="profile-tab-contents">
+    <div class="wrapper">
+        <div class="profile-tab-content profile-tab-content-about-me">
+            <p class="profile-tab-content-title">Bio</p>
+            <p class="profile-tab-content-paragraph">
+                Lorem illo sed officiis velit totam alias Similique maxime
+                sapiente esse illum autem commodi veniam similique? Blanditiis
+                veniam exercitationem dolore recusandae repudiandae illo Nam
+                neque tempore tempora nesciunt eius. Voluptatibus.
+            </p>
+            <div class="profile-tab-content-personal-infos">
+                <div class="profile-tab-content-personal-info">
+                    <label class="profile-tab-personal-infos-label" for="">
+                        Nom de famille:
+                    </label>
+                    <p class="profile-tab-personal-infos-p">Diallo</p>
+                </div>
+                <div class="profile-tab-content-personal-info">
+                    <label class="profile-tab-personal-infos-label" for="">
+                        Prenom(s):
+                    </label>
+                    <p class="profile-tab-personal-infos-p">Mustafa</p>
+                </div>
+                <div class="profile-tab-content-personal-info">
+                    <label class="profile-tab-personal-infos-label" for="">
+                        Sexe:
+                    </label>
+                    <p class="profile-tab-personal-infos-p">Masculin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

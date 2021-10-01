@@ -61,7 +61,6 @@ header {
     display: flex;
     flex-direction: column;
     background-color: var(--main-color);
-    margin-bottom: 1em;
 }
 
 .upper-header,
@@ -480,12 +479,118 @@ form.auth-form {
 }
 
 /*--- Writer-Dashboard ---*/
-.writer-dashboard{
+.writer-dashboard {
     display: flex;
     align-items: center;
     background-color: white;
     padding: 1em;
 }
 
+/*--- User-Profile ---*/
+.profile-header {
+    background-color: #082032;
+    padding: 3em 1em;
 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
+    color: white;
+}
+
+.profile-image {
+    max-height: 10em;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 100%;
+}
+
+.profile-username {
+    font-weight: bold;
+    font-size: 2em;
+    text-align: center;
+    margin: 0.6em 0;
+}
+
+.profile-stats {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.profile-stat {
+    margin: 0 1em;
+}
+
+.profile-stat :nth-child(1) {
+    font-style: italic;
+}
+
+/*--- Profile-Tabs ---*/
+.profile-tab-selector {
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+}
+
+.profile-tab-button {
+    border: none;
+    border-bottom: 0.5em #082032 solid;
+    padding: 1em;
+    background-color: white;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.profile-tab-button:hover,
+.profile-tab-button-active {
+    background-color: #082032;
+    color: white;
+}
+
+/*--- Profile-Tab-Content ---*/
+.profile-tab-contents {
+    background-color: white;
+    padding: 1em 0;
+}
+
+.profile-tab-content {
+    display: flex;
+    justify-content: center;
+}
+
+/*--- Profile-Tab-About-Me ---*/
+.profile-tab-content-about-me {
+    flex-direction: column;
+    align-items: center;
+    padding: 0 10%;
+}
+
+.profile-tab-content-title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 2em;
+    margin: 1em 0;
+}
+
+.profile-tab-content-personal-infos {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 1em 0;
+}
+
+.profile-tab-content-personal-info {
+    display: flex;
+    margin: 1em 0;
+}
+
+.profile-tab-personal-infos-label {
+    font-weight: bold;
+    margin-right: 1em;
+}
+
+.profile-tab-personal-infos-p {
+    font-style: italic;
+}
