@@ -172,6 +172,11 @@ header {
 .section-item-title {
     font-weight: bold;
     text-transform: uppercase;
+    color: black;
+}
+
+.section-item-title:hover {
+    color: var(--ternary-color);
 }
 
 .register,
@@ -473,3 +478,14 @@ form.auth-form {
 .btn-next {
     margin-left: auto;
 }
+
+/*--- Writer-Dashboard ---*/
+.writer-dashboard{
+    display: flex;
+    align-items: center;
+    background-color: white;
+    padding: 1em;
+}
+
+
+

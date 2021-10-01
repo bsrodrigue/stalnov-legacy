@@ -9,18 +9,27 @@
   </div>
   <hr />
 
+  {% if user.is_authenticated %}
+
   <div class="panel-section account-section">
     <div class="account-section-item">
-      <a class="section-item-title">Bibliothèque</a>
+      <a href="{% url 'my_library' %}" class="section-item-title"
+        >Bibliothèque</a
+      >
       <i class="fas fa-book"></i>
     </div>
     <div class="account-section-item">
-      <a class="section-item-title">Créations</a>
+      <a href="{% url 'my_creations' %}" class="section-item-title"
+        >Créations</a
+      >
       <i class="fas fa-feather-alt"></i>
     </div>
     <div class="account-section-item">
-      <a class="section-item-title">Notifications</a>
+      <a href="{% url 'notifications' %}" class="section-item-title"
+        >Notifications</a
+      >
       <i class="far fa-bell"></i>
     </div>
   </div>
+  {% endif%}
 </nav>
