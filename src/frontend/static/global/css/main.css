@@ -516,6 +516,10 @@ form.auth-form {
     padding: 1em;
 }
 
+.writer-dashboard-action a{
+    color: white;
+}
+
 .writer-dashboard-action:hover {
     background-color: black;
 }
