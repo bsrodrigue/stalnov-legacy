@@ -71,7 +71,7 @@ header {
 }
 
 /*--- Site-Message ---*/
-.site-message{
+.site-message {
     display: flex;
     justify-content: space-around;
     background-color: orange;
@@ -493,6 +493,78 @@ form.auth-form {
     align-items: center;
     background-color: white;
     padding: 1em;
+}
+
+.writer-dashboard-actions {
+    display: flex;
+}
+
+.writer-dashboard-action {
+    display: flex;
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    padding: 1em;
+}
+
+.writer-dashboard-action:hover {
+    background-color: black;
+}
+
+.writer-dashboard-action i {
+    margin-right: 1em;
+}
+
+.writer-dashboard-novel-list {
+}
+
+.writer-dashboard-novel-list-item {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+}
+
+.writer-dashboard-novel-item-cover{
+    height: 5em;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 5em;
+}
+
+.writer-dashboard-novel-item-title{
+    font-weight: bold;
+    font-size: 1em;
+    flex-grow: 1;
+    margin-left: 1em;
+}
+
+.writer-dashboard-novel-item-actions {
+    display: flex;
+}
+
+.novel-item-action {
+    margin: 1em 0 1em 1em;
+    color: white;
+    padding: 1em;
+}
+
+.novel-item-action:hover{
+    background-color: black;
+}
+
+.novel-item-action-chapters {
+    background-color: var(--secondary-color);
+}
+
+.novel-item-action-edit{
+    background-color: var(--ternary-color);
+}
+
+.novel-item-action-delete {
+    background-color: red;
 }
 
 /*--- User-Profile ---*/
