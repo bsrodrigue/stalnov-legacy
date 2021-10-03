@@ -147,7 +147,7 @@ class NovelCreationView(View):
         return render(request, self.template_name, {'form': form,  **extra_context})
 
     def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
+        form = self.form_class(request.POST, request.FILES)
         if form.is_valid():
             print(form.cleaned_data)
             form.cleaned_data['cover'] = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data[
