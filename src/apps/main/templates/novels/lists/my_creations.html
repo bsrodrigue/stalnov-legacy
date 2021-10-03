@@ -1,4 +1,5 @@
 {% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %}
+{% include 'novels/blocks/confirmation_modal.html' %}
 <div class="writer-dashboard">
     <form action=""></form>
     <div class="writer-dashboard-actions">
@@ -34,7 +35,7 @@
             <a href="{% url 'edit_novel' novel.id %}" class="novel-item-action novel-item-action-edit">
                 <i class="far fa-edit"></i>
             </a>
-            <a href="{% url 'delete_novel' novel.id %}" class="novel-item-action novel-item-action-delete">
+            <a data-url="{% url 'delete_novel' novel.id %}" class="novel-item-action novel-item-action-delete">
                 <i class="fas fa-trash-alt"></i>
             </a>
         </div>

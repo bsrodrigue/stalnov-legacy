@@ -2,6 +2,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let profileButton = document.querySelector(".profile-button");
     let sidePanel = document.querySelector(".side-panel");
     let genderInputs = document.querySelectorAll(".gender-input");
+    let modalContainer = document.querySelector(".modal-container");
 
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {
@@ -48,6 +49,31 @@ window.addEventListener("DOMContentLoaded", (e) => {
                         break;
                 }
             }
+        });
+    });
+
+    // Modals
+    document.querySelectorAll(".novel-item-action-delete").forEach((btn) => {
+        btn.addEventListener("click", (e) => {
+            e.preventDefault();
+            console.log("Delete");
+            modalContainer.classList.add("modal-container-show");
+            document
+                .querySelector(".btn-cancel")
+                .addEventListener("click", (e) => {
+                    e.preventDefault();
+                    modalContainer.classList.remove("modal-container-show");
+                });
+            document
+                .querySelector(".btn-confirm")
+                .addEventListener("click", (e) => {
+                    const submitLink = btn.getAttribute("data-url");
+                    if (submitLink) {
+                        document.querySelector(".btn-confirm").href =
+                            submitLink;
+                        document.querySelector(".btn-confirm").click();
+                    }
+                });
         });
     });
 });

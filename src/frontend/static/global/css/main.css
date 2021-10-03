@@ -56,6 +56,66 @@ a:hover {
     cursor: pointer;
 }
 
+
+/*--- Modals ---*/
+.modal-container{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-container-show{
+    display: flex;
+}
+
+.modal{
+    position: relative;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1em;
+
+    width: clamp(300px, 50vw, 400px);
+    height: 300px; 
+    border-radius: 1em;
+}
+
+.modal-title{
+    font-weight: bold;
+    text-align: center;
+}
+
+.modal-subtitle{
+    color: grey;
+}
+
+.modal-actions{
+    display: flex;
+}
+
+.modal .btn{
+    width: 100%;
+    margin: 0 1em;
+    border-radius: 1em;
+}
+
+.modal .btn:nth-of-type(1){
+    background-color: red;
+}
+
+.modal .btn:nth-of-type(2){
+    background-color: green;
+}
+
+.modal .btn:hover{
+    background-color: black;
+}
+
 /*--- Header ---*/
 header {
     display: flex;
