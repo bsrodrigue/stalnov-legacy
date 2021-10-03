@@ -268,13 +268,13 @@ def edit_novel(request, novel_id):
 
 @login_required
 def my_creations(request):
-    my_created_novels = Novel.objects.filter(author=request.user.id)
+    novels = Novel.objects.filter(author=request.user.id)
     return render(
         request,
         "novels/lists/my_creations.html",
         {
             "page_title": "Mes Créations",
-            "my_created_novels": my_created_novels,
+            "novels": novels,
             "page_hero_title": "Mes créations",
             "page_hero_description": "",
         },

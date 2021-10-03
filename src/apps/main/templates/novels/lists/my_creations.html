@@ -9,120 +9,45 @@
     </div>
 </div>
 <ul class="writer-dashboard-novel-list">
+    {% if novels %}
+
+        {% for novel in novels %}
+
     <li class="writer-dashboard-novel-list-item">
         <img
             class="writer-dashboard-novel-item-cover"
-            src="{% static 'global/img/covs/cov1.jpg' %}"
+            {% if novel.cover %}
+                src="{{ novel.cover.url  }}"
+            {% else %}
+
+                    {% endif %}
             alt=""
         />
         <p class="writer-dashboard-novel-item-title">
-            Les Aventures de Samba Diallo
+        {{ novel.title  }}
         </p>
         <div class="novel-item-stats"></div>
         <div class="writer-dashboard-novel-item-actions">
-            <div class="novel-item-action novel-item-action-chapters">
+            <a class="novel-item-action novel-item-action-chapters">
                 <i class="fas fa-list-ol"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-edit">
+            </a>
+            <a href="{% url 'edit_novel' novel.id %}" class="novel-item-action novel-item-action-edit">
                 <i class="far fa-edit"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-delete">
+            </a>
+            <a href="{% url 'delete_novel' novel.id %}" class="novel-item-action novel-item-action-delete">
                 <i class="fas fa-trash-alt"></i>
-            </div>
+            </a>
         </div>
     </li>
-    <hr />
-    <li class="writer-dashboard-novel-list-item">
-        <img
-            class="writer-dashboard-novel-item-cover"
-            src="{% static 'global/img/covs/cov2.jpg' %}"
-            alt=""
-        />
-        <p class="writer-dashboard-novel-item-title">
-            Les Aventures de Samba Diallo
-        </p>
-        <div class="novel-item-stats"></div>
-        <div class="writer-dashboard-novel-item-actions">
-            <div class="novel-item-action novel-item-action-chapters">
-                <i class="fas fa-list-ol"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-edit">
-                <i class="far fa-edit"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-delete">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
-    </li>
-    <hr />
-    <li class="writer-dashboard-novel-list-item">
-        <img
-            class="writer-dashboard-novel-item-cover"
-            src="{% static 'global/img/covs/cov3.jpg' %}"
-            alt=""
-        />
-        <p class="writer-dashboard-novel-item-title">
-            Ousbeda dans un autre monde
-        </p>
-        <div class="novel-item-stats"></div>
-        <div class="writer-dashboard-novel-item-actions">
-            <div class="novel-item-action novel-item-action-chapters">
-                <i class="fas fa-list-ol"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-edit">
-                <i class="far fa-edit"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-delete">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
-    </li>
-    <hr />
-    <li class="writer-dashboard-novel-list-item">
-        <img
-            class="writer-dashboard-novel-item-cover"
-            src="{% static 'global/img/covs/cov4.jpg' %}"
-            alt=""
-        />
-        <p class="writer-dashboard-novel-item-title">
-            Les Aventures de Samba Diallo
-        </p>
-        <div class="novel-item-stats"></div>
-        <div class="writer-dashboard-novel-item-actions">
-            <div class="novel-item-action novel-item-action-chapters">
-                <i class="fas fa-list-ol"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-edit">
-                <i class="far fa-edit"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-delete">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
-    </li>
-    <hr />
-    <li class="writer-dashboard-novel-list-item">
-        <img
-            class="writer-dashboard-novel-item-cover"
-            src="{% static 'global/img/covs/cov2.jpg' %}"
-            alt=""
-        />
-        <p class="writer-dashboard-novel-item-title">
-            Les dragons de Ouagadougou
-        </p>
-        <div class="novel-item-stats"></div>
-        <div class="writer-dashboard-novel-item-actions">
-            <div class="novel-item-action novel-item-action-chapters">
-                <i class="fas fa-list-ol"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-edit">
-                <i class="far fa-edit"></i>
-            </div>
-            <div class="novel-item-action novel-item-action-delete">
-                <i class="fas fa-trash-alt"></i>
-            </div>
-        </div>
-    </li>
+    {% if not forloop.last %}
+        <hr />
+        {% endif %}
+
+            {% endfor %}
+
+        {% else %}
+
+    {% endif %}
 </ul>
 
 
