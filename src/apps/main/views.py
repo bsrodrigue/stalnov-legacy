@@ -10,7 +10,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
 from .models import Novel, Chapter, Comment
-from .forms import StallionUserCreationForm, StallionUserChangeForm, ChapterForm, CommentForm, NovelForm
+from .forms import StallionUserCreationForm, ChapterForm, CommentForm, NovelForm
 
 
 class SignUpView(CreateView):
