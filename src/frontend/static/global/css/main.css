@@ -586,6 +586,32 @@ form.auth-form {
     background-color: red;
 }
 
+/*--- Create-Novel-Form ---*/
+#novel_form{
+    background-color: white;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+#novel_form input{
+    margin: 2em 0;
+}
+
+.ql-toolbar{
+    margin-top: 1em;
+}
+
+#editor{
+    padding: 1em 0;
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+#novel_save_button{
+    width: 100%;
+}
+
 /*--- User-Profile ---*/
 .profile-header {
     background-color: #082032;

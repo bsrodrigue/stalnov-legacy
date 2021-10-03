@@ -1,6 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block active_container %}container{% endblock active_container %}
+{% block global_wrapper  %}wrapper{% endblock global_wrapper %}
 
 
 {% block additional_stylesheets %}
@@ -12,16 +13,19 @@
 {% block additional_scripts %}
 <script src="{% static 'novels/js/quill.min.js' %}"></script>
 <script>
-  var quill = new Quill('#editor', {
-    theme: 'snow',
-    placeholder: 'Décrivez votre nouvelle histoire, donnez leur envie de la lire...',
-  });
+    const QUILL_OPTIONS = {
+            placeholder: 'Ecrivez une description accrochante pour votre nouveau roman...',
+            theme: 'snow',
+        };
+
+    let quill = new Quill('#editor', QUILL_OPTIONS);
 </script>
 <script src=" {% static 'global/js/forms/richtext.js' %} "></script>
 <script src=" {% static 'novels/js/novel_form.js' %} "></script>
 {% endblock additional_scripts %}
 
 {% block content %}
+
 <form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
@@ -60,10 +64,9 @@
         {{ form.genre }}
     </div>
 
-        {% comment %}This element does not have a style and acts just as an information receiver{% endcomment %}
   <input id="richtext_input" type="text" name="description" hidden>
 
-  <!-- QuillJS Novel Description Input -->
+  <!-- Richtext Editor-->
   <div id="editor">
    {% if novel %}
    {% autoescape on %}
@@ -80,6 +83,6 @@
  
   </div>
 
-    <input id="novel_save_button" class="btn btn-dark"type="submit" value="Sauvegarder">
+    <input id="novel_save_button" class="btn "type="submit" value="Sauvegarder">
 </form>
 {% endblock content %}

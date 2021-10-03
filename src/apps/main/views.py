@@ -158,7 +158,7 @@ class NovelCreationView(View):
             if form.cleaned_data['public']:
                 request.user.publish_novel(novel.id)
             return HttpResponseRedirect(reverse_lazy('my_creations'))
-        extra_context = {'novel_id': 'novel_id'}
+        extra_context = {'new_novel': 'new_novel'}
         return render(request, self.template_name, {'form': form, **extra_context})
 
 
