@@ -4,6 +4,7 @@ from .novel import Novel
 from .like import Like
 from .comment import Comment
 from django.contrib.auth.models import AbstractUser
+from django.contrib.staticfiles.storage import staticfiles_storage
 
 from apps.main.decorators import *
 
@@ -42,6 +43,10 @@ class StallionUser(AbstractUser):
         novel.genre = kwargs.get("genre", novel.genre)
         novel.public = kwargs.get("public", novel.public)
         novel.mature = kwargs.get("mature", novel.mature)
+       
+        if kwargs.get('cover'):
+            novel.cover = kwargs.get('cover')
+
         novel.save()
         return novel
 

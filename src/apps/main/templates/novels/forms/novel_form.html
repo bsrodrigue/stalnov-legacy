@@ -58,13 +58,15 @@
         <input accept="image/*" id="novel-form-cover-input" name="cover" type="file" form="novel_form" hidden>
     <!-- Novel Title Input -->
   <input class="novel-form-title-input" value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+  {{ form.title.errors  }}
 
     <div class="novel-form-genre">
         {{ form.genre.label_tag }}
         {{ form.genre }}
+        {{ form.genre.errors }}
     </div>
 
-  <input id="richtext_input" type="text" name="description" hidden>
+    <input  value=" {% if novel %} {{ novel.description }} {% endif %}" id="richtext_input" type="text" name="description" hidden>
 
   <!-- Richtext Editor-->
   <div id="editor">
@@ -74,10 +76,12 @@
   {% endautoescape %}
    {% endif %}
   </div>
+    {{ form.description.errors }}
 
   <div id="novel_form_checkboxes">
     <label for="public">Rendre public:</label>
     <input {% if novel.public %} checked {% endif %} type="checkbox" name="public" id="novel_public_checkbox">
+    {{ form.public.errors }}
     <br>
     <small>Ce livre sera disponible au public si au moins un chapitre est public </small>
  

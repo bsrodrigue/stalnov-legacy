@@ -9,9 +9,8 @@ from django.views import View
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
-from .models import Novel, Chapter, Comment
-from .forms import StallionUserCreationForm, ChapterForm, CommentForm, NovelForm
-
+from ..models import Novel, Chapter, Comment
+from ..forms import StallionUserCreationForm, ChapterForm, CommentForm
 
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
@@ -45,8 +44,8 @@ def notifications(request):
 class ProfileView(View):
     template_name = "accounts/pages/profile.html"
     context = {
-            "page_title": "Mon profil"
-            }
+        "page_title": "Mon profil"
+    }
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.context)
@@ -135,33 +134,6 @@ def novel_dashboard(request, novel_id):
         },
     )
 
-
-@method_decorator(login_required, name='dispatch')
-class NovelCreationView(View):
-    form_class = NovelForm
-    template_name = 'novels/forms/novel_form.html'
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        extra_context = {'new_novel': 'new_novel'}
-        return render(request, self.template_name, {'form': form,  **extra_context})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST, request.FILES)
-        if form.is_valid():
-            print(form.cleaned_data)
-            form.cleaned_data['cover'] = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg" if form.cleaned_data[
-                'default_cover'] else form.cleaned_data['cover']
-            novel = request.user.create_novel(
-                **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public', 'default_cover'}}
-            )
-            if form.cleaned_data['public']:
-                request.user.publish_novel(novel.id)
-            return HttpResponseRedirect(reverse_lazy('my_creations'))
-        extra_context = {'new_novel': 'new_novel'}
-        return render(request, self.template_name, {'form': form, **extra_context})
-
-
 @method_decorator(login_required, name='dispatch')
 class ChapterCreationView(View):
     form_class = ChapterForm
@@ -233,37 +205,6 @@ def delete_novel(request, novel_id):
     return HttpResponseRedirect(reverse_lazy("my_creations"))
 
 
-@login_required
-def edit_novel(request, novel_id):
-    if request.method == "POST":
-        form = NovelForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            request.user.edit_novel(
-                novel_id, title=data["title"], description=data["description"]
-            )
-            if data["public"]:
-                request.user.publish_novel(novel_id)
-            else:
-                request.user.unpublish_novel(novel_id)
-            return HttpResponseRedirect(reverse_lazy("my_creations"))
-
-    novel_to_be_edited = Novel.objects.get(pk=novel_id)
-    form = NovelForm(
-        initial={
-            "genre": novel_to_be_edited.genre,
-        }
-    )
-
-    return render(
-        request,
-        "novels/forms/novel_form.html",
-        {
-            "form": form,
-            "edit_novel": "edit_novel",
-            "novel": novel_to_be_edited,
-        },
-    )
 
 
 @login_required
