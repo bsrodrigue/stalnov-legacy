@@ -4,11 +4,13 @@
         <a href=" {% url 'home' %} ">
             <i class="logo fas fa-book-reader"></i>
         </a>
-        <form class="search-form" action="">
+        <form method="GET" class="search-form" action="{% url 'search' %}">
             <i class="search-icon fas fa-search"></i>
             <input
+                required
                 class="search-input"
                 type="text"
+                name="search"
                 placeholder="Chercher un livre..."
             />
         </form>

@@ -4,6 +4,23 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let genderInputs = document.querySelectorAll(".gender-input");
     let modalContainer = document.querySelector(".modal-container");
 
+    // Search
+    let searchIcon = document.querySelector(".search-icon");
+    let searchForm = document.querySelector(".search-form");
+    let searchInput = document.querySelector(".search-input");
+    searchForm.addEventListener('submit', e=>{
+        if(searchInput.value == ""){
+            return;
+        }
+    })
+    searchIcon.addEventListener("click", (e) => {
+        e.preventDefault();
+        if (searchInput.value == "") {
+            return;
+        }
+        searchForm.submit();
+    });
+
     // Reorder Chapters
     let chapterList = document.querySelector("#dashboard-chapter-list");
     const SORTABLE_OPTIONS = {

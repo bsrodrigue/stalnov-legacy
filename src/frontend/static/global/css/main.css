@@ -346,6 +346,7 @@ section {
 .simple-nc {
     width: 100%;
     height: 100%;
+    border-radius: 1em;
 }
 
 .simple-nc-overlay {
@@ -355,6 +356,8 @@ section {
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     transition: bottom 0.5s ease-out;
+    width: inherit;
+    padding: 1em;
 }
 
 .simple-nc-overlay :nth-child(1) {

@@ -101,18 +101,17 @@ def like_chapter(request, chapter_id):
 
 
 def search(request):
-    search_term = request.GET.get("search_term")
+    search_term = request.GET.get("search")
+    search_term = search_term.lower()
     found_novels = [
-        novel for novel in Novel.accessible_novels.all() if search_term in novel.title
+        novel for novel in Novel.accessible_novels.all() if search_term in novel.title.lower()
     ]
     return render(
         request,
         "novels/lists/search_result.html",
         {
             "page_title": "Recherche",
-            "found_novels": found_novels,
-            "page_hero_title": "Résultats de recherche",
-            "page_hero_description": "Lisez, écrivez et partagez des Webnovels Africains",
+            "novels": found_novels,
         },
     )
 

@@ -1,16 +1,18 @@
-{% extends 'global/base.html' %}
-{% block active_container %}container{% endblock active_container %}
-{% block content %}
+{% extends 'global/base.html' %} {% block active_container %}container{% endblock active_container %} {% block global_wrapper %} wrapper {% endblock global_wrapper %} {% block content %}
 <!-- New Novels -->
 <section>
-    <h1 class="section-title">Résultats de recherche</h1>
-    <div class="section-title-underbar underbar"></div>
-    <div class="section-content">
-        {% if found_novels %}
-        {% include 'novels/blocks/novel_cards.html' with novels=found_novels %}
-        {% else %}
-        <h1>Aucun Résultat trouvé</h1>
-        {% endif %}
+    <div class="section-title-container">
+        <div class="section-title-top">
+            <p class="section-title">Resultats de recherche</p>
+        </div>
+        <div class="section-title-bottom"></div>
     </div>
+    {% if novels %}
+    <div class="nc-grid">
+        {% for novel in novels %} {% include 'novels/blocks/cards/novel_card.html' with novel=novel %} {% endfor %}
+    </div>
+    {% else %}
+    <h1>Aucun Résultat trouvé</h1>
+    {% endif %}
 </section>
 {% endblock content %}
