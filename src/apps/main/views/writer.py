@@ -68,3 +68,13 @@ class NovelEditionView(View):
         novel = Novel.objects.get(pk=novel_id)
         extra_context = {'edit_novel': 'edit_novel', 'novel': novel}
         return render(request, self.template_name, {'form': form, **extra_context})
+
+@method_decorator(login_required, name='dispatch')
+class ChapterListView(View):
+    template_name = 'novels/lists/dashboard_chapters.html'
+    def get(self, request, *args, **kwargs):
+        novel_id = kwargs['novel_id']
+        novel = Novel.objects.get(pk=novel_id)
+        chapters = novel.get_chapters()
+        extra_context = {'novel': novel, 'chapters': chapters}
+        return render(request, self.template_name, { **extra_context})

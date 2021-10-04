@@ -4,6 +4,16 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let genderInputs = document.querySelectorAll(".gender-input");
     let modalContainer = document.querySelector(".modal-container");
 
+    // Reorder Chapters
+    let chapterList = document.querySelector("#dashboard-chapter-list");
+    const SORTABLE_OPTIONS = {
+        animation: 150,
+        onChange: function (e) {
+            console.log(e);
+        },
+    };
+    let sortable = Sortable.create(chapterList, SORTABLE_OPTIONS);
+
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {
         e.preventDefault();

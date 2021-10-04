@@ -588,9 +588,6 @@ form.auth-form {
     margin-right: 1em;
 }
 
-.writer-dashboard-novel-list {
-}
-
 .writer-dashboard-novel-list-item {
     display: flex;
     flex-wrap: wrap;
@@ -598,6 +595,7 @@ form.auth-form {
     justify-content: space-between;
     align-items: center;
     padding: 0.5em 1em;
+    border-bottom: 1px black solid;
 }
 
 @media only screen and (max-width: 600px){

@@ -3,47 +3,32 @@
 <div class="writer-dashboard">
     <form action=""></form>
     <div class="writer-dashboard-actions">
-        <a href="{% url 'new_novel' %}" class="writer-dashboard-action new-novel">
+        <a href="{% url 'new_chapter' novel.id %}" class="writer-dashboard-action new-novel">
             <i class="fas fa-plus-square"></i>
-            Nouveau Roman
+            Nouveau Chapitre
         </a>
     </div>
 </div>
-<ul class="writer-dashboard-novel-list">
-    {% if novels %}
+<ul id="dashboard-chapter-list" class="writer-dashboard-novel-list">
+    {% if chapters %}
 
-        {% for novel in novels %}
+        {% for chapter in chapters %}
 
-    <li class="writer-dashboard-novel-list-item">
-        <img
-            class="writer-dashboard-novel-item-cover"
-            {% if novel.cover %}
-                src="{{ novel.cover.url  }}"
-            {% else %}
-
-                    {% endif %}
-            alt=""
-        />
+    <li class="chapters writer-dashboard-novel-list-item">
+        <i class="fas fa-grip-lines"></i>
         <p class="writer-dashboard-novel-item-title">
-        {{ novel.title  }}
+        {{ chapter.title  }}
         </p>
         <div class="novel-item-stats"></div>
         <div class="writer-dashboard-novel-item-actions">
-            <a href="{% url 'chapters' novel.id %}" class="novel-item-action novel-item-action-chapters">
-                <i class="fas fa-list-ol"></i>
-            </a>
-            <a href="{% url 'edit_novel' novel.id %}" class="novel-item-action novel-item-action-edit">
+            <a href="{% url 'edit_chapter' chapter.id %}" class="novel-item-action novel-item-action-edit">
                 <i class="far fa-edit"></i>
             </a>
-            <a data-url="{% url 'delete_novel' novel.id %}" class="novel-item-action novel-item-action-delete">
+            <a data-url="{% url 'delete_chapter' chapter.id %}" class="novel-item-action novel-item-action-delete">
                 <i class="fas fa-trash-alt"></i>
             </a>
         </div>
     </li>
-    {% if not forloop.last %}
-        <hr />
-        {% endif %}
-
             {% endfor %}
 
         {% else %}
