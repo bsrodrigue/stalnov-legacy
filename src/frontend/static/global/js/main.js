@@ -12,7 +12,12 @@ window.addEventListener("DOMContentLoaded", (e) => {
             console.log(e);
         },
     };
-    let sortable = Sortable.create(chapterList, SORTABLE_OPTIONS);
+
+    try {
+        let sortable = Sortable.create(chapterList, SORTABLE_OPTIONS);
+    } catch (e) {
+        console.error("Sortable does not seem to work here...");
+    }
 
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {
