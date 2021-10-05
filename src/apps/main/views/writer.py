@@ -27,6 +27,7 @@ def handleAction(action, request, selected_novels):
         for novel_id in selected_novels:
             request.user.unpublish_novel(novel_id)
 
+
 @method_decorator(login_required, name='dispatch')
 class NovelActionView(View):
     POSSIBLE_ACTIONS = ('delete', 'publish', 'unpublish')
