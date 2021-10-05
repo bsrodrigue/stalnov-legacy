@@ -1,21 +1,30 @@
 {% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %}
 {% include 'novels/blocks/confirmation_modal.html' %}
 <div class="writer-dashboard">
-    <form action=""></form>
+    <form id="writer-dashboard-action-form" method="POST" action="{% url 'novel_dashboard_action' %}" hidden>
+        {% csrf_token %}
+    </form>
     <div class="writer-dashboard-actions">
         <a href="{% url 'new_novel' %}" class="writer-dashboard-action new-novel">
             <i class="fas fa-plus-square"></i>
             Nouveau Roman
         </a>
+        <input form="writer-dashboard-action-form" value="Valider" type="submit">
+        <select form="writer-dashboard-action-form" id="writer-dashboard-action-select" name="action">
+            <option value="delete">Supprimer</option>
+            <option value="publish">Publier</option>
+            <option value="unpublish">Depublier</option>
+        </select>
     </div>
 </div>
 <ul class="writer-dashboard-novel-list">
     {% if novels %}
 
         {% for novel in novels %}
-
+    <input form="writer-dashboard-action-form" type="checkbox" id="check-novel-{{ novel.id }}" name="selected-novels" value="{{ novel.id }}" hidden/>
     <li class="writer-dashboard-novel-list-item">
         <img
+            data-novel-id="{{ novel.id }}"
             class="writer-dashboard-novel-item-cover"
             {% if novel.cover %}
                 src="{{ novel.cover.url  }}"
@@ -27,7 +36,9 @@
         <p class="writer-dashboard-novel-item-title">
         {{ novel.title  }}
         </p>
-        <div class="novel-item-stats"></div>
+        <p class="writer-dashboard-novel-item-public">
+            {% if novel.public %} Public {% else %} Non-Public {% endif %}
+        </p>
         <div class="writer-dashboard-novel-item-actions">
             <a href="{% url 'chapters' novel.id %}" class="novel-item-action novel-item-action-chapters">
                 <i class="fas fa-list-ol"></i>

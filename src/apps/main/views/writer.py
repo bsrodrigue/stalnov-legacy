@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
@@ -14,6 +14,37 @@ def setup_novel_cover(form):
     if cover == '' or form.cleaned_data['default_cover'] != '':
         cover = f"novel_covers/defaults/default{form.cleaned_data['default_cover']}.jpg"
     return cover
+
+
+def handleAction(action, request, selected_novels):
+    if action == 'delete':
+        for novel_id in selected_novels:
+            request.user.delete_novel(novel_id)
+    elif action == 'publish':
+        for novel_id in selected_novels:
+            request.user.publish_novel(novel_id)
+    elif action == 'unpublish':
+        for novel_id in selected_novels:
+            request.user.unpublish_novel(novel_id)
+
+@method_decorator(login_required, name='dispatch')
+class NovelActionView(View):
+    POSSIBLE_ACTIONS = ('delete', 'publish', 'unpublish')
+
+    def post(self, request, *args, **kwargs):
+        try:
+            action = request.POST['action']
+            selected_novels = request.POST.getlist('selected-novels')
+        except:
+            return HttpResponse('Error while processing action and selected novels')
+        if action not in self.POSSIBLE_ACTIONS:
+            return HttpResponse('Error: cannot perform this kind of action')
+        if len(selected_novels) == 0:
+            return HttpResponse('Error: No novels to act upon')
+
+        handleAction(action, request, selected_novels)
+
+        return HttpResponseRedirect(reverse_lazy('my_creations'))
 
 
 @method_decorator(login_required, name='dispatch')
@@ -69,12 +100,14 @@ class NovelEditionView(View):
         extra_context = {'edit_novel': 'edit_novel', 'novel': novel}
         return render(request, self.template_name, {'form': form, **extra_context})
 
+
 @method_decorator(login_required, name='dispatch')
 class ChapterListView(View):
     template_name = 'novels/lists/dashboard_chapters.html'
+
     def get(self, request, *args, **kwargs):
         novel_id = kwargs['novel_id']
         novel = Novel.objects.get(pk=novel_id)
         chapters = novel.get_chapters()
         extra_context = {'novel': novel, 'chapters': chapters}
-        return render(request, self.template_name, { **extra_context})
+        return render(request, self.template_name, {**extra_context})

@@ -71,6 +71,7 @@ writer_urlpatterns = [
     path("new_novel", writer.NovelCreationView.as_view(), name="new_novel"),
     path("edit_novel/<int:novel_id>",
          writer.NovelEditionView.as_view(), name="edit_novel"),
+    path("writer_dashboard_action/", writer.NovelActionView.as_view(), name="novel_dashboard_action"),
     path(
         "delete_novel/<int:novel_id>", default.delete_novel, name="delete_novel"
     ),

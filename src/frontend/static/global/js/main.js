@@ -3,16 +3,39 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let sidePanel = document.querySelector(".side-panel");
     let genderInputs = document.querySelectorAll(".gender-input");
     let modalContainer = document.querySelector(".modal-container");
-
-    // Search
     let searchIcon = document.querySelector(".search-icon");
     let searchForm = document.querySelector(".search-form");
     let searchInput = document.querySelector(".search-input");
-    searchForm.addEventListener('submit', e=>{
-        if(searchInput.value == ""){
+    let chapterList = document.querySelector("#dashboard-chapter-list");
+    let dashboardNovelCovers = document.querySelectorAll(
+        ".writer-dashboard-novel-item-cover"
+    );
+
+    // Select Novels on Writer Dashboard
+    dashboardNovelCovers.forEach((cover) => {
+        cover.addEventListener("click", (e) => {
+            e.preventDefault();
+            const NOVEL_ID = e.target.getAttribute("data-novel-id");
+            if (NOVEL_ID === undefined) {
+                throw new Error("Could not get novel id");
+            }
+            let correspondingCheckbox = document.querySelector(
+                `#check-novel-${NOVEL_ID}`
+            );
+            if (!correspondingCheckbox) {
+                throw new Error("Could not get checkbox related to novel id");
+            }
+            correspondingCheckbox.toggleAttribute("checked");
+            e.target.classList.toggle("writer-dashboard-item-checked");
+        });
+    });
+
+    // Search
+    searchForm.addEventListener("submit", (e) => {
+        if (searchInput.value == "") {
             return;
         }
-    })
+    });
     searchIcon.addEventListener("click", (e) => {
         e.preventDefault();
         if (searchInput.value == "") {
@@ -22,7 +45,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
     });
 
     // Reorder Chapters
-    let chapterList = document.querySelector("#dashboard-chapter-list");
     const SORTABLE_OPTIONS = {
         animation: 150,
         onChange: function (e) {

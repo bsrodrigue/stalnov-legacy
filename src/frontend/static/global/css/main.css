@@ -56,22 +56,21 @@ a:hover {
     cursor: pointer;
 }
 
-
 /*--- Modals ---*/
-.modal-container{
+.modal-container {
     position: absolute;
     width: 100vw;
     height: 100vh;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal-container-show{
+.modal-container-show {
     display: flex;
 }
 
-.modal{
+.modal {
     position: relative;
     background-color: white;
     display: flex;
@@ -81,38 +80,38 @@ a:hover {
     padding: 1em;
 
     width: clamp(300px, 50vw, 400px);
-    height: 300px; 
+    height: 300px;
     border-radius: 1em;
 }
 
-.modal-title{
+.modal-title {
     font-weight: bold;
     text-align: center;
 }
 
-.modal-subtitle{
+.modal-subtitle {
     color: grey;
 }
 
-.modal-actions{
+.modal-actions {
     display: flex;
 }
 
-.modal .btn{
+.modal .btn {
     width: 100%;
     margin: 0 1em;
     border-radius: 1em;
 }
 
-.modal .btn:nth-of-type(1){
+.modal .btn:nth-of-type(1) {
     background-color: red;
 }
 
-.modal .btn:nth-of-type(2){
+.modal .btn:nth-of-type(2) {
     background-color: green;
 }
 
-.modal .btn:hover{
+.modal .btn:hover {
     background-color: black;
 }
 
@@ -558,12 +557,12 @@ form.auth-form {
     padding: 1em;
 }
 
-.writer-dashboard-pagination{
+.writer-dashboard-pagination {
     display: flex;
     justify-content: space-between;
 }
 
-.writer-dashboard-pagination .btn{
+.writer-dashboard-pagination .btn {
     text-align: center;
 }
 
@@ -579,7 +578,7 @@ form.auth-form {
     padding: 1em;
 }
 
-.writer-dashboard-action a{
+.writer-dashboard-action a {
     color: white;
 }
 
@@ -601,24 +600,41 @@ form.auth-form {
     border-bottom: 1px black solid;
 }
 
-@media only screen and (max-width: 600px){
-    .writer-dashboard-novel-list-item{
+@media only screen and (max-width: 600px) {
+    .writer-dashboard-novel-list-item {
         flex-direction: column;
     }
 }
 
-.writer-dashboard-novel-item-cover{
+.writer-dashboard-novel-item-cover {
     height: 5em;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 5em;
 }
 
-.writer-dashboard-novel-item-title{
+.writer-dashboard-novel-item-cover:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.writer-dashboard-item-checked,
+.writer-dashboard-item-checked:hover {
+    opacity: 0.3;
+}
+
+.writer-dashboard-novel-item-title {
     font-weight: bold;
     font-size: 1em;
     flex-grow: 1;
     margin-left: 1em;
+}
+
+.writer-dashboard-novel-item-public{
+    font-style: italic;
+    font-weight: bold;
+    font-size: 0.8em;
+    color: grey;
 }
 
 .writer-dashboard-novel-item-actions {
@@ -631,7 +647,7 @@ form.auth-form {
     padding: 1em;
 }
 
-.novel-item-action:hover{
+.novel-item-action:hover {
     background-color: black;
 }
 
@@ -639,7 +655,7 @@ form.auth-form {
     background-color: var(--secondary-color);
 }
 
-.novel-item-action-edit{
+.novel-item-action-edit {
     background-color: var(--ternary-color);
 }
 
@@ -648,28 +664,28 @@ form.auth-form {
 }
 
 /*--- Create-Novel-Form ---*/
-#novel_form{
+#novel_form {
     background-color: white;
     padding: 1em;
     display: flex;
     flex-direction: column;
 }
 
-#novel_form input{
+#novel_form input {
     margin: 2em 0;
 }
 
-.ql-toolbar{
+.ql-toolbar {
     margin-top: 1em;
 }
 
-#editor{
+#editor {
     padding: 1em 0;
     height: 50vh;
     overflow-y: scroll;
 }
 
-#novel_save_button{
+#novel_save_button {
     width: 100%;
 }
 
