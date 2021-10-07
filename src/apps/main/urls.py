@@ -65,13 +65,15 @@ reader_urlpatterns = [
 ]
 
 writer_urlpatterns = [
-    path("my_creations", default.my_creations, name="my_creations"),
-    path('chapters/<int:novel_id>', writer.ChapterListView.as_view(), name='chapters'),
+    path("my_creations", writer.NovelDashboard.as_view(), name="my_creations"),
+    path('chapters/<int:novel_id>',
+         writer.ChapterListView.as_view(), name='chapters'),
 
     path("new_novel", writer.NovelCreationView.as_view(), name="new_novel"),
     path("edit_novel/<int:novel_id>",
          writer.NovelEditionView.as_view(), name="edit_novel"),
-    path("writer_dashboard_action/", writer.NovelActionView.as_view(), name="novel_dashboard_action"),
+    path("writer_dashboard_action/", writer.NovelActionView.as_view(),
+         name="novel_dashboard_action"),
     path(
         "delete_novel/<int:novel_id>", default.delete_novel, name="delete_novel"
     ),
