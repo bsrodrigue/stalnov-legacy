@@ -6,6 +6,7 @@ from .comment import Comment
 from django.contrib.auth.models import AbstractUser
 from apps.main.decorators import *
 
+
 class StallionUser(AbstractUser):
     GENDERS = (
         ("H", "Homme"),
@@ -19,8 +20,10 @@ class StallionUser(AbstractUser):
         max_length=256, choices=GENDERS, default="Homme", blank=True)
     library = models.ManyToManyField('Novel', blank=True)
 
-    def create_novel(self, **kwargs):
+    def get_works(self):
+        return Novel.objects.filter(author=self)
 
+    def create_novel(self, **kwargs):
         return Novel.objects.create(author=self, **kwargs)
 
     @must_be_the_author('Novel')
