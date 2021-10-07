@@ -29,27 +29,6 @@ body {
     font-family: "Raleway", sans-serif;
 }
 
-/*--- Utilities ---*/
-.wrapper {
-    margin-right: auto; /* 1 */
-    margin-left: auto; /* 1 */
-
-    max-width: 1400px; /* 2 */
-
-    padding-right: 10px; /* 3 */
-    padding-left: 10px; /* 3 */
-}
-
-.center-box {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.material-shadow {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
 
 /*--- Global Typography ---*/
 a {
@@ -549,6 +528,7 @@ form.auth-form {
     background-color: black;
 }
 
+
 .btn-next {
     margin-left: auto;
 }
@@ -563,7 +543,13 @@ form.auth-form {
 
 .writer-dashboard-pagination {
     display: flex;
-    justify-content: space-between;
+}
+
+.writer-dashboard-pagination-indicator {
+    background-color: var(--main-color);
+    color: white;
+    font-weight: bold;
+    text-align: center;
 }
 
 .writer-dashboard-pagination .btn {
@@ -597,7 +583,7 @@ form.auth-form {
     border-radius: 1em 0 0 1em;
 }
 
-.writer-dashboard-action-container input:disabled{
+.writer-dashboard-action-container input:disabled {
     background-color: grey;
 }
 
@@ -607,7 +593,7 @@ form.auth-form {
     color: var(--main-color);
 }
 
-.writer-dashboard-action-container select:focus{
+.writer-dashboard-action-container select:focus {
     outline: none;
 }
 
@@ -837,4 +823,30 @@ form.auth-form {
 
 .profile-tab-personal-infos-p {
     font-style: italic;
+}
+
+/*--- Utilities ---*/
+.wrapper {
+    margin-right: auto; /* 1 */
+    margin-left: auto; /* 1 */
+
+    max-width: 1400px; /* 2 */
+
+    padding-right: 10px; /* 3 */
+    padding-left: 10px; /* 3 */
+}
+
+.center-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.material-shadow {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.disabled {
+    background-color: grey;
 }
