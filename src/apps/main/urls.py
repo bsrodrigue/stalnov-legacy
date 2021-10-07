@@ -67,7 +67,7 @@ reader_urlpatterns = [
 writer_urlpatterns = [
     path("my_creations", writer.NovelDashboard.as_view(), name="my_creations"),
     path('chapters/<int:novel_id>',
-         writer.ChapterListView.as_view(), name='chapters'),
+         writer.ChapterDashboard.as_view(), name='chapters'),
 
     path("new_novel", writer.NovelCreationView.as_view(), name="new_novel"),
     path("edit_novel/<int:novel_id>",

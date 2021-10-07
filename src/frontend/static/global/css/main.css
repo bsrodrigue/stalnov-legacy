@@ -535,49 +535,49 @@ form.auth-form {
     margin-left: auto;
 }
 
-/*--- Writer-Dashboard ---*/
-.writer-dashboard {
+/*--- Dashboard ---*/
+.dashboard {
     display: flex;
     align-items: center;
     background-color: white;
     padding: 1em;
 }
 
-.writer-dashboard-pagination {
+.dashboard-pagination {
     display: flex;
 }
 
-.writer-dashboard-pagination-indicator {
+.dashboard-pagination-indicator {
     background-color: var(--main-color);
     color: white;
     font-weight: bold;
     text-align: center;
 }
 
-.writer-dashboard-pagination .btn {
+.dashboard-pagination .btn {
     text-align: center;
 }
 
-.writer-dashboard-actions {
+.dashboard-actions {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
 
-.writer-dashboard-action-container {
+.dashboard-action-container {
     display: flex;
     align-items: center;
 }
 
-.writer-dashboard-action-container input,
-.writer-dashboard-action-container select {
+.dashboard-action-container input,
+.dashboard-action-container select {
     height: 3em;
     background-color: white;
     font-weight: bold;
     text-align: center;
 }
 
-.writer-dashboard-action-container input {
+.dashboard-action-container input {
     border: none;
     color: white;
     background-color: var(--main-color);
@@ -585,21 +585,21 @@ form.auth-form {
     border-radius: 1em 0 0 1em;
 }
 
-.writer-dashboard-action-container input:disabled {
+.dashboard-action-container input:disabled {
     background-color: grey;
 }
 
-.writer-dashboard-action-container select {
+.dashboard-action-container select {
     border-radius: 0 1em 1em 0;
     border-color: var(--main-color);
     color: var(--main-color);
 }
 
-.writer-dashboard-action-container select:focus {
+.dashboard-action-container select:focus {
     outline: none;
 }
 
-.writer-dashboard-action {
+.dashboard-action {
     display: flex;
     background-color: var(--main-color);
     color: white;
@@ -607,19 +607,19 @@ form.auth-form {
     padding: 1em;
 }
 
-.writer-dashboard-action a {
+.dashboard-action a {
     color: white;
 }
 
-.writer-dashboard-action:hover {
+.dashboard-action:hover {
     background-color: black;
 }
 
-.writer-dashboard-action i {
+.dashboard-action i {
     margin-right: 1em;
 }
 
-.writer-dashboard-novel-list-item {
+.dashboard-list-item {
     display: flex;
     flex-wrap: wrap;
     background-color: white;
@@ -630,65 +630,65 @@ form.auth-form {
 }
 
 @media only screen and (max-width: 600px) {
-    .writer-dashboard-novel-list-item {
+    .dashboard-list-item {
         flex-direction: column;
     }
 }
 
-.writer-dashboard-novel-item-cover {
+.dashboard-item-cover {
     height: 5em;
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 5em;
 }
 
-.writer-dashboard-novel-item-cover:hover {
+.dashboard-item-cover:hover {
     cursor: pointer;
     opacity: 0.8;
 }
 
-.writer-dashboard-item-checked,
-.writer-dashboard-item-checked:hover {
+.dashboard-item-checked,
+.dashboard-item-checked:hover {
     opacity: 0.3;
 }
 
-.writer-dashboard-novel-item-title {
+.dashboard-item-title {
     font-weight: bold;
     font-size: 1em;
     flex-grow: 1;
     margin-left: 1em;
 }
 
-.writer-dashboard-novel-item-public {
+.dashboard-item-public {
     font-style: italic;
     font-weight: bold;
     font-size: 0.8em;
     color: grey;
 }
 
-.writer-dashboard-novel-item-actions {
+.dashboard-item-actions {
     display: flex;
 }
 
-.novel-item-action {
+.item-action {
     margin: 1em 0 1em 1em;
     color: white;
     padding: 1em;
 }
 
-.novel-item-action:hover {
+.item-action:hover {
     background-color: black;
 }
 
-.novel-item-action-chapters {
+.item-action-chapters {
     background-color: var(--secondary-color);
 }
 
-.novel-item-action-edit {
+.item-action-edit {
     background-color: var(--ternary-color);
 }
 
-.novel-item-action-delete {
+.item-action-delete {
     background-color: red;
 }
 

@@ -8,10 +8,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let searchInput = document.querySelector(".search-input");
     let chapterList = document.querySelector("#dashboard-chapter-list");
     let dashboardNovelCovers = document.querySelectorAll(
-        ".writer-dashboard-novel-item-cover"
+        ".dashboard-item-cover"
     );
     let dashboardActionSubmit = document.querySelector(
-        "#writer-dashboard-action-submit"
+        "#dashboard-action-submit"
     );
 
     // Default values
@@ -23,18 +23,18 @@ window.addEventListener("DOMContentLoaded", (e) => {
     dashboardNovelCovers.forEach((cover) => {
         cover.addEventListener("click", (e) => {
             e.preventDefault();
-            const NOVEL_ID = e.target.getAttribute("data-novel-id");
+            const NOVEL_ID = e.target.getAttribute("data-item-id");
             if (NOVEL_ID === undefined) {
-                throw new Error("Could not get novel id");
+                throw new Error("Could not get item id");
             }
             let correspondingCheckbox = document.querySelector(
-                `#check-novel-${NOVEL_ID}`
+                `#check-item-${NOVEL_ID}`
             );
             if (!correspondingCheckbox) {
-                throw new Error("Could not get checkbox related to novel id");
+                throw new Error("Could not get checkbox related to item id");
             }
             correspondingCheckbox.toggleAttribute("checked");
-            e.target.classList.toggle("writer-dashboard-item-checked");
+            e.target.classList.toggle("dashboard-item-checked");
 
             // Toggle Submit
             let dashboardItemChecks = document.querySelectorAll(
@@ -129,10 +129,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
     });
 
     // Modals
-    document.querySelectorAll(".novel-item-action-delete").forEach((btn) => {
+    document.querySelectorAll(".item-action-delete").forEach((btn) => {
         btn.addEventListener("click", (e) => {
             e.preventDefault();
-            console.log("Delete");
             modalContainer.classList.add("modal-container-show");
             document
                 .querySelector(".btn-cancel")

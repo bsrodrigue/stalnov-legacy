@@ -36,7 +36,7 @@ class NovelActionView(View):
     def post(self, request, *args, **kwargs):
         try:
             action = request.POST['action']
-            selected_novels = request.POST.getlist('selected-novels')
+            selected_novels = request.POST.getlist('selected-items')
         except:
             return HttpResponse('Error while processing action and selected novels')
         if action not in self.POSSIBLE_ACTIONS:
@@ -50,7 +50,7 @@ class NovelActionView(View):
 
 
 class NovelDashboard(View):
-    template_name = 'novels/lists/dashboard.html'
+    template_name = 'novels/lists/dashboard.jinja'
 
     def get(self, request, *args, **kwargs):
         novels = request.user.get_works()
@@ -58,7 +58,25 @@ class NovelDashboard(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         extra_context = {
-            'page_obj':  page_obj
+            'page_obj':  page_obj,
+            'dashboard': 'novel'
+        }
+        return render(request, self.template_name, {**extra_context})
+
+
+class ChapterDashboard(View):
+    template_name = 'novels/lists/dashboard.jinja'
+
+    def get(self, request, *args, **kwargs):
+        novel_id = kwargs.get('novel_id')
+        chapters = Novel.objects.get(pk=novel_id).get_chapters()
+        paginator = Paginator(chapters, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        extra_context = {
+            'page_obj':  page_obj,
+            'dashboard': 'chapter',
+            'novel_id': novel_id,
         }
         return render(request, self.template_name, {**extra_context})
 
