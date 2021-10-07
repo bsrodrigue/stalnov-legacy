@@ -15,7 +15,9 @@ window.addEventListener("DOMContentLoaded", (e) => {
     );
 
     // Default values
-    dashboardActionSubmit.disabled = true;
+    if (dashboardActionSubmit) {
+        dashboardActionSubmit.disabled = true;
+    }
 
     // Select Novels on Writer Dashboard
     dashboardNovelCovers.forEach((cover) => {
