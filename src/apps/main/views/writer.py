@@ -1,6 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.http import HttpResponseRedirect, HttpResponse
+from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
@@ -46,6 +47,20 @@ class NovelActionView(View):
         handleAction(action, request, selected_novels)
 
         return HttpResponseRedirect(reverse_lazy('my_creations'))
+
+
+class NovelDashboard(View):
+    template_name = 'novels/lists/dashboard.html'
+
+    def get(self, request, *args, **kwargs):
+        novels = request.user.get_works()
+        paginator = Paginator(novels, 5)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        extra_context = {
+            'page_obj':  page_obj
+        }
+        return render(request, self.template_name, {**extra_context})
 
 
 @method_decorator(login_required, name='dispatch')
