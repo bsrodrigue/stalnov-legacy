@@ -13,7 +13,7 @@
     box-sizing: border-box;
 }
 
-html{
+html {
     scroll-behavior: smooth;
 }
 
@@ -571,7 +571,44 @@ form.auth-form {
 }
 
 .writer-dashboard-actions {
+    width: 100%;
     display: flex;
+    justify-content: space-between;
+}
+
+.writer-dashboard-action-container {
+    display: flex;
+    align-items: center;
+}
+
+.writer-dashboard-action-container input,
+.writer-dashboard-action-container select {
+    height: 3em;
+    background-color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.writer-dashboard-action-container input {
+    border: none;
+    color: white;
+    background-color: var(--main-color);
+    padding: 0 2em;
+    border-radius: 1em 0 0 1em;
+}
+
+.writer-dashboard-action-container input:disabled{
+    background-color: grey;
+}
+
+.writer-dashboard-action-container select {
+    border-radius: 0 1em 1em 0;
+    border-color: var(--main-color);
+    color: var(--main-color);
+}
+
+.writer-dashboard-action-container select:focus{
+    outline: none;
 }
 
 .writer-dashboard-action {
