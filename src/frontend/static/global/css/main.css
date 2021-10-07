@@ -29,7 +29,6 @@ body {
     font-family: "Raleway", sans-serif;
 }
 
-
 /*--- Global Typography ---*/
 a {
     text-decoration: none;
@@ -143,6 +142,10 @@ header {
     color: var(--secondary-color);
     position: absolute;
     left: 0.5em;
+}
+
+.search-icon:hover {
+    cursor: pointer;
 }
 
 .search-input {
@@ -527,7 +530,6 @@ form.auth-form {
     cursor: pointer;
     background-color: black;
 }
-
 
 .btn-next {
     margin-left: auto;
