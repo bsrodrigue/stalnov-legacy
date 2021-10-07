@@ -10,6 +10,12 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let dashboardNovelCovers = document.querySelectorAll(
         ".writer-dashboard-novel-item-cover"
     );
+    let dashboardActionSubmit = document.querySelector(
+        "#writer-dashboard-action-submit"
+    );
+
+    // Default values
+    dashboardActionSubmit.disabled = true;
 
     // Select Novels on Writer Dashboard
     dashboardNovelCovers.forEach((cover) => {
@@ -27,6 +33,20 @@ window.addEventListener("DOMContentLoaded", (e) => {
             }
             correspondingCheckbox.toggleAttribute("checked");
             e.target.classList.toggle("writer-dashboard-item-checked");
+
+            // Toggle Submit
+            let dashboardItemChecks = document.querySelectorAll(
+                ".dashboard-item-check"
+            );
+
+            // Make the submit clickable accordingly
+            dashboardItemChecks = Array.from(dashboardItemChecks);
+            const areChecked = (element) => element.checked;
+            dashboardActionSubmit.disabled = dashboardItemChecks.some(
+                areChecked
+            )
+                ? false
+                : true;
         });
     });
 

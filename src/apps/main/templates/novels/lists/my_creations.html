@@ -1,71 +1,104 @@
-{% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %}
-{% include 'novels/blocks/confirmation_modal.html' %}
+{% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %} {% include 'novels/blocks/confirmation_modal.html' %}
 <div class="writer-dashboard">
-    <form id="writer-dashboard-action-form" method="POST" action="{% url 'novel_dashboard_action' %}" hidden>
+    <form
+        id="writer-dashboard-action-form"
+        method="POST"
+        action="{% url 'novel_dashboard_action' %}"
+        hidden
+    >
         {% csrf_token %}
     </form>
     <div class="writer-dashboard-actions">
-        <a href="{% url 'new_novel' %}" class="writer-dashboard-action new-novel">
+        <a
+            href="{% url 'new_novel' %}"
+            class="writer-dashboard-action new-novel"
+        >
             <i class="fas fa-plus-square"></i>
             Nouveau Roman
         </a>
-        <input form="writer-dashboard-action-form" value="Valider" type="submit">
-        <select form="writer-dashboard-action-form" id="writer-dashboard-action-select" name="action">
-            <option value="delete">Supprimer</option>
-            <option value="publish">Publier</option>
-            <option value="unpublish">Depublier</option>
-        </select>
+        <div class="writer-dashboard-action-container">
+            <input
+                disabled
+                form="writer-dashboard-action-form"
+                id="writer-dashboard-action-submit"
+                value="Valider"
+                type="submit"
+            />
+            <select
+                form="writer-dashboard-action-form"
+                id="writer-dashboard-action-select"
+                name="action"
+            >
+                <option value="delete">Supprimer</option>
+                <option value="publish">Publier</option>
+                <option value="unpublish">Depublier</option>
+            </select>
+        </div>
     </div>
 </div>
 <ul class="writer-dashboard-novel-list">
-    {% if novels %}
-
-        {% for novel in novels %}
-    <input form="writer-dashboard-action-form" type="checkbox" id="check-novel-{{ novel.id }}" name="selected-novels" value="{{ novel.id }}" hidden/>
+    {% if novels %} {% for novel in novels %}
+    <input
+        form="writer-dashboard-action-form"
+        class="dashboard-item-check"
+        type="checkbox"
+        id="check-novel-{{ novel.id }}"
+        name="selected-novels"
+        value="{{ novel.id }}"
+        hidden
+    />
     <li class="writer-dashboard-novel-list-item">
         <img
             data-novel-id="{{ novel.id }}"
             class="writer-dashboard-novel-item-cover"
-            {% if novel.cover %}
-                src="{{ novel.cover.url  }}"
-            {% else %}
-
-                    {% endif %}
+            {%
+            if
+            novel.cover
+            %}
+            src="{{ novel.cover.url  }}"
+            {%
+            else
+            %}
+            {%
+            endif
+            %}
             alt=""
         />
-        <p class="writer-dashboard-novel-item-title">
-        {{ novel.title  }}
-        </p>
-        <p class="writer-dashboard-novel-item-public" style="{% if novel.public %} color:green; {% else %} color:red; {% endif %}" >
+        <p class="writer-dashboard-novel-item-title">{{ novel.title }}</p>
+        <p
+            class="writer-dashboard-novel-item-public"
+            style="{% if novel.public %} color:green; {% else %} color:red; {% endif %}"
+        >
             {% if novel.public %} Public {% else %} Non-Public {% endif %}
         </p>
         <div class="writer-dashboard-novel-item-actions">
-            <a href="{% url 'chapters' novel.id %}" class="novel-item-action novel-item-action-chapters">
+            <a
+                href="{% url 'chapters' novel.id %}"
+                class="novel-item-action novel-item-action-chapters"
+            >
                 <i class="fas fa-list-ol"></i>
             </a>
-            <a href="{% url 'edit_novel' novel.id %}" class="novel-item-action novel-item-action-edit">
+            <a
+                href="{% url 'edit_novel' novel.id %}"
+                class="novel-item-action novel-item-action-edit"
+            >
                 <i class="far fa-edit"></i>
             </a>
-            <a data-url="{% url 'delete_novel' novel.id %}" class="novel-item-action novel-item-action-delete">
+            <a
+                data-url="{% url 'delete_novel' novel.id %}"
+                class="novel-item-action novel-item-action-delete"
+            >
                 <i class="fas fa-trash-alt"></i>
             </a>
         </div>
     </li>
-            {% endfor %}
-
-        {% else %}
-
-    {% endif %}
+    {% endfor %} {% else %} {% endif %}
 </ul>
 
-
 <div class="writer-dashboard-pagination">
-        <div class="btn">Precedant</div>
-        <div class="writer-dashboard-pagination-indicator">
-        </div>
-        <div class="btn">Suivant</div>
+    <div class="btn">Precedant</div>
+    <div class="writer-dashboard-pagination-indicator"></div>
+    <div class="btn">Suivant</div>
 </div>
-
-
 
 {% endblock content %}
