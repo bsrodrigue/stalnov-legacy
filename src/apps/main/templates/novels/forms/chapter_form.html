@@ -22,14 +22,14 @@
 
 
 {% block content %}
-<form id="chapter_form" action=" {% if new_chapter %} {% url 'new_chapter' novel_id %} {% else %}  {% url 'edit_chapter' chapter_id %}  {% endif %} " method="post">
+<form id="chapter_form" class="writing-form" action=" {% if new_chapter %} {% url 'new_chapter' novel_id %} {% else %}  {% url 'edit_chapter' chapter_id %}  {% endif %} " method="post">
   {% csrf_token %}
   <!-- Chapter Title Input -->
-  <input value="{% if chapter %} {{ chapter.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
-  <small> {{ form.title.errors  }}  </small>
+  <input value="{% if chapter %} {{ chapter.title }} {% endif %}" id="title_input" class="writing-form-title-input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+  <small> {{ form.title.error  }}  </small>
 
   <!-- Actual Chapter Content Input -->
-  <input id="richtext_input" type="text" name="content" hidden>
+  <input form="chapter_form" id="richtext_input" class="writing-form-title-input" type="text" name="content" hidden>
 
   <!-- QuillJS Chapter Content Input -->
   <div id="editor">
@@ -39,23 +39,16 @@
   {% endautoescape %}
    {% endif %}
   </div>
-  <small> {{ form.content.errors  }}  </small>
-
-  <div id="chapter_order">
-    <label for="order">Chapitre #:</label>
-	<input {% if chapter.order is not None %} value={{ chapter.order  }} {% else %}  value={{ novel_id|novel_chapters  }} {% endif %} type="number" name="order" id="chapter_order">
-    <br>
-  </div>
-  <small> {{ form.order.errors  }}  </small>
+  <small> {{ form.content.error  }}  </small>
 
   <div id="chapter_form_checkboxes">
     <label for="public">Rendre public:</label>
     <input {% if chapter.public %} checked {% endif %} type="checkbox" name="public" id="chapter_public_checkbox">
     <br>
     <small>Le chapitre sera visible pour tout le monde</small>
-  <small> {{ form.public.errors  }}  </small>
+  <small> {{ form.public.error  }}  </small>
   </div>
   
-  <input id="chapter_save_button" class="btn btn-dark"type="submit" value="Sauvegarder">
+  <input id="chapter_save_button" class="btn btn-dark writing_save_button"type="submit" value="Sauvegarder">
 </form>
 {% endblock content %}

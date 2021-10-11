@@ -702,16 +702,38 @@ form.auth-form {
 }
 
 /*--- Create-Novel-Form ---*/
-#novel_form {
+.writing-form {
     background-color: white;
     padding: 1em;
     display: flex;
     flex-direction: column;
 }
 
-#novel_form input {
+.writing-form-title-input {
+    height: 3em;
+    border: none;
+    padding: 1em 0em;
+    background: rgba(255, 255, 255, 0);
+    color: rgba(0, 0, 0, 0.726);
+    font-weight: bold;
+    font-size: 25px;
+    transition: all 0.3s ease-out;
+}
+
+.writing-form-title-input:focus {
+    outline: none;
+    padding: 1em;
+    transition: all 0.5s ease-out;
+}
+
+.writing-form-title-input::placeholder {
+    color: rgba(0, 0, 0, 0.459);
+}
+
+.writing-form-title-input input {
     margin: 2em 0;
 }
+
 
 .ql-toolbar {
     margin-top: 1em;
@@ -723,8 +745,56 @@ form.auth-form {
     overflow-y: scroll;
 }
 
-#novel_save_button {
+.writing_save_button {
     width: 100%;
+}
+
+/*--- Novel Cover---*/
+
+.default-covers {
+    display: flex;
+    justify-content: space-between;
+}
+
+.default-cover {
+    width: 20%;
+    border-radius: 1.5em;
+    opacity: 0.4;
+}
+
+.default-cover-selected {
+    border-radius: 0em;
+    opacity: 1;
+    background-color: blue;
+    transition: 0.3s all ease-in;
+}
+
+.upload-your-cover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.2em #00adb5 solid;
+    border-radius: 0.5em;
+    height: 5em;
+    width: 5em;
+}
+
+.upload-your-cover i {
+    color: #00adb5;
+}
+
+.upload-your-cover:hover {
+    background-color: #00adb5;
+}
+
+.upload-your-cover:hover i {
+    color: white;
+}
+
+.cover-uploaded {
+    background-size: cover;
+    background-position: center;
+    border: none;
 }
 
 /*--- User-Profile ---*/

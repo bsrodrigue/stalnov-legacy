@@ -8,8 +8,8 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
 from django.shortcuts import render
-from ..models import Novel
-from ..forms import NovelForm
+from ..models import Novel, Chapter
+from ..forms import NovelForm, ChapterForm
 
 # TODO: Combine pagination with reordering or remove pagination
 
@@ -161,10 +161,61 @@ class NovelEditionView(View):
             else:
                 request.user.unpublish_novel(novel_id)
             return HttpResponseRedirect(reverse_lazy('my_creations'))
-        print(form.data)
         novel_id = kwargs['novel_id']
         novel = Novel.objects.get(pk=novel_id)
         extra_context = {'edit_novel': 'edit_novel', 'novel': novel}
+        return render(request, self.template_name, {'form': form, **extra_context})
+
+
+@method_decorator(login_required, name='dispatch')
+class ChapterCreationView(View):
+    form_class = ChapterForm
+    template_name = 'novels/forms/chapter_form.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        extra_context = {'novel_id': kwargs.get(
+            'novel_id'), 'new_chapter': 'new_chapter'}
+        return render(request, self.template_name, {'form': form, **extra_context})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        novel_id = kwargs.get('novel_id')
+        if form.is_valid():
+            chapter = request.user.create_chapter(
+                novel_id,
+                **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public'}})
+            if form.cleaned_data['public']:
+                request.user.publish_chapter(chapter.id)
+            return HttpResponseRedirect(reverse_lazy('my_creations'))
+        extra_context = {'novel_id': novel_id, 'new_chapter': 'new_chapter'}
+        return render(request, self.template_name, {'form': form, **extra_context})
+
+
+@method_decorator(login_required, name='dispatch')
+class ChapterEditionView(View):
+    form_class = ChapterForm
+    template_name = 'novels/forms/chapter_form.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        chapter_id = kwargs.get('chapter_id')
+        chapter = Chapter.objects.get(pk=chapter_id)
+        extra_context = {'chapter_id': chapter_id, 'edit_chapter': 'edit_chapter', 'chapter': chapter}
+        return render(request, self.template_name, {'form': form, **extra_context})
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        chapter_id = kwargs.get('chapter_id')
+        chapter = Chapter.objects.get(pk=chapter_id)
+        if form.is_valid():
+            chapter = request.user.edit_chapter(
+                chapter_id,
+                **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public'}})
+            if form.cleaned_data['public']:
+                request.user.publish_chapter(chapter.id)
+                return HttpResponseRedirect(reverse_lazy('my_creations'))
+        extra_context = {'edit_chapter': 'edit_chapter', 'chapter_id': chapter_id, 'chapter': chapter}
         return render(request, self.template_name, {'form': form, **extra_context})
 
 

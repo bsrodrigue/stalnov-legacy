@@ -26,7 +26,7 @@
 
 {% block content %}
 
-<form id="novel_form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post" enctype="multipart/form-data">
+<form id="novel_form" class="writing-form" action=" {% if new_novel %} {% url 'new_novel' %} {% else %}  {% url 'edit_novel' novel.id %}  {% endif %}  " method="post" enctype="multipart/form-data">
     {% csrf_token %}
 
     <!-- Novel Cover Selection -->
@@ -57,7 +57,7 @@
 
         <input accept="image/*" id="novel-form-cover-input" name="cover" type="file" form="novel_form" hidden>
     <!-- Novel Title Input -->
-  <input class="novel-form-title-input" value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+  <input class="writing-form-title-input" value="{% if novel %} {{ novel.title }} {% endif %}" id="title_input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
   {{ form.title.errors  }}
 
     <div class="novel-form-genre">
@@ -87,6 +87,6 @@
  
   </div>
 
-    <input id="novel_save_button" class="btn "type="submit" value="Sauvegarder">
+    <input id="novel_save_button" class="writing_save_button" class="btn "type="submit" value="Sauvegarder">
 </form>
 {% endblock content %}

@@ -133,65 +133,6 @@ def novel_dashboard(request, novel_id):
         },
     )
 
-@method_decorator(login_required, name='dispatch')
-class ChapterCreationView(View):
-    form_class = ChapterForm
-    template_name = 'novels/forms/chapter_form.html'
-
-    def get(self, request, *args, **kwargs):
-        form = self.form_class()
-        extra_context = {'novel_id': kwargs.get(
-            'novel_id'), 'new_chapter': 'new_chapter'}
-        return render(request, self.template_name, {'form': form, **extra_context})
-
-    def post(self, request, *args, **kwargs):
-        form = self.form_class(request.POST)
-        novel_id = kwargs.get('novel_id')
-        if form.is_valid():
-            chapter = request.user.create_chapter(
-                novel_id,
-                **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public'}})
-            if form.cleaned_data['public']:
-                request.user.publish_chapter(chapter.id)
-                return HttpResponseRedirect(reverse_lazy('novel_dashboard', kwargs={'novel_id': novel_id}))
-        extra_context = {'novel_id': novel_id, 'new_chapter': 'new_chapter'}
-        return render(request, self.template_name, {'form': form, **extra_context})
-
-
-@login_required
-def edit_chapter(request, chapter_id):
-    if request.method == "POST":
-        form = ChapterForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            chapter = request.user.edit_chapter(
-                chapter_id,
-                title=data["title"],
-                content=data["content"],
-                order=data["order"],
-            )
-            if data["public"]:
-                request.user.publish_chapter(chapter_id)
-            else:
-                request.user.unpublish_chapter(chapter_id)
-            return HttpResponseRedirect(
-                reverse_lazy("novel_dashboard", kwargs={
-                             "novel_id": chapter.novel.id})
-            )
-        else:
-            return HttpResponse("Formulaire invalide")
-
-    chapter_to_be_edited = Chapter.objects.get(pk=chapter_id)
-    return render(
-        request,
-        "novels/forms/chapter_form.html",
-        {
-            "chapter_id": chapter_id,
-            "chapter": chapter_to_be_edited,
-            "edit_chapter": "edit_chapter",
-        },
-    )
-
 
 @login_required
 def delete_chapter(request, chapter_id):

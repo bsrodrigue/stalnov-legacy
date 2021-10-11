@@ -79,9 +79,9 @@ writer_urlpatterns = [
     ),
 
     path("new_chapter/<int:novel_id>",
-         default.ChapterCreationView.as_view(), name="new_chapter"),
+         writer.ChapterCreationView.as_view(), name="new_chapter"),
     path(
-        "edit_chapter/<int:chapter_id>", default.edit_chapter, name="edit_chapter"
+        "edit_chapter/<int:chapter_id>", writer.ChapterEditionView.as_view(), name="edit_chapter"
     ),
     path("reorder", writer.ChapterReorderView.as_view(), name="reorder"),
     path(

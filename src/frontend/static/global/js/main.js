@@ -202,4 +202,22 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 });
         });
     });
+
+    //Richtext
+    let $input = document.querySelector("#richtext_input");
+
+    if (!$input) {
+        console.error("Input field not found");
+        return;
+    }
+
+    if (!quill) {
+        console.error("Quill is not imported, cannot save text.");
+        return;
+    }
+
+    $input.value = quill.root.innerHTML;
+    quill.on("text-change", function (delta, oldDelta, source) {
+        $input.value = quill.root.innerHTML;
+    });
 });
