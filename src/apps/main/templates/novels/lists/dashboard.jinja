@@ -1,7 +1,9 @@
 {% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %} {% include 'novels/blocks/confirmation_modal.html' %}
 
 <div class="dashboard">
-<form id="dashboard-action-form" method="POST" {% if 'novel_dashboard'%} action="{% url 'novel_dashboard_action' %}" {% else %} action="{% url 'chapter_dashboard_action' %}"{% endif %} hidden> {% csrf_token %} </form>
+<form id="dashboard-action-form" method="POST" action="{% url 'bulk_dashboard_action' %}" hidden> {% csrf_token %} </form>
+<input form="dashboard-action-form" type="text" name="content_type" value="{% if dashboard == 'novel' %}novel{% elif dashboard == 'chapter' %}chapter{% endif %}" hidden>
+<input form="dashboard-action-form" type="text" name="novel_id" value="{% if dashboard == 'novel' %}{{ item.id }}{% elif dashboard == 'chapter' %}{{ item.novel.id }}{% endif %}" hidden>
 <div class="dashboard-actions">
     {% if dashboard == 'novel' %}
         <a href="{% url 'new_novel' %}" class="dashboard-action"> <i class="fas fa-plus-square"> </i> Nouveau Roman</a>

@@ -11,6 +11,11 @@ from django.shortcuts import render
 from ..models import Novel
 from ..forms import NovelForm
 
+# TODO: Combine pagination with reordering or remove pagination
+
+NOVEL_PAGINATION_SIZE = 10
+CHAPTER_PAGINATION_SIZE = 100
+
 
 @method_decorator(login_required, name='dispatch')
 class ChapterReorderView(View):
@@ -33,36 +38,47 @@ def setup_novel_cover(form):
     return cover
 
 
-def handleAction(action, request, selected_novels):
+def handleAction(action, content_type, request, selected_items):
     if action == 'delete':
-        for novel_id in selected_novels:
-            request.user.delete_novel(novel_id)
+        if content_type == 'novel':
+            for item_id in selected_items:
+                request.user.delete_novel(item_id)
+        elif content_type == 'chapter':
+            for item_id in selected_items:
+                request.user.delete_chapter(item_id)
     elif action == 'publish':
-        for novel_id in selected_novels:
-            request.user.publish_novel(novel_id)
+        if content_type == 'novel':
+            for item_id in selected_items:
+                request.user.publish_novel(item_id)
+        elif content_type == 'chapter':
+            for item_id in selected_items:
+                request.user.publish_chapter(item_id)
     elif action == 'unpublish':
-        for novel_id in selected_novels:
-            request.user.unpublish_novel(novel_id)
+        if content_type == 'novel':
+            for item_id in selected_items:
+                request.user.unpublish_novel(item_id)
+        elif content_type == 'chapter':
+            for item_id in selected_items:
+                request.user.unpublish_chapter(item_id)
 
 
 @method_decorator(login_required, name='dispatch')
-class NovelActionView(View):
+class BulkActionView(View):
     POSSIBLE_ACTIONS = ('delete', 'publish', 'unpublish')
 
     def post(self, request, *args, **kwargs):
         try:
+            content_type = request.POST['content_type']
             action = request.POST['action']
-            selected_novels = request.POST.getlist('selected-items')
+            selected_items = request.POST.getlist('selected-items')
         except:
             return HttpResponse('Error while processing action and selected novels')
         if action not in self.POSSIBLE_ACTIONS:
             return HttpResponse('Error: cannot perform this kind of action')
-        if len(selected_novels) == 0:
+        if len(selected_items) == 0:
             return HttpResponse('Error: No novels to act upon')
-
-        handleAction(action, request, selected_novels)
-
-        return HttpResponseRedirect(reverse_lazy('my_creations'))
+        handleAction(action, content_type, request, selected_items)
+        return HttpResponseRedirect(reverse_lazy("my_creations"))
 
 
 class NovelDashboard(View):
@@ -70,7 +86,7 @@ class NovelDashboard(View):
 
     def get(self, request, *args, **kwargs):
         novels = request.user.get_works()
-        paginator = Paginator(novels, 5)
+        paginator = Paginator(novels, NOVEL_PAGINATION_SIZE)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         extra_context = {
@@ -86,7 +102,7 @@ class ChapterDashboard(View):
     def get(self, request, *args, **kwargs):
         novel_id = kwargs.get('novel_id')
         chapters = Novel.objects.get(pk=novel_id).get_chapters()
-        paginator = Paginator(chapters, 10)
+        paginator = Paginator(chapters, CHAPTER_PAGINATION_SIZE)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         extra_context = {
