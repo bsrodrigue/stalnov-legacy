@@ -77,6 +77,7 @@ class ChapterDashboard(View):
             'page_obj':  page_obj,
             'dashboard': 'chapter',
             'novel_id': novel_id,
+            'sortable': True,
         }
         return render(request, self.template_name, {**extra_context})
 

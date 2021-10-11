@@ -6,7 +6,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let searchIcon = document.querySelector(".search-icon");
     let searchForm = document.querySelector(".search-form");
     let searchInput = document.querySelector(".search-input");
-    let chapterList = document.querySelector("#dashboard-chapter-list");
+    let sortableList = document.querySelector(".sortable-list");
     let dashboardNovelCovers = document.querySelectorAll(
         ".dashboard-item-cover"
     );
@@ -75,7 +75,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     };
 
     try {
-        let sortable = Sortable.create(chapterList, SORTABLE_OPTIONS);
+        let sortable = Sortable.create(sortableList, SORTABLE_OPTIONS);
     } catch (e) {
         console.error("Sortable does not seem to work here...");
     }
