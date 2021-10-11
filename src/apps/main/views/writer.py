@@ -1,6 +1,8 @@
+import json
 from django.contrib.auth.decorators import login_required
+from django.http.response import HttpResponseBadRequest
 from django.utils.decorators import method_decorator
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from django.urls import reverse_lazy
 from django.views import View
@@ -8,6 +10,20 @@ from django.shortcuts import render
 from django.shortcuts import render
 from ..models import Novel
 from ..forms import NovelForm
+
+
+@method_decorator(login_required, name='dispatch')
+class ChapterReorderView(View):
+    def post(self, request, *args, **kwargs):
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            data = json.load(request)
+            reordering = data.get('payload')
+            for new_order, chapter_id in reordering.items():
+                request.user.edit_chapter(chapter_id, order=new_order)
+            return JsonResponse({'status': 'Chapter Reordered successfuly'})
+        else:
+            return HttpResponseBadRequest('Invalid Request')
 
 
 def setup_novel_cover(form):

@@ -83,6 +83,7 @@ writer_urlpatterns = [
     path(
         "edit_chapter/<int:chapter_id>", default.edit_chapter, name="edit_chapter"
     ),
+    path("reorder", writer.ChapterReorderView.as_view(), name="reorder"),
     path(
         "delete_chapter/<int:chapter_id>",
         default.delete_chapter,

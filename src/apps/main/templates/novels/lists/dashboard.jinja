@@ -23,7 +23,7 @@
 <ul class="dashboard-list"  {% if sortable %} class="sortable-list" {% endif %}>
     {% if page_obj %} {% for item in page_obj %}
         <input form="dashboard-action-form" class="dashboard-item-check" type="checkbox" id="check-item-{{ item.id }}" name="selected-items" value="{{ item.id }}" hidden />
-        <li class="dashboard-list-item">
+        <li data-id="{{ item.id  }}" class="dashboard-list-item">
             {% if dashboard == 'novel'%}
             <img data-item-id="{{ item.id }}" class="dashboard-item-cover" {% if item.cover %} src="{{ item.cover.url  }}" {% else %} {% endif %} alt=""/>
             {% elif dashboard == 'chapter'%}

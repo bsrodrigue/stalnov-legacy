@@ -13,6 +13,27 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let dashboardActionSubmit = document.querySelector(
         "#dashboard-action-submit"
     );
+    let sortable = undefined;
+
+    const CHAPTER_REORDER_ENDPOINT = "/writer/reorder";
+
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== "") {
+            const cookies = document.cookie.split(";");
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === name + "=") {
+                    cookieValue = decodeURIComponent(
+                        cookie.substring(name.length + 1)
+                    );
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
 
     // Default values
     if (dashboardActionSubmit) {
@@ -70,16 +91,45 @@ window.addEventListener("DOMContentLoaded", (e) => {
     const SORTABLE_OPTIONS = {
         animation: 150,
         handle: ".fa-bars",
-        onChange: function (e) {
-            console.log(e);
+        sort: true,
+        dataIdAttr: "data-id",
+        onEnd: function (e) {
+            saveNewOrder();
         },
     };
 
     try {
-        let sortable = Sortable.create(sortableList, SORTABLE_OPTIONS);
+        sortable = Sortable.create(sortableList, SORTABLE_OPTIONS);
     } catch (e) {
         console.error("Sortable does not seem to work here...");
     }
+
+    const saveNewOrder = () => {
+        let sorted = sortable.toArray();
+        let data = {};
+        sorted.map((novel_id, order) => {
+            data[order] = novel_id;
+        });
+
+        fetch(CHAPTER_REORDER_ENDPOINT, {
+            method: "POST",
+            credentials: "same-origin",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRFToken": getCookie("csrftoken"),
+            },
+            body: JSON.stringify({
+                payload: data,
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+            })
+            .catch((e) => {
+                console.error(e);
+            });
+    };
 
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {
