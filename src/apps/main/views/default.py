@@ -149,6 +149,7 @@ class ChapterCreationView(View):
         novel_id = kwargs.get('novel_id')
         if form.is_valid():
             chapter = request.user.create_chapter(
+                novel_id,
                 **{x: form.cleaned_data[x] for x in form.cleaned_data if x not in {'public'}})
             if form.cleaned_data['public']:
                 request.user.publish_chapter(chapter.id)
