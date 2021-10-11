@@ -629,6 +629,10 @@ form.auth-form {
     border-bottom: 1px black solid;
 }
 
+.dashboard-list-item i {
+    margin: 0 1em;
+}
+
 @media only screen and (max-width: 600px) {
     .dashboard-list-item {
         flex-direction: column;

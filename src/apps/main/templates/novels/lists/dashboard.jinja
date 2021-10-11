@@ -27,6 +27,7 @@
             {% if dashboard == 'novel'%}
             <img data-item-id="{{ item.id }}" class="dashboard-item-cover" {% if item.cover %} src="{{ item.cover.url  }}" {% else %} {% endif %} alt=""/>
             {% elif dashboard == 'chapter'%}
+            <i class="fas fa-bars"></i>
             <img data-item-id="{{ item.id }}" class="dashboard-item-cover" {% if item.novel.cover %} src="{{ item.novel.cover.url  }}" {% else %} {% endif %} alt=""/>
             {% endif %}
             <p class="dashboard-item-title">{{ item.title }}</p>
