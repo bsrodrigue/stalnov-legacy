@@ -38,6 +38,11 @@ a:hover {
     cursor: pointer;
 }
 
+/*--- ReorderJS ---*/
+i.fa-bars :hover {
+    cursor: grab;
+}
+
 /*--- Modals ---*/
 .modal-container {
     position: absolute;

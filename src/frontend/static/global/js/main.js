@@ -69,6 +69,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     // Reorder Chapters
     const SORTABLE_OPTIONS = {
         animation: 150,
+        handle: ".fa-bars",
         onChange: function (e) {
             console.log(e);
         },
