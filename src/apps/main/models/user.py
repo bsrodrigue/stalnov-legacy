@@ -26,6 +26,9 @@ class StallionUser(AbstractUser):
 
     def create_novel(self, **kwargs):
         return Novel.objects.create(author=self, **kwargs)
+    
+    def __str__(self):
+        return self.username
 
     @must_be_the_author('Novel')
     @notify_readers('delete_novel')

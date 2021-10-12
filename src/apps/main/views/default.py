@@ -105,9 +105,10 @@ class SearchView(View):
     template_name = "novels/lists/search_result.jinja"
 
     def get(self, request, *args, **kwargs):
-        search_term = request.GET.get("search").lower()
+        search_term = request.GET.get("search")
         novels = Novel.objects.filter(
-            title__icontains=search_term, public=True)
+            title__icontains=search_term,
+            public=True)
         paginator = Paginator(novels, 10)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
