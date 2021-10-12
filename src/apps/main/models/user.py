@@ -1,4 +1,5 @@
 from django.db import models
+from django.views.generic.base import View
 from .chapter import Chapter
 from .novel import Novel
 from .like import Like

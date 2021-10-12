@@ -22,7 +22,6 @@ def novel_likes(novelId):
     novel = Novel.objects.get(pk=novelId)
     return novel.get_likes()
 
-
 @register.filter(name="chapter_likes")
 def chapter_likes(chapter_id):
     chapter = Chapter.objects.get(pk=chapter_id)

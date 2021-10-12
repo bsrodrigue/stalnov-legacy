@@ -10,7 +10,7 @@ LOGIN_PAGE_CONTEXT = {
 }
 
 home_urlpatterns = [
-    path('', default.home, name='home'),
+    path('', default.HomeView.as_view(), name='home'),
 ]
 
 auth_urlpatterns = [

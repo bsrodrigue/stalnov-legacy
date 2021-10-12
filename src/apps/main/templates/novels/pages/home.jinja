@@ -1,6 +1,5 @@
 {% extends 'global/base.html' %} {% load static %} {% block content %}
-    {% include 'novels/pages/blocks/home/team_selection.html' %}
-    {% include 'novels/pages/blocks/home/team_selection.html' %}
+    {% include 'novels/pages/blocks/home/novel_section.jinja' with section_title="Nouveaux romans" novels=novels %}
 {% endblock content %}
 {% block global_wrapper %}
     wrapper

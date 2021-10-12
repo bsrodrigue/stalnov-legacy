@@ -162,19 +162,13 @@ def my_creations(request):
         },
     )
 
+class HomeView(View):
+    template_name = "novels/pages/home.jinja"
 
-def home(request):
-    latest_novels = Novel.accessible_novels.all()
-    return render(
-        request,
-        "novels/pages/home.html",
-        {
-            "page_title": "Stallion Novels",
-            "latest_novels": latest_novels,
-            "page_hero_title": "Bienvenue sur Stallion Novels",
-            "page_hero_description": "La plateforme africaine #1 d'écriture et de lecture de romans en ligne!",
-        },
-    )
+    def get(self, request, *args, **kwargs):
+        novels = Novel.accessible_novels.all()
+        extra_context = { 'novels' : novels }
+        return render(request, self.template_name, {**extra_context})
 
 
 def genre(request, genre_name):

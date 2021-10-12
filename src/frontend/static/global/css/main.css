@@ -350,7 +350,7 @@ section {
     padding: 1em;
 }
 
-.simple-nc-overlay :nth-child(1) {
+.simple-nc-overlay p:nth-child(1) {
     width: 100%;
     padding: 0.5em;
     text-align: center;
@@ -358,9 +358,34 @@ section {
     background-color: var(--ternary-color);
 }
 
-.simple-nc-overlay :nth-child(2) {
+.simple-nc-overlay p:nth-child(2) {
     text-align: justify-content;
     padding: 0.5em;
+}
+
+.simple-nc-stats {
+    display: flex;
+    justify-content: space-around;
+    margin: 1em 0;
+}
+
+.simple-nc-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.simple-nc-actions a {
+    color: white;
+}
+
+.simple-nc-actions i {
+    background-color: var(--secondary-color);
+    padding: 0.5em 1em;
+    border-radius: 1em;
+}
+
+.simple-nc-actions i:hover {
+    background-color: black;
 }
 
 .simple-nc:hover > .simple-nc-overlay {
@@ -733,7 +758,6 @@ form.auth-form {
 .writing-form-title-input input {
     margin: 2em 0;
 }
-
 
 .ql-toolbar {
     margin-top: 1em;
