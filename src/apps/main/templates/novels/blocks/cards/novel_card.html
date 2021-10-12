@@ -1,8 +1,48 @@
-      <div class="nc simple-nc">
-        <div class="simple-nc-overlay">
-            <p>{{ novel.title }}</p>
-            <p>{{ novel.description|safe }}</p>
-        </div>
+{% load static %}
+{% load novel_extras %}
 
-        <img src=" {% if novel.cover %} {{ novel.cover.url }}  {% endif %}" alt="" />
+<div class="nc simple-nc">
+  <div class="simple-nc-overlay">
+    <p>{{ novel.title }}</p>
+    <p>{{ novel.description|safe|truncatechars:250 }}...</p>
+    <div class="simple-nc-stats">
+
+      <div class="simple-nc-stat simple-nc-stat-views">
+        <i class="fas fa-eye"></i>
+        <small>{{ novel.reads }}</small>
       </div>
+      <div class="simple-nc-stat simple-nc-stat-parts">
+        <i class="fas fa-list-ol"></i>
+        <small>{{ novel.id|novel_chapters }}</small>
+      </div>
+      <div class="simple-nc-stat simple-nc-stat-likes">
+        <i class="fas fa-hand-holding-heart"></i>
+        <small>{{ novel.id|novel_likes }}</small>
+      </div>
+      <div class="simple-nc-stat simple-nc-stat-comments">
+        <i class="fas fa-comments"></i>
+        <small>{{ novel.id|novel_comments }}</small>
+      </div>
+    </div>
+    <div class="simple-nc-actions">
+
+      <a href="{% url 'novel' novel.id %}">
+        <i class="fas fa-glasses"></i>
+      </a>
+      {% if user.is_authenticated %}
+        {% if novel.id|is_already_in_library:user.id %}
+          <a href="{% url 'remove_from_library' novel.id %}">
+            <i class="fas fa-folder-minus"></i>
+          </a>
+        {% else %}
+          <a href="{% url 'add_to_library' novel.id %}">
+            <i class="fas fa-folder-plus"></i>
+          </a>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+
+  <img src="{% if novel.cover %} {{ novel.cover.url }} {% endif %}" alt="" />
+</div>
+
