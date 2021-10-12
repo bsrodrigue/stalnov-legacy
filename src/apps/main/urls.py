@@ -39,7 +39,7 @@ reader_urlpatterns = [
          default.chapter, name="chapter"),
 
     path("genre/<str:genre_name>", default.genre, name="genre"),
-    path("search", default.search, name="search"),
+    path("search", default.SearchView.as_view(), name="search"),
 
     path(
         "add_to_library/<int:novel_id>",

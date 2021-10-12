@@ -12,6 +12,7 @@ from django.shortcuts import render
 from ..models import Novel, Chapter, Comment
 from ..forms import StallionUserCreationForm, ChapterForm, CommentForm
 
+
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
     success_url = reverse_lazy("login")
@@ -100,20 +101,15 @@ def like_chapter(request, chapter_id):
     return HttpResponseRedirect(reverse_lazy("home"))
 
 
-def search(request):
-    search_term = request.GET.get("search")
-    search_term = search_term.lower()
-    found_novels = [
-        novel for novel in Novel.accessible_novels.all() if search_term in novel.title.lower()
-    ]
-    return render(
-        request,
-        "novels/lists/search_result.html",
-        {
-            "page_title": "Recherche",
-            "novels": found_novels,
-        },
-    )
+class SearchView(View):
+    template_name = "novels/lists/search_result.jinja"
+    def get(self, request, *args, **kwargs):
+        search_term = request.GET.get("search").lower()
+        novels = Novel.objects.filter(title__icontains=search_term, public=True)
+        extra_context = {
+            'novels': novels,
+        }
+        return render(request, self.template_name, {**extra_context})
 
 
 @login_required
@@ -146,8 +142,6 @@ def delete_novel(request, novel_id):
     return HttpResponseRedirect(reverse_lazy("my_creations"))
 
 
-
-
 @login_required
 def my_creations(request):
     novels = Novel.objects.filter(author=request.user.id)
@@ -162,12 +156,13 @@ def my_creations(request):
         },
     )
 
+
 class HomeView(View):
     template_name = "novels/pages/home.jinja"
 
     def get(self, request, *args, **kwargs):
         novels = Novel.accessible_novels.all()
-        extra_context = { 'novels' : novels }
+        extra_context = {'novels': novels}
         return render(request, self.template_name, {**extra_context})
 
 
