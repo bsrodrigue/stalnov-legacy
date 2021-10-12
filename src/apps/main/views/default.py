@@ -1,3 +1,4 @@
+from django.core import paginator
 import readtime
 import copy
 from django.core.paginator import Paginator
@@ -9,7 +10,7 @@ from django.views import View
 from django.shortcuts import render
 from django.views.generic.edit import CreateView
 from django.shortcuts import render
-from ..models import Novel, Chapter, Comment
+from ..models import Novel, Chapter, Comment, Genre
 from ..forms import StallionUserCreationForm, ChapterForm, CommentForm
 
 
@@ -113,7 +114,6 @@ class SearchView(View):
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
         extra_context = {
-            'novels': novels,
             'page_obj': page_obj,
         }
         return render(request, self.template_name, {**extra_context})
@@ -174,14 +174,18 @@ class HomeView(View):
 
 
 def genre(request, genre_name):
-    requested_genre_novels = Novel.objects.filter(genre__title=genre_name).order_by(
+    genre = Genre.objects.get(title=genre_name)
+    novels = genre.get_novels().order_by(
         "-created_at"
     )
+    paginator = Paginator(novels, 10)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     return render(
         request,
         "novels/lists/genre.html",
         {
-            "requested_genre_novels": requested_genre_novels,
+            "page_obj": page_obj,
         },
     )
 

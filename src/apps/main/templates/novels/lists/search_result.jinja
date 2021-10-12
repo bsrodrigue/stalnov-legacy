@@ -7,9 +7,9 @@
         </div>
         <div class="section-title-bottom"></div>
     </div>
-    {% if novels %}
+    {% if page_obj %}
     <div class="nc-grid">
-        {% for novel in novels %} {% include 'novels/blocks/cards/novel_card.html' with novel=novel %} {% endfor %}
+        {% for novel in page_obj %} {% include 'novels/blocks/cards/novel_card.html' with novel=novel %} {% endfor %}
     </div>
     {% else %}
     <h1>Aucun Résultat trouvé</h1>
