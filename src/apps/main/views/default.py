@@ -103,11 +103,17 @@ def like_chapter(request, chapter_id):
 
 class SearchView(View):
     template_name = "novels/lists/search_result.jinja"
+
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get("search").lower()
-        novels = Novel.objects.filter(title__icontains=search_term, public=True)
+        novels = Novel.objects.filter(
+            title__icontains=search_term, public=True)
+        paginator = Paginator(novels, 10)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
         extra_context = {
             'novels': novels,
+            'page_obj': page_obj,
         }
         return render(request, self.template_name, {**extra_context})
 
