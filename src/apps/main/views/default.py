@@ -254,15 +254,13 @@ class ReaderView(View):
         novel_id = kwargs.get('novel_id')
         novel = Novel.objects.get(pk=novel_id)
         chapters = novel.get_chapters()
-
         paginator = Paginator(chapters, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-        print(page_obj[0])
         extra_context = {
             'novel': novel,
             'chapters': chapters,
-            'current_chapter': page_obj[0],
+            'page_obj': page_obj,
         }
 
         return render(

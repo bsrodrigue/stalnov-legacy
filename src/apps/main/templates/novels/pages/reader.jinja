@@ -12,7 +12,7 @@
                 <ul class="reader-chapter-list">
                     {% for  chapter in chapters %}
                         <li>
-                            <a class="reader-chapter-list-item" href="">
+                            <a class="reader-chapter-list-item" href="?page={{ forloop.counter }}">
                                 {{ chapter.title  }}
                             </a>
                         </li>
@@ -28,7 +28,9 @@
     </aside>
 
 
+    {% include 'novels/blocks/ui_commands/paginator.jinja' %}
     <div class="chapter-content material-shadow">
+        {% for current_chapter in page_obj%}
         {% if current_chapter %}
             <p class="chapter-title">{{ current_chapter.title }}</p>
             <hr/>
@@ -36,7 +38,9 @@
         {% else %}
             <p class="simple-error-message">Contenu du chapitre introuve</p>
         {% endif %}
+        {% endfor %}
     </div>
+    {% include 'novels/blocks/ui_commands/paginator.jinja' %}
 
 
 {% endblock content %}
