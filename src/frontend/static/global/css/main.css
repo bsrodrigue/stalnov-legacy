@@ -962,6 +962,7 @@ form.auth-form {
     padding: 2em;
     height: 50vh;
     overflow-y: scroll;
+    border-radius: 0 0 1em 0;
 }
 
 .reader-side-panel-content::-webkit-scrollbar {
