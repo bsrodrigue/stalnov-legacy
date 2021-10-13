@@ -3,8 +3,8 @@
 :root {
     --main-color: #171717;
     --secondary-color: #444444;
-    --ternary-color: #DA0037;
-    --bg-color: #EDEDED;
+    --ternary-color: #da0037;
+    --bg-color: #ededed;
 }
 
 * {
@@ -13,20 +13,23 @@
     box-sizing: border-box;
 }
 
-html {
-    scroll-behavior: smooth;
-}
-
 html,
 body {
     background-color: var(--bg-color);
     overflow-x: hidden;
     position: relative;
     height: 100%;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
 body {
     font-family: "Raleway", sans-serif;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 /*--- Global Typography ---*/
@@ -928,6 +931,58 @@ form.auth-form {
 
 .profile-tab-personal-infos-p {
     font-style: italic;
+}
+
+/*--- Reader ---*/
+.reader-side-panel {
+    display: flex;
+    position: absolute;
+    width: 430px;
+    left: 0;
+
+    transition: left 0.3s ease-out;
+}
+
+.reader-side-panel-hidden {
+    left: -350px;
+    transition: left 0.3s ease-out;
+}
+
+.reader-side-panel-content,
+.reader-side-panel-toggle {
+    background-color: white;
+}
+
+.reader-side-panel-content {
+    padding: 2em;
+    height: 50vh;
+    overflow-y: scroll;
+}
+
+.reader-side-panel-content::-webkit-scrollbar {
+    display: none;
+}
+
+.reader-side-panel-title {
+    font-weight: bold;
+    text-align: center;
+}
+
+.reader-side-panel-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 2em 2em 0;
+    height: 4em;
+    width: 80px;
+}
+
+.reader-side-panel-toggle:hover {
+    cursor: pointer;
+}
+
+.reader-side-panel-toggle i {
+    font-size: 2em;
 }
 
 /*--- Utilities ---*/

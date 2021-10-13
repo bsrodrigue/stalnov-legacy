@@ -1,4 +1,31 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
+
+    <aside class="reader-side-panel reader-side-panel-hidden">
+        <div class="reader-side-panel-content">
+            <p class="reader-side-panel-title">
+                Table de Matiere
+            </p>
+
+            {% if chapters %}
+                <ul class="reader-chapter-list">
+                    {% for  chapter in chapters %}
+                        <li>
+                            <a class="reader-chapter-list-item" href="">
+                                {{ chapter.title  }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div class="reader-side-panel-toggle">
+            <i class="fas fa-list-ol"></i>
+        </div>
+    </aside>
+
+
 {% endblock content %}

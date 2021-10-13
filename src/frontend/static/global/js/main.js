@@ -1,5 +1,7 @@
 window.addEventListener("DOMContentLoaded", (e) => {
     let profileButton = document.querySelector(".profile-button");
+    let chapterListSidePanel = document.querySelector(".reader-side-panel");
+    let chapterListToggle = document.querySelector(".reader-side-panel-toggle");
     let sidePanel = document.querySelector(".side-panel");
     let genderInputs = document.querySelectorAll(".gender-input");
     let modalContainer = document.querySelector(".modal-container");
@@ -130,6 +132,12 @@ window.addEventListener("DOMContentLoaded", (e) => {
                 console.error(e);
             });
     };
+
+    //Toggle Chapter list in reader
+    chapterListToggle.addEventListener("click", (e) => {
+        e.preventDefault();
+        chapterListSidePanel.classList.toggle("reader-side-panel-hidden");
+    });
 
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {
