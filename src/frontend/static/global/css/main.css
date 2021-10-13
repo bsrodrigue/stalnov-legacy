@@ -936,11 +936,16 @@ form.auth-form {
 /*--- Reader ---*/
 .reader-side-panel {
     display: flex;
-    position: absolute;
+    position: fixed;
+    z-index: 3;
     width: 430px;
     left: 0;
-
+    color: white;
     transition: left 0.3s ease-out;
+}
+
+.reader-side-panel a {
+    color: white;
 }
 
 .reader-side-panel-hidden {
@@ -950,7 +955,7 @@ form.auth-form {
 
 .reader-side-panel-content,
 .reader-side-panel-toggle {
-    background-color: white;
+    background-color: var(--ternary-color);
 }
 
 .reader-side-panel-content {
@@ -985,7 +990,7 @@ form.auth-form {
     font-size: 2em;
 }
 
-.chapter-title{
+.chapter-title {
     font-weight: bold;
     margin: 1em 0;
     text-align: center;
@@ -1000,7 +1005,7 @@ form.auth-form {
     text-align: justify;
 }
 
-.chapter-content hr{
+.chapter-content hr {
     margin: 1em;
     background-color: grey;
     opacity: 0.5;
