@@ -28,4 +28,15 @@
     </aside>
 
 
+    <div class="chapter-content material-shadow">
+        {% if current_chapter %}
+            <p class="chapter-title">{{ current_chapter.title }}</p>
+            <hr/>
+            {{ current_chapter.content|safe }}
+        {% else %}
+            <p class="simple-error-message">Contenu du chapitre introuve</p>
+        {% endif %}
+    </div>
+
+
 {% endblock content %}

@@ -985,6 +985,27 @@ form.auth-form {
     font-size: 2em;
 }
 
+.chapter-title{
+    font-weight: bold;
+    margin: 1em 0;
+    text-align: center;
+}
+
+.chapter-content {
+    background-color: white;
+    padding: 4em 2em;
+    margin: 1em auto;
+    max-width: 800px;
+    border-radius: 1em;
+    text-align: justify;
+}
+
+.chapter-content hr{
+    margin: 1em;
+    background-color: grey;
+    opacity: 0.5;
+}
+
 /*--- Utilities ---*/
 .wrapper {
     margin-right: auto; /* 1 */

@@ -134,10 +134,14 @@ window.addEventListener("DOMContentLoaded", (e) => {
     };
 
     //Toggle Chapter list in reader
-    chapterListToggle.addEventListener("click", (e) => {
-        e.preventDefault();
-        chapterListSidePanel.classList.toggle("reader-side-panel-hidden");
-    });
+    try {
+        chapterListToggle.addEventListener("click", (e) => {
+            e.preventDefault();
+            chapterListSidePanel.classList.toggle("reader-side-panel-hidden");
+        });
+    } catch (e) {
+        console.error(e);
+    }
 
     // Toggle Side-Panel
     profileButton.addEventListener("click", (e) => {

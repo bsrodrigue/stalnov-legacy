@@ -258,7 +258,7 @@ class ReaderView(View):
         paginator = Paginator(chapters, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
-
+        print(page_obj[0])
         extra_context = {
             'novel': novel,
             'chapters': chapters,
