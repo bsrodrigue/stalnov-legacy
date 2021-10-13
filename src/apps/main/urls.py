@@ -34,7 +34,7 @@ account_urlpatterns = [
 reader_urlpatterns = [
     path("my_library", default.my_library, name="my_library"),
 
-    path("novel/<int:novel_id>", default.novel, name="novel"),
+    path("novel/<int:novel_id>", default.ReaderView.as_view(), name="novel"),
     path("chapter/<int:novel_id>/<int:chapter_index>",
          default.chapter, name="chapter"),
 

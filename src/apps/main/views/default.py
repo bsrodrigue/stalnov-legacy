@@ -247,18 +247,24 @@ def chapter(request, novel_id, chapter_index):
     )
 
 
-def novel(request, novel_id):
-    novel = Novel.objects.get(pk=novel_id)
-    chapters = Chapter.objects.filter(novel=novel_id, public=True)
+class ReaderView(View):
+    template_name = "novels/pages/reader.jinja"
 
-    return render(
-        request,
-        "novels/pages/novel.html",
-        {
-            "page_title": f"{novel.title}",
-            "novel": novel,
-            "chapters": chapters,
-            "page_hero_title": f"{novel.title}",
-            "page_hero_description": f"{novel.description}",
-        },
-    )
+    def get(self, request, *args, **kwargs):
+        novel_id = kwargs.get('novel_id')
+        novel = Novel.objects.get(pk=novel_id)
+        chapters = novel.get_chapters()
+
+        paginator = Paginator(chapters, 1)
+        page_number = request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+
+        extra_context = {
+            'novel': novel,
+            'chapters': chapters,
+            'current_chapter': page_obj[0],
+        }
+
+        return render(
+            request, self.template_name, {**extra_context}
+        )
