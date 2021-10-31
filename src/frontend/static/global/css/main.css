@@ -961,6 +961,7 @@ form.auth-form {
 .reader-side-panel-content {
     padding: 2em;
     height: 50vh;
+    width: 350px;
     overflow-y: scroll;
     border-radius: 0 0 1em 0;
 }

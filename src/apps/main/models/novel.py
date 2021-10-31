@@ -22,7 +22,7 @@ class Novel(models.Model):
     )
     genre = models.ForeignKey('main.NovelGenre', on_delete=models.CASCADE)
     objects = models.Manager()
-    reads = models.IntegerField()
+    reads = models.IntegerField(default=0)
     accessible_novels = AccessibleNovelManager()
 
     def get_readers(self):
