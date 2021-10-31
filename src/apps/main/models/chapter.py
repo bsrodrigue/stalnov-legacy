@@ -26,7 +26,7 @@ class Chapter(models.Model):
 
     def is_liked_by(self, user_id):
         user = get_user_model().objects.get(pk=user_id)
-        return Like.objects.filter(liker=user).exists()
+        return Like.objects.filter(liker=user, chapter=self).exists()
 
     def get_comments(self):
         comments = Comment.objects.filter(chapter=self)
