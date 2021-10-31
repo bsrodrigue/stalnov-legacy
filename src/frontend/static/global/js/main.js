@@ -48,7 +48,6 @@ window.addEventListener("DOMContentLoaded", (e) => {
     try {
         let chapterLikeButton = document.getElementById("chapter-like-button");
         chapterLikeButton.addEventListener("click", (e) => {
-            e.preventDefault();
             let data = {};
             data["chapter_id"] =
                 chapterLikeButton.getAttribute("data-chapter-id");
