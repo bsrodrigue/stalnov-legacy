@@ -52,10 +52,10 @@ reader_urlpatterns = [
         name="remove_from_library",
     ),
 
-    path("like_chapter/<int:chapter_id>",
-         default.like_chapter, name="like_chapter"),
+    path("like_chapter",
+         default.ChapterLikeView.as_view(), name="like_chapter"),
     path(
-        "unlike_chapter/<int:chapter_id>", default.unlike_chapter, name="unlike_chapter"
+        "unlike_chapter", default.ChapterUnlikeView.as_view(), name="unlike_chapter"
     ),
     path(
         "comment_chapter/<int:chapter_id>",

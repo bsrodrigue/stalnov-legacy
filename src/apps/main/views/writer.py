@@ -16,7 +16,6 @@ from ..forms import NovelForm, ChapterForm
 NOVEL_PAGINATION_SIZE = 10
 CHAPTER_PAGINATION_SIZE = 100
 
-
 @method_decorator(login_required, name='dispatch')
 class ChapterReorderView(View):
     def post(self, request, *args, **kwargs):

@@ -31,15 +31,25 @@
     {% include 'novels/blocks/ui_commands/paginator.jinja' %}
     <div class="chapter-content material-shadow">
         {% for current_chapter in page_obj%}
-        {% if current_chapter %}
-            <p class="chapter-title">{{ current_chapter.title }}</p>
-            <hr/>
-            {{ current_chapter.content|safe }}
-        {% else %}
-            <p class="simple-error-message">Contenu du chapitre introuve</p>
-        {% endif %}
+            {% if current_chapter %}
+                <p class="chapter-title">{{ current_chapter.title }}</p>
+                <hr/>
+                {{ current_chapter.content|safe }}
+                <button data-is-liked="{{ is_liked }}" data-chapter-id="{{ current_chapter.id }}" id="chapter-like-button">
+                    {% if is_liked %}
+                        J'aime plus
+                    {% else %}
+                        J'aime
+                    {% endif %}
+
+                </button>
+            {% else %}
+                <p class="simple-error-message">Contenu du chapitre introuve</p>
+            {% endif %}
         {% endfor %}
     </div>
+
+
     {% include 'novels/blocks/ui_commands/paginator.jinja' %}
 
 

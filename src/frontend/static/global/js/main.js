@@ -18,6 +18,8 @@ window.addEventListener("DOMContentLoaded", (e) => {
     let sortable = undefined;
 
     const CHAPTER_REORDER_ENDPOINT = "/writer/reorder";
+    const CHAPTER_LIKE_ENDPOINT = "/reader/like_chapter";
+    const CHAPTER_UNLIKE_ENDPOINT = "/reader/unlike_chapter";
 
     function getCookie(name) {
         let cookieValue = null;
@@ -40,6 +42,51 @@ window.addEventListener("DOMContentLoaded", (e) => {
     // Default values
     if (dashboardActionSubmit) {
         dashboardActionSubmit.disabled = true;
+    }
+
+    // Like-Unlike Chapters
+    try {
+        let chapterLikeButton = document.getElementById("chapter-like-button");
+        chapterLikeButton.addEventListener("click", (e) => {
+            e.preventDefault();
+            let data = {};
+            data["chapter_id"] =
+                chapterLikeButton.getAttribute("data-chapter-id");
+            chapterLikeButton.disabled = true;
+            chapterLikeButton.innerHTML = "...";
+            const ENDPOINT =
+                chapterLikeButton.getAttribute("data-is-liked") === "True"
+                    ? CHAPTER_UNLIKE_ENDPOINT
+                    : CHAPTER_LIKE_ENDPOINT;
+            fetch(ENDPOINT, {
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({
+                    payload: data,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    const NEW_STATUS =
+                        data["status"] === "liked" ? "True" : "False";
+                    const NEW_BUTTON_TEXT =
+                        data["status"] === "liked" ? "J'aime plus" : "J'aime";
+                    chapterLikeButton.setAttribute("data-is-liked", NEW_STATUS);
+                    chapterLikeButton.innerHTML = NEW_BUTTON_TEXT;
+                })
+                .catch((e) => {
+                    console.error(e);
+                })
+                .finally(() => {
+                    chapterLikeButton.disabled = false;
+                });
+        });
+    } catch (e) {
+        console.error(e);
     }
 
     // Select Novels on Writer Dashboard

@@ -1,10 +1,11 @@
 from django.core import paginator
+import json
 import readtime
 import copy
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
@@ -13,6 +14,32 @@ from django.shortcuts import render
 from ..models import Novel, Chapter, Comment, Genre
 from ..forms import StallionUserCreationForm, ChapterForm, CommentForm
 
+@method_decorator(login_required, name='dispatch')
+class ChapterUnlikeView(View):
+    def post(self, request, *args, **kwargs):
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            data = json.load(request)
+            payload = data.get('payload')
+            chapter_id = payload.get('chapter_id')
+            request.user.unlike_chapter(chapter_id)
+            return JsonResponse({'status': 'unliked'})
+        else:
+            return HttpResponseBadRequest('Invalid Request')
+
+
+@method_decorator(login_required, name='dispatch')
+class ChapterLikeView(View):
+    def post(self, request, *args, **kwargs):
+        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        if is_ajax:
+            data = json.load(request)
+            payload = data.get('payload')
+            chapter_id = payload.get('chapter_id')
+            request.user.like_chapter(chapter_id)
+            return JsonResponse({'status': 'liked'})
+        else:
+            return HttpResponseBadRequest('Invalid Request')
 
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
@@ -24,7 +51,6 @@ class SignUpView(CreateView):
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {"form": form, **self.context})
-
 
 def notifications(request):
     user = request.user
@@ -257,10 +283,12 @@ class ReaderView(View):
         paginator = Paginator(chapters, 1)
         page_number = request.GET.get('page')
         page_obj = paginator.get_page(page_number)
+        is_liked = page_obj[0].is_liked_by(request.user.id)
         extra_context = {
             'novel': novel,
             'chapters': chapters,
             'page_obj': page_obj,
+            'is_liked': is_liked,
         }
 
         return render(

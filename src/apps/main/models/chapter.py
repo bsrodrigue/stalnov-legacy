@@ -1,6 +1,7 @@
 from django.db import models
 from .like import Like
 from .comment import Comment
+from django.contrib.auth import get_user_model
 
 class Chapter(models.Model):
     class Meta:
@@ -22,6 +23,10 @@ class Chapter(models.Model):
     def get_likes(self):
         likes = Like.objects.filter(chapter=self)
         return likes.count()
+
+    def is_liked_by(self, user_id):
+        user = get_user_model().objects.get(pk=user_id)
+        return Like.objects.filter(liker=user).exists()
 
     def get_comments(self):
         comments = Comment.objects.filter(chapter=self)
