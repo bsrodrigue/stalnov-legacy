@@ -18,7 +18,7 @@ DEV_ENV = os.getenv("ENV", "dev") == "dev"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.183.35']
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.189.35']
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
