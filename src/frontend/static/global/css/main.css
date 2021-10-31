@@ -992,6 +992,22 @@ form.auth-form {
     font-size: 2em;
 }
 
+.reader-navigator {
+    background-color: white;
+    position: fixed;
+    bottom: 3em;
+    right: 1em;
+}
+
+.reader-navigator > div {
+    margin: 1em;
+}
+
+.reader-navigator i {
+    font-size: 2em;
+    color: var(--ternary-color);
+}
+
 .chapter-title {
     font-weight: bold;
     margin: 1em 0;

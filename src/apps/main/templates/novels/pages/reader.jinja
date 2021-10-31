@@ -1,6 +1,7 @@
 {% extends 'global/base.html' %}
 {% load static %}
 {% block content %}
+    <div id="page-top"></div>
 
     <aside class="reader-side-panel reader-side-panel-hidden">
         <div class="reader-side-panel-content">
@@ -28,6 +29,20 @@
     </aside>
 
 
+    <aside class="reader-navigator material-shadow">
+        <div class="reader-navigator-top">
+            <a href="#page-top">
+                <i class="fas fa-arrow-alt-circle-up"></i>
+            </a>
+        </div>
+        <div class="reader-navigator-bottom">
+            <a href="#page-bottom">
+                <i class="fas fa-arrow-alt-circle-down"></i>
+            </a>
+        </div>
+    </aside>
+
+
     {% include 'novels/blocks/ui_commands/paginator.jinja' %}
     <div class="chapter-content material-shadow">
         {% for current_chapter in page_obj%}
@@ -49,6 +64,8 @@
         {% endfor %}
     </div>
 
+
+    <div id="page-bottom"></div>
 
     {% include 'novels/blocks/ui_commands/paginator.jinja' %}
 
