@@ -3,9 +3,10 @@ from .like import Like
 from .comment import Comment
 from django.contrib.auth import get_user_model
 
+
 class Chapter(models.Model):
     class Meta:
-        ordering = ['order']
+        ordering = ["order"]
 
     title = models.CharField(max_length=100)
     content = models.TextField(blank=True, null=True)
@@ -37,5 +38,3 @@ class Chapter(models.Model):
 
     def __str__(self):
         return f"{self.novel}:{self.title}"
-
-

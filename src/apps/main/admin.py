@@ -9,6 +9,7 @@ admin.site.register(Like)
 admin.site.register(Comment)
 admin.site.register(Genre)
 
+
 class StallionUserAdmin(UserAdmin):
     add_form = StallionUserCreationForm
     form = StallionUserChangeForm
@@ -22,5 +23,5 @@ class StallionUserAdmin(UserAdmin):
         "gender",
     ]
 
-admin.site.register(StallionUser, StallionUserAdmin)
 
+admin.site.register(StallionUser, StallionUserAdmin)

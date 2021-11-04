@@ -5,7 +5,12 @@ import copy
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse, HttpResponseBadRequest
+from django.http import (
+    HttpResponse,
+    HttpResponseRedirect,
+    JsonResponse,
+    HttpResponseBadRequest,
+)
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
@@ -14,66 +19,73 @@ from django.shortcuts import render
 from ..models import Novel, Chapter, Comment, Genre
 from ..forms import StallionUserCreationForm, ChapterForm, CommentForm
 
-@method_decorator(login_required, name='dispatch')
+
+@method_decorator(login_required, name="dispatch")
 class ChapterUnlikeView(View):
     def post(self, request, *args, **kwargs):
-        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
         if is_ajax:
             data = json.load(request)
-            payload = data.get('payload')
-            chapter_id = payload.get('chapter_id')
+            payload = data.get("payload")
+            chapter_id = payload.get("chapter_id")
             request.user.unlike_chapter(chapter_id)
-            return JsonResponse({'status': 'unliked'})
+            return JsonResponse({"status": "unliked"})
         else:
-            return HttpResponseBadRequest('Invalid Request')
+            return HttpResponseBadRequest("Invalid Request")
 
 
-@method_decorator(login_required, name='dispatch')
+@method_decorator(login_required, name="dispatch")
 class ChapterLikeView(View):
     def post(self, request, *args, **kwargs):
-        is_ajax = request.headers.get('X-Requested-With') == 'XMLHttpRequest'
+        is_ajax = request.headers.get("X-Requested-With") == "XMLHttpRequest"
         if is_ajax:
             data = json.load(request)
-            payload = data.get('payload')
-            chapter_id = payload.get('chapter_id')
+            payload = data.get("payload")
+            chapter_id = payload.get("chapter_id")
             request.user.like_chapter(chapter_id)
-            return JsonResponse({'status': 'liked'})
+            return JsonResponse({"status": "liked"})
         else:
-            return HttpResponseBadRequest('Invalid Request')
+            return HttpResponseBadRequest("Invalid Request")
+
 
 class SignUpView(CreateView):
     form_class = StallionUserCreationForm
     success_url = reverse_lazy("login")
     template_name = "accounts/forms/auth/register.html"
-    context = {"page_title": "Inscription", "page_hero_title": "Inscription",
-               "page_hero_description": "Rejoignez la meilleure plateforme de lecture de l'Afrique de l'Ouest"}
+    context = {
+        "page_title": "Inscription",
+        "page_hero_title": "Inscription",
+        "page_hero_description": "Rejoignez la meilleure plateforme de lecture de l'Afrique de l'Ouest",
+    }
 
     def get(self, request, *args, **kwargs):
         form = self.form_class()
         return render(request, self.template_name, {"form": form, **self.context})
+
 
 def notifications(request):
     user = request.user
     notifications = user.notifications.all()
     notifications = copy.copy(notifications)
     paginator = Paginator(notifications, 5)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     user.notifications.mark_all_as_read()
     return render(
-        request, "accounts/lists/notifications.html", {"page_title": "notifications",
-                                                       "page_hero_title": "Notifications",
-                                                       "page_hero_description": "Lisez vos notifications",
-                                                       "page_obj": page_obj,
-                                                       }
+        request,
+        "accounts/lists/notifications.html",
+        {
+            "page_title": "notifications",
+            "page_hero_title": "Notifications",
+            "page_hero_description": "Lisez vos notifications",
+            "page_obj": page_obj,
+        },
     )
 
 
 class ProfileView(View):
     template_name = "accounts/pages/profile.html"
-    context = {
-        "page_title": "Mon profil"
-    }
+    context = {"page_title": "Mon profil"}
 
     def get(self, request, *args, **kwargs):
         return render(request, self.template_name, self.context)
@@ -133,14 +145,12 @@ class SearchView(View):
 
     def get(self, request, *args, **kwargs):
         search_term = request.GET.get("search")
-        novels = Novel.objects.filter(
-            title__icontains=search_term,
-            public=True)
+        novels = Novel.objects.filter(title__icontains=search_term, public=True)
         paginator = Paginator(novels, 10)
-        page_number = request.GET.get('page')
+        page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
         extra_context = {
-            'page_obj': page_obj,
+            "page_obj": page_obj,
         }
         return render(request, self.template_name, {**extra_context})
 
@@ -195,17 +205,15 @@ class HomeView(View):
 
     def get(self, request, *args, **kwargs):
         novels = Novel.accessible_novels.all()
-        extra_context = {'novels': novels}
+        extra_context = {"novels": novels}
         return render(request, self.template_name, {**extra_context})
 
 
 def genre(request, genre_name):
     genre = Genre.objects.get(title=genre_name)
-    novels = genre.get_novels().order_by(
-        "-created_at"
-    )
+    novels = genre.get_novels().order_by("-created_at")
     paginator = Paginator(novels, 10)
-    page_number = request.GET.get('page')
+    page_number = request.GET.get("page")
     page_obj = paginator.get_page(page_number)
     return render(
         request,
@@ -277,20 +285,18 @@ class ReaderView(View):
     template_name = "novels/pages/reader.jinja"
 
     def get(self, request, *args, **kwargs):
-        novel_id = kwargs.get('novel_id')
+        novel_id = kwargs.get("novel_id")
         novel = Novel.objects.get(pk=novel_id)
         chapters = novel.get_chapters()
         paginator = Paginator(chapters, 1)
-        page_number = request.GET.get('page')
+        page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
         is_liked = page_obj[0].is_liked_by(request.user.id)
         extra_context = {
-            'novel': novel,
-            'chapters': chapters,
-            'page_obj': page_obj,
-            'is_liked': is_liked,
+            "novel": novel,
+            "chapters": chapters,
+            "page_obj": page_obj,
+            "is_liked": is_liked,
         }
 
-        return render(
-            request, self.template_name, {**extra_context}
-        )
+        return render(request, self.template_name, {**extra_context})

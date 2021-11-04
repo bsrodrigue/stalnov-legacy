@@ -6,10 +6,9 @@ from django.conf.urls.static import static
 import notifications.urls
 
 urlpatterns = [
-    path('', include('apps.main.urls')),
+    path("", include("apps.main.urls")),
     path(
-        "inbox/notifications/", include(notifications.urls,
-                                        namespace="notifications")
+        "inbox/notifications/", include(notifications.urls, namespace="notifications")
     ),
     path("admin/", admin.site.urls),
 ]

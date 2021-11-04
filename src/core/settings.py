@@ -18,7 +18,7 @@ DEV_ENV = os.getenv("ENV", "dev") == "dev"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ['127.0.0.1', '192.168.189.35']
+ALLOWED_HOSTS = ["127.0.0.1", "192.168.189.35"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    'livereload.middleware.LiveReloadScript',
+    "livereload.middleware.LiveReloadScript",
 ]
 
 ROOT_URLCONF = "core.urls"
@@ -71,7 +71,6 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
-
                 # Custom processors
                 "apps.main.context_processors.genres",
             ],
@@ -125,4 +124,4 @@ LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "home"
 
 
-DEFAULT_AUTO_FIELD="django.db.models.AutoField"
+DEFAULT_AUTO_FIELD = "django.db.models.AutoField"

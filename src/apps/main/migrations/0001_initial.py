@@ -13,104 +13,283 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('auth', '0012_alter_user_first_name_max_length'),
+        ("auth", "0012_alter_user_first_name_max_length"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='StallionUser',
+            name="StallionUser",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('password', models.CharField(max_length=128, verbose_name='password')),
-                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
-                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
-                ('username', models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username')),
-                ('first_name', models.CharField(blank=True, max_length=150, verbose_name='first name')),
-                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='last name')),
-                ('email', models.EmailField(blank=True, max_length=254, verbose_name='email address')),
-                ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
-                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
-                ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
-                ('firstname', models.CharField(blank=True, default='', max_length=256)),
-                ('lastname', models.CharField(blank=True, default='', max_length=256)),
-                ('bio', models.CharField(blank=True, default='', max_length=512)),
-                ('gender', models.CharField(blank=True, choices=[('H', 'Homme'), ('F', 'Femme')], default='Homme', max_length=256)),
-                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.Group', verbose_name='groups')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("password", models.CharField(max_length=128, verbose_name="password")),
+                (
+                    "last_login",
+                    models.DateTimeField(
+                        blank=True, null=True, verbose_name="last login"
+                    ),
+                ),
+                (
+                    "is_superuser",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates that this user has all permissions without explicitly assigning them.",
+                        verbose_name="superuser status",
+                    ),
+                ),
+                (
+                    "username",
+                    models.CharField(
+                        error_messages={
+                            "unique": "A user with that username already exists."
+                        },
+                        help_text="Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.",
+                        max_length=150,
+                        unique=True,
+                        validators=[
+                            django.contrib.auth.validators.UnicodeUsernameValidator()
+                        ],
+                        verbose_name="username",
+                    ),
+                ),
+                (
+                    "first_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="first name"
+                    ),
+                ),
+                (
+                    "last_name",
+                    models.CharField(
+                        blank=True, max_length=150, verbose_name="last name"
+                    ),
+                ),
+                (
+                    "email",
+                    models.EmailField(
+                        blank=True, max_length=254, verbose_name="email address"
+                    ),
+                ),
+                (
+                    "is_staff",
+                    models.BooleanField(
+                        default=False,
+                        help_text="Designates whether the user can log into this admin site.",
+                        verbose_name="staff status",
+                    ),
+                ),
+                (
+                    "is_active",
+                    models.BooleanField(
+                        default=True,
+                        help_text="Designates whether this user should be treated as active. Unselect this instead of deleting accounts.",
+                        verbose_name="active",
+                    ),
+                ),
+                (
+                    "date_joined",
+                    models.DateTimeField(
+                        default=django.utils.timezone.now, verbose_name="date joined"
+                    ),
+                ),
+                ("firstname", models.CharField(blank=True, default="", max_length=256)),
+                ("lastname", models.CharField(blank=True, default="", max_length=256)),
+                ("bio", models.CharField(blank=True, default="", max_length=512)),
+                (
+                    "gender",
+                    models.CharField(
+                        blank=True,
+                        choices=[("H", "Homme"), ("F", "Femme")],
+                        default="Homme",
+                        max_length=256,
+                    ),
+                ),
+                (
+                    "groups",
+                    models.ManyToManyField(
+                        blank=True,
+                        help_text="The groups this user belongs to. A user will get all permissions granted to each of their groups.",
+                        related_name="user_set",
+                        related_query_name="user",
+                        to="auth.Group",
+                        verbose_name="groups",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'user',
-                'verbose_name_plural': 'users',
-                'abstract': False,
+                "verbose_name": "user",
+                "verbose_name_plural": "users",
+                "abstract": False,
             },
             managers=[
-                ('objects', django.contrib.auth.models.UserManager()),
+                ("objects", django.contrib.auth.models.UserManager()),
             ],
         ),
         migrations.CreateModel(
-            name='Chapter',
+            name="Chapter",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('content', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateField(auto_now_add=True)),
-                ('publication_date', models.DateField(blank=True, null=True)),
-                ('reads', models.PositiveIntegerField(default=0)),
-                ('order', models.PositiveIntegerField(default=0)),
-                ('public', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("content", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateField(auto_now_add=True)),
+                ("publication_date", models.DateField(blank=True, null=True)),
+                ("reads", models.PositiveIntegerField(default=0)),
+                ("order", models.PositiveIntegerField(default=0)),
+                ("public", models.BooleanField(default=False)),
             ],
             options={
-                'ordering': ['order'],
+                "ordering": ["order"],
             },
         ),
         migrations.CreateModel(
-            name='Novel',
+            name="Novel",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=100)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('cover', models.ImageField(default='novel_covers/defaults/default1.png', upload_to='novel_covers')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('publication_date', models.DateField(blank=True, null=True)),
-                ('mature', models.BooleanField(default=False)),
-                ('public', models.BooleanField(default=False)),
-                ('genre', models.CharField(choices=[('Inconnu', 'Inconnu'), ('Fantasy', 'Fantasy'), ('Aventure', 'Aventure'), ('Romance', 'Romance'), ('Horreur', 'Horreur'), ('Action', 'Action'), ('Historique', 'Historique'), ('Nouvelles', 'Nouvelles')], default='Inconnu', max_length=30)),
-                ('author', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=100)),
+                ("description", models.TextField(blank=True, null=True)),
+                (
+                    "cover",
+                    models.ImageField(
+                        default="novel_covers/defaults/default1.png",
+                        upload_to="novel_covers",
+                    ),
+                ),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("publication_date", models.DateField(blank=True, null=True)),
+                ("mature", models.BooleanField(default=False)),
+                ("public", models.BooleanField(default=False)),
+                (
+                    "genre",
+                    models.CharField(
+                        choices=[
+                            ("Inconnu", "Inconnu"),
+                            ("Fantasy", "Fantasy"),
+                            ("Aventure", "Aventure"),
+                            ("Romance", "Romance"),
+                            ("Horreur", "Horreur"),
+                            ("Action", "Action"),
+                            ("Historique", "Historique"),
+                            ("Nouvelles", "Nouvelles"),
+                        ],
+                        default="Inconnu",
+                        max_length=30,
+                    ),
+                ),
+                (
+                    "author",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ['publication_date'],
+                "ordering": ["publication_date"],
             },
         ),
         migrations.CreateModel(
-            name='Like',
+            name="Like",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('chapter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.chapter')),
-                ('liker', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "chapter",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.chapter"
+                    ),
+                ),
+                (
+                    "liker",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('content', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateField(auto_now_add=True)),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('chapter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.chapter')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("content", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateField(auto_now_add=True)),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
+                (
+                    "chapter",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.chapter"
+                    ),
+                ),
             ],
         ),
         migrations.AddField(
-            model_name='chapter',
-            name='novel',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.novel'),
+            model_name="chapter",
+            name="novel",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE, to="main.novel"
+            ),
         ),
         migrations.AddField(
-            model_name='stallionuser',
-            name='library',
-            field=models.ManyToManyField(blank=True, to='main.Novel'),
+            model_name="stallionuser",
+            name="library",
+            field=models.ManyToManyField(blank=True, to="main.Novel"),
         ),
         migrations.AddField(
-            model_name='stallionuser',
-            name='user_permissions',
-            field=models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.Permission', verbose_name='user permissions'),
+            model_name="stallionuser",
+            name="user_permissions",
+            field=models.ManyToManyField(
+                blank=True,
+                help_text="Specific permissions for this user.",
+                related_name="user_set",
+                related_query_name="user",
+                to="auth.Permission",
+                verbose_name="user permissions",
+            ),
         ),
     ]

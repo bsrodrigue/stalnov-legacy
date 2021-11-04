@@ -5,8 +5,8 @@ from django.shortcuts import render
 def welcome(request):
     return render(
         request,
-        'core/pages/welcome.html',
+        "core/pages/welcome.html",
         {
-            'page_title': 'Bienvenue',
-        }
+            "page_title": "Bienvenue",
+        },
     )

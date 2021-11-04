@@ -4,6 +4,7 @@ from notifications.signals import notify
 
 from .exceptions import *
 
+
 def notify_readers_about_novel(author, novel_id, action_message, edit=False):
     novel = Novel.objects.get(pk=novel_id)
     if edit and not novel.is_accessible():
@@ -13,6 +14,7 @@ def notify_readers_about_novel(author, novel_id, action_message, edit=False):
         recipient=novel.get_readers(),
         verb=f"L'auteur {author.username} a {action_message} son livre {novel.title}",
     )
+
 
 def notify_readers_about_chapter(author, chapter_id, action_message, edit=False):
     chapter = Chapter.objects.get(pk=chapter_id)
@@ -29,34 +31,34 @@ def notify_readers_about_chapter(author, chapter_id, action_message, edit=False)
 def notify_readers(action):
     def decorator(func):
         def wrapper(*args, **kwargs):
-            if action == 'delete_novel':
+            if action == "delete_novel":
                 notify_readers_about_novel(args[0], args[1], "supprime")
                 result = func(*args, **kwargs)
-            elif action == 'delete_chapter':
+            elif action == "delete_chapter":
                 notify_readers_about_chapter(args[0], args[1], "supprime")
                 result = func(*args, **kwargs)
             else:
                 result = func(*args, **kwargs)
                 if action == "publish_novel":
+                    notify_readers_about_novel(args[0], args[1], "rendu public")
+                elif action == "unpublish_novel":
+                    notify_readers_about_novel(args[0], args[1], "rendu non-public")
+                elif action == "edit_novel":
                     notify_readers_about_novel(
-                        args[0], args[1], "rendu public")
-                elif action == 'unpublish_novel':
-                    notify_readers_about_novel(
-                        args[0], args[1], "rendu non-public")
-                elif action == 'edit_novel':
-                    notify_readers_about_novel(
-                        args[0], args[1], "modifie les informations sur", edit=True)
+                        args[0], args[1], "modifie les informations sur", edit=True
+                    )
                 elif action == "publish_chapter":
+                    notify_readers_about_chapter(args[0], args[1], "rendu public")
+                elif action == "unpublish_chapter":
+                    notify_readers_about_chapter(args[0], args[1], "rendu non-public")
+                elif action == "edit_chapter":
                     notify_readers_about_chapter(
-                        args[0], args[1], "rendu public")
-                elif action == 'unpublish_chapter':
-                    notify_readers_about_chapter(
-                        args[0], args[1], "rendu non-public")
-                elif action == 'edit_chapter':
-                    notify_readers_about_chapter(
-                        args[0], args[1], "modifie les informations sur", edit=True)
+                        args[0], args[1], "modifie les informations sur", edit=True
+                    )
             return result
+
         return wrapper
+
     return decorator
 
 
@@ -86,7 +88,9 @@ def notify_author(action):
                     verb=f"{args[0].username} a commente votre chapitre {chapter.title}",
                 )
             return result
+
         return wrapper
+
     return decorator
 
 
@@ -104,7 +108,9 @@ def must_be_the_author(model):
                     raise NotYourNovelException
             result = func(*args, **kwargs)
             return result
+
         return wrapper
+
     return decorator
 
 
@@ -120,8 +126,7 @@ def must_be_public(model):
                 raise IsNotPublicException
             result = func(*args, **kwargs)
             return result
+
         return wrapper
+
     return decorator
-
-
-

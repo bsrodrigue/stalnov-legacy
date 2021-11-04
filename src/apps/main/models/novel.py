@@ -4,9 +4,10 @@ from django.contrib.auth import get_user_model
 from .chapter import Chapter
 from ..managers import AccessibleNovelManager
 
+
 class Novel(models.Model):
     class Meta:
-        ordering = ['publication_date']
+        ordering = ["publication_date"]
 
     title = models.CharField(max_length=100)
     description = models.TextField(blank=True, null=True)
@@ -20,7 +21,7 @@ class Novel(models.Model):
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True, null=True
     )
-    genre = models.ForeignKey('main.NovelGenre', on_delete=models.CASCADE)
+    genre = models.ForeignKey("main.NovelGenre", on_delete=models.CASCADE)
     objects = models.Manager()
     reads = models.IntegerField(default=0)
     accessible_novels = AccessibleNovelManager()
@@ -58,5 +59,3 @@ class Novel(models.Model):
 
     def __str__(self):
         return self.title
-
-
