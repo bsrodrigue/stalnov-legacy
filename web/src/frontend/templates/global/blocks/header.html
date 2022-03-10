@@ -1,0 +1,36 @@
+{% load static %}
+<header>
+    <div class="upper-header">
+        <a href=" {% url 'home' %} ">
+            <i class="logo fas fa-book-reader"></i>
+        </a>
+        <form method="GET" class="search-form" action="{% url 'search' %}">
+            <i class="search-icon fas fa-search"></i>
+            <input
+                required
+                class="search-input"
+                type="text"
+                name="search"
+                placeholder="Chercher un livre..."
+            />
+        </form>
+
+        <button class="profile-button">
+            <i class="fas fa-user-circle"></i>
+        </button>
+    </div>
+
+    <div class="lower-header">
+        <nav class="novel-genre-nav">
+            {% for genre in genres %}
+            <a
+                class="novel-genre-nav-item"
+                href=" {% url 'genre' genre.title %} "
+                >{{ genre.title }}</a
+            >
+            {% endfor %}
+        </nav>
+    </div>
+
+    {% include 'global/blocks/header/side_panel.html'%}
+</header>

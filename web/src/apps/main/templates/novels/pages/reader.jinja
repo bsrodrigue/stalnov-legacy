@@ -1,0 +1,73 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block content %}
+    <div id="page-top"></div>
+
+    <aside class="reader-side-panel reader-side-panel-hidden">
+        <div class="reader-side-panel-content">
+            <p class="reader-side-panel-title">
+                Table de Matiere
+            </p>
+
+            {% if chapters %}
+                <ul class="reader-chapter-list">
+                    {% for  chapter in chapters %}
+                        <li>
+                            <a class="reader-chapter-list-item" href="?page={{ forloop.counter }}">
+                                {{ chapter.title  }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+
+            {% endif %}
+        </div>
+        <div class="reader-side-panel-toggle">
+            <i class="fas fa-list-ol"></i>
+        </div>
+    </aside>
+
+
+    <aside class="reader-navigator material-shadow">
+        <div class="reader-navigator-top">
+            <a href="#page-top">
+                <i class="fas fa-arrow-alt-circle-up"></i>
+            </a>
+        </div>
+        <div class="reader-navigator-bottom">
+            <a href="#page-bottom">
+                <i class="fas fa-arrow-alt-circle-down"></i>
+            </a>
+        </div>
+    </aside>
+
+
+    {% include 'novels/blocks/ui_commands/paginator.jinja' %}
+    <div class="chapter-content material-shadow">
+        {% for current_chapter in page_obj%}
+            {% if current_chapter %}
+                <p class="chapter-title">{{ current_chapter.title }}</p>
+                <hr/>
+                {{ current_chapter.content|safe }}
+                <button data-is-liked="{{ is_liked }}" data-chapter-id="{{ current_chapter.id }}" id="chapter-like-button">
+                    {% if is_liked %}
+                        J'aime plus
+                    {% else %}
+                        J'aime
+                    {% endif %}
+
+                </button>
+            {% else %}
+                <p class="simple-error-message">Contenu du chapitre introuve</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+
+    <div id="page-bottom"></div>
+
+    {% include 'novels/blocks/ui_commands/paginator.jinja' %}
+
+
+{% endblock content %}

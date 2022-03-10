@@ -1,0 +1,63 @@
+{% extends 'global/base.html' %} {% load static %} {% block active_container %}container{% endblock active_container %} {% block content %} {% include 'novels/blocks/confirmation_modal.html' %}
+
+<div class="dashboard">
+<form id="dashboard-action-form" method="POST" action="{% url 'bulk_dashboard_action' %}" hidden> {% csrf_token %} </form>
+<input form="dashboard-action-form" type="text" name="content_type" value="{% if dashboard == 'novel' %}novel{% elif dashboard == 'chapter' %}chapter{% endif %}" hidden>
+<input form="dashboard-action-form" type="text" name="novel_id" value="{% if dashboard == 'novel' %}{{ item.id }}{% elif dashboard == 'chapter' %}{{ item.novel.id }}{% endif %}" hidden>
+<div class="dashboard-actions">
+    {% if dashboard == 'novel' %}
+        <a href="{% url 'new_novel' %}" class="dashboard-action"> <i class="fas fa-plus-square"> </i> Nouveau Roman</a>
+    {% elif dashboard == 'chapter'  %}
+        <a href="{% url 'new_chapter' novel_id %}" class="dashboard-action"><i class="fas fa-plus-square"></i> Nouveau Chapitre </a>
+    {% endif %}
+
+    <div class="dashboard-action-container">
+        <input disabled form="dashboard-action-form" id="dashboard-action-submit" value="Valider" type="submit" />
+        <select form="dashboard-action-form" id="dashboard-action-select" name="action">
+            <option value="publish">Publier</option>
+            <option value="unpublish">Depublier</option>
+            <option value="delete">Supprimer</option>
+        </select>
+    </div>
+</div>
+</div>
+
+<ul class="dashboard-list"  {% if sortable %} class="sortable-list" {% endif %}>
+    {% if page_obj %} {% for item in page_obj %}
+        <input form="dashboard-action-form" class="dashboard-item-check" type="checkbox" id="check-item-{{ item.id }}" name="selected-items" value="{{ item.id }}" hidden />
+        <li data-id="{{ item.id  }}" class="dashboard-list-item">
+            {% if dashboard == 'novel'%}
+            <img data-item-id="{{ item.id }}" class="dashboard-item-cover" {% if item.cover %} src="{{ item.cover.url  }}" {% else %} {% endif %} alt=""/>
+            {% elif dashboard == 'chapter'%}
+            <i class="fas fa-bars"></i>
+            <img data-item-id="{{ item.id }}" class="dashboard-item-cover" {% if item.novel.cover %} src="{{ item.novel.cover.url  }}" {% else %} {% endif %} alt=""/>
+            {% endif %}
+            <p class="dashboard-item-title">{{ item.title }}</p>
+            <p class="dashboard-item-public" style="{% if item.public %} color:green; {% else %} color:red; {% endif %}">
+            {% if item.public %} Public {% else %} Non-Public {% endif %}
+            </p>
+            <div class="dashboard-item-actions">
+                {% if dashboard == 'novel' %}
+                    <a href="{% url 'chapters' item.id %}" class="item-action item-action-chapters"> <i class="fas fa-list-ol"></i> </a>
+                    <a href="{% url 'edit_novel' item.id %}" class="item-action item-action-edit">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a data-url="{% url 'delete_novel' item.id %}" class="item-action item-action-delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                {% elif dashboard == 'chapter' %}
+                    <a href="{% url 'edit_chapter' item.id %}" class="item-action item-action-edit">
+                        <i class="far fa-edit"></i>
+                    </a>
+                    <a data-url="{% url 'delete_chapter' item.id %}" class="item-action item-action-delete">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>
+                {% endif %}
+            </div>
+        </li>
+    {% endfor %} {% else %} {% endif %}
+</ul>
+
+{% include 'novels/blocks/ui_commands/paginator.jinja' %}
+
+{% endblock content %}

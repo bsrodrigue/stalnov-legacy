@@ -1,0 +1,17 @@
+{% load static %}
+{% load novel_extras %}
+<section class="novel-section">
+  <!--- TITLE --->
+  <div class="section-title-container">
+    <div class="section-title-top">
+      <p class="section-title">{{ section_title }}</p>
+    </div>
+    <div class="section-title-bottom"></div>
+  </div>
+  <!--- SECTION-CONTENT --->
+  <div style="background-color: white;" class="section-content material-shadow">
+    <div class="nc-grid">
+        {% for novel in novels %} {% include 'novels/blocks/cards/novel_card.html' with novel=novel %} {% endfor %}
+    </div>
+  </div>
+</section>

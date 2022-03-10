@@ -1,0 +1,41 @@
+<nav class="side-panel side-panel-hidden">
+  <div class="panel-section auth-section">
+    {% if user.is_authenticated %}
+    <a class="register" href=" {% url 'logout' %} ">Me deconnecter</a>
+    {% else %}
+    <a class="register" href=" {% url 'signup' %} ">S'inscrire</a>
+    <a class="login" href="{% url 'login' %}">Me connecter</a>
+    {% endif %}
+  </div>
+  <hr />
+
+  {% if user.is_authenticated %}
+
+  <div class="panel-section account-section">
+    <div class="account-section-item">
+      <a href="{% url 'my_profile' %}" class="section-item-title"
+        >Mon Profil</a
+      >
+      <i class="far fa-user-circle"></i>
+    </div>
+    <div class="account-section-item">
+      <a href="{% url 'my_library' %}" class="section-item-title"
+        >Bibliothèque</a
+      >
+      <i class="fas fa-book"></i>
+    </div>
+    <div class="account-section-item">
+      <a href="{% url 'my_creations' %}" class="section-item-title"
+        >Créations</a
+      >
+      <i class="fas fa-feather-alt"></i>
+    </div>
+    <div class="account-section-item">
+      <a href="{% url 'notifications' %}" class="section-item-title"
+        >Notifications</a
+      >
+      <i class="far fa-bell"></i>
+    </div>
+  </div>
+  {% endif%}
+</nav>

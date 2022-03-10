@@ -1,0 +1,54 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% load novel_extras %}
+{% block active_container %}container{% endblock active_container %}
+
+
+{% block additional_stylesheets %}
+<link href=" {% static 'novels/css/quill.snow.css' %} " rel="stylesheet">
+{% endblock additional_stylesheets %}
+
+
+{% block additional_scripts %}
+<script src="{% static 'novels/js/quill.min.js' %}"></script>
+<script>
+  var quill = new Quill('#editor', {
+    theme: 'snow',
+    placeholder: 'Écrivez quelque chose d\'intéressant...',
+  });
+</script>
+<script src=" {% static 'global/js/forms/richtext.js' %} "></script>
+{% endblock additional_scripts %}
+
+
+{% block content %}
+<form id="chapter_form" class="writing-form" action=" {% if new_chapter %} {% url 'new_chapter' novel_id %} {% else %}  {% url 'edit_chapter' chapter_id %}  {% endif %} " method="post">
+  {% csrf_token %}
+  <!-- Chapter Title Input -->
+  <input value="{% if chapter %} {{ chapter.title }} {% endif %}" id="title_input" class="writing-form-title-input" type="text" name="title" id="" required placeholder="Nouveau Titre...">
+  <small> {{ form.title.error  }}  </small>
+
+  <!-- Actual Chapter Content Input -->
+  <input form="chapter_form" id="richtext_input" class="writing-form-title-input" type="text" name="content" hidden>
+
+  <!-- QuillJS Chapter Content Input -->
+  <div id="editor">
+   {% if chapter %}
+   {% autoescape on %}
+    {{ chapter.content|safe }}
+  {% endautoescape %}
+   {% endif %}
+  </div>
+  <small> {{ form.content.error  }}  </small>
+
+  <div id="chapter_form_checkboxes">
+    <label for="public">Rendre public:</label>
+    <input {% if chapter.public %} checked {% endif %} type="checkbox" name="public" id="chapter_public_checkbox">
+    <br>
+    <small>Le chapitre sera visible pour tout le monde</small>
+  <small> {{ form.public.error  }}  </small>
+  </div>
+  
+  <input id="chapter_save_button" class="btn btn-dark writing_save_button"type="submit" value="Sauvegarder">
+</form>
+{% endblock content %}

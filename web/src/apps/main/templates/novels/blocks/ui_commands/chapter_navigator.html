@@ -1,0 +1,14 @@
+<div class="chapter-navigator">
+
+    {% if page_obj.has_previous %}
+    <div class="chapter-navigator-button">
+        <a class="chapter-navigator-link" href="?page={{ page_obj.previous_page_number }}">Chapitre Précedant</a>
+    </div>
+    {% endif %}
+
+    {% if page_obj.has_next %}
+    <div class="chapter-navigator-button">
+        <a class="chapter-navigator-link" href="?page={{ page_obj.next_page_number }}">Chapitre Suivant</a>
+    </div>
+    {% endif %}
+</div>

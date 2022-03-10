@@ -1,0 +1,20 @@
+{% extends 'global/base.html' %}
+{% load static %}
+{% block title %}Sign Up{% endblock %}
+
+{% block additional_scripts %}
+    <script src="{% static 'global/js/signup.js' %}" type="text/javascript"></script>
+{% endblock additional_scripts %}
+
+{% block content %}
+    <div class="wrapper center-box">
+        <!--- Multistep Signup Form --->
+        <form class="auth-form material-shadow" id="signup-form" method="post">
+            {% csrf_token %}
+            {% include 'accounts/forms/auth/blocks/first_step.html' %}
+            {% include 'accounts/forms/auth/blocks/second_step.html' %}
+            {% include 'accounts/forms/auth/blocks/third_step.html' %}
+        </form>
+    </div>
+
+{% endblock %}

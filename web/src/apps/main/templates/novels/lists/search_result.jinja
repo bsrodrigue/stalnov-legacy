@@ -1,0 +1,21 @@
+{% extends 'global/base.html' %} {% block active_container %}container{% endblock active_container %} {% block global_wrapper %} wrapper {% endblock global_wrapper %} {% block content %}
+<!-- New Novels -->
+<section>
+    <div class="section-title-container">
+        <div class="section-title-top">
+            <p class="section-title">Resultats de recherche</p>
+        </div>
+        <div class="section-title-bottom"></div>
+    </div>
+    {% if page_obj %}
+    <div class="nc-grid">
+        {% for novel in page_obj %} {% include 'novels/blocks/cards/novel_card.html' with novel=novel %} {% endfor %}
+    </div>
+    {% else %}
+    <h1>Aucun Résultat trouvé</h1>
+    {% endif %}
+</section>
+
+
+{% include 'novels/blocks/ui_commands/paginator.jinja' %}
+{% endblock content %}
