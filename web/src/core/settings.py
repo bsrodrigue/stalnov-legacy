@@ -18,13 +18,14 @@ DEV_ENV = os.getenv("ENV", "dev") == "dev"
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-ALLOWED_HOSTS = ["127.0.0.1", "192.168.189.35"]
+ALLOWED_HOSTS = ["local-stalnov.com"]
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY")
+SECRET_KEY = "OKAY"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = DEV_ENV
@@ -86,11 +87,11 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": os.getenv("PSQL_NSTALNOV_DB"),
-        "USER": os.getenv("PSQL_NSTALNOV_USR"),
-        "PASSWORD": os.getenv("PSQL_NSTALNOV_PASS"),
-        "HOST": os.getenv("PSQL_NSTALNOV_HOST"),
-        "PORT": os.getenv("PSQL_NSTALNOV_PORT"),
+        "NAME": os.getenv("POSTGRES_DB"),
+        "USER": os.getenv("POSTGRES_USER"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD"),
+        "HOST": "db",
+        "PORT": 5432,
     },
 }
 
