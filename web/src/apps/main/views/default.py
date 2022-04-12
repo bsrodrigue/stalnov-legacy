@@ -291,12 +291,12 @@ class ReaderView(View):
         paginator = Paginator(chapters, 1)
         page_number = request.GET.get("page")
         page_obj = paginator.get_page(page_number)
-        is_liked = page_obj[0].is_liked_by(request.user.id)
+        # is_liked = page_obj[0].is_liked_by(request.user.id)
         extra_context = {
             "novel": novel,
             "chapters": chapters,
             "page_obj": page_obj,
-            "is_liked": is_liked,
+            # "is_liked": is_liked,
         }
 
         return render(request, self.template_name, {**extra_context})

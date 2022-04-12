@@ -54,20 +54,20 @@ window.addEventListener("DOMContentLoaded", (e) => {
             chapterLikeButton.disabled = true;
             chapterLikeButton.innerHTML = "...";
             const ENDPOINT =
-                chapterLikeButton.getAttribute("data-is-liked") === "True"
-                    ? CHAPTER_UNLIKE_ENDPOINT
-                    : CHAPTER_LIKE_ENDPOINT;
+                chapterLikeButton.getAttribute("data-is-liked") === "True" ?
+                CHAPTER_UNLIKE_ENDPOINT :
+                CHAPTER_LIKE_ENDPOINT;
             fetch(ENDPOINT, {
-                method: "POST",
-                credentials: "same-origin",
-                headers: {
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRFToken": getCookie("csrftoken"),
-                },
-                body: JSON.stringify({
-                    payload: data,
-                }),
-            })
+                    method: "POST",
+                    credentials: "same-origin",
+                    headers: {
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRFToken": getCookie("csrftoken"),
+                    },
+                    body: JSON.stringify({
+                        payload: data,
+                    }),
+                })
                 .then((response) => response.json())
                 .then((data) => {
                     const NEW_STATUS =
@@ -114,10 +114,10 @@ window.addEventListener("DOMContentLoaded", (e) => {
             dashboardItemChecks = Array.from(dashboardItemChecks);
             const areChecked = (element) => element.checked;
             dashboardActionSubmit.disabled = dashboardItemChecks.some(
-                areChecked
-            )
-                ? false
-                : true;
+                    areChecked
+                ) ?
+                false :
+                true;
         });
     });
 
@@ -141,7 +141,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
         handle: ".fa-bars",
         sort: true,
         dataIdAttr: "data-id",
-        onEnd: function (e) {
+        onEnd: function(e) {
             saveNewOrder();
         },
     };
@@ -160,16 +160,16 @@ window.addEventListener("DOMContentLoaded", (e) => {
         });
 
         fetch(CHAPTER_REORDER_ENDPOINT, {
-            method: "POST",
-            credentials: "same-origin",
-            headers: {
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRFToken": getCookie("csrftoken"),
-            },
-            body: JSON.stringify({
-                payload: data,
-            }),
-        })
+                method: "POST",
+                credentials: "same-origin",
+                headers: {
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRFToken": getCookie("csrftoken"),
+                },
+                body: JSON.stringify({
+                    payload: data,
+                }),
+            })
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
@@ -275,7 +275,7 @@ window.addEventListener("DOMContentLoaded", (e) => {
     }
 
     $input.value = quill.root.innerHTML;
-    quill.on("text-change", function (delta, oldDelta, source) {
+    quill.on("text-change", function(delta, oldDelta, source) {
         $input.value = quill.root.innerHTML;
     });
 });

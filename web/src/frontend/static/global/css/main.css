@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
-
 :root {
     --main-color: #171717;
     --secondary-color: #444444;
@@ -20,8 +19,10 @@ body {
     position: relative;
     height: 100%;
     scroll-behavior: smooth;
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
 }
 
 body {
@@ -32,7 +33,9 @@ body::-webkit-scrollbar {
     display: none;
 }
 
+
 /*--- Global Typography ---*/
+
 a {
     text-decoration: none;
 }
@@ -41,12 +44,16 @@ a:hover {
     cursor: pointer;
 }
 
+
 /*--- ReorderJS ---*/
+
 i.fa-bars :hover {
     cursor: grab;
 }
 
+
 /*--- Modals ---*/
+
 .modal-container {
     position: absolute;
     width: 100vw;
@@ -68,7 +75,6 @@ i.fa-bars :hover {
     justify-content: space-around;
     align-items: center;
     padding: 1em;
-
     width: clamp(300px, 50vw, 400px);
     height: 300px;
     border-radius: 1em;
@@ -105,7 +111,9 @@ i.fa-bars :hover {
     background-color: black;
 }
 
+
 /*--- Header ---*/
+
 header {
     display: flex;
     flex-direction: column;
@@ -119,7 +127,9 @@ header {
     padding: 1em;
 }
 
+
 /*--- Site-Message ---*/
+
 .site-message {
     display: flex;
     justify-content: space-around;
@@ -128,7 +138,9 @@ header {
     font-weight: bold;
 }
 
+
 /*--- Upper-Header ---*/
+
 .upper-header {
     align-items: center;
 }
@@ -183,7 +195,9 @@ header {
     color: white;
 }
 
+
 /*--- Lower-Header ---*/
+
 .lower-header {
     background-color: var(--ternary-color);
 }
@@ -194,7 +208,9 @@ header {
     margin: 0.5em;
 }
 
+
 /*--- Side-Panel ---*/
+
 .side-panel {
     position: absolute;
     z-index: 3;
@@ -268,6 +284,7 @@ header {
     margin: 1em 0em;
 }
 
+
 /*--- Home-Page ---*/
 
 section {
@@ -312,6 +329,7 @@ section {
     padding: 1em;
 }
 
+
 /*--- Novel-Cards ---*/
 
 .nc-grid {
@@ -333,6 +351,7 @@ section {
 .nc img {
     border-radius: 1em;
 }
+
 
 /*--- Simple-Novel-Cards ---*/
 
@@ -391,7 +410,7 @@ section {
     background-color: black;
 }
 
-.simple-nc:hover > .simple-nc-overlay {
+.simple-nc:hover>.simple-nc-overlay {
     bottom: 0;
     transition: bottom 0.5s ease-out;
 }
@@ -401,6 +420,7 @@ section {
     height: 100%;
     object-fit: cover;
 }
+
 
 /*--- Detailed-Novel-Cards ---*/
 
@@ -435,6 +455,7 @@ section {
 .detailed-nc-overlay-infos :nth-child(1) {
     font-weight: bold;
 }
+
 
 /*--- Registration-Form ---*/
 
@@ -568,7 +589,9 @@ form.auth-form {
     margin-left: auto;
 }
 
+
 /*--- Dashboard ---*/
+
 .dashboard {
     display: flex;
     align-items: center;
@@ -729,7 +752,9 @@ form.auth-form {
     background-color: red;
 }
 
+
 /*--- Create-Novel-Form ---*/
+
 .writing-form {
     background-color: white;
     padding: 1em;
@@ -775,6 +800,7 @@ form.auth-form {
 .writing_save_button {
     width: 100%;
 }
+
 
 /*--- Novel Cover---*/
 
@@ -824,15 +850,15 @@ form.auth-form {
     border: none;
 }
 
+
 /*--- User-Profile ---*/
+
 .profile-header {
     background-color: #082032;
     padding: 3em 1em;
-
     display: flex;
     flex-direction: column;
     align-items: center;
-
     color: white;
 }
 
@@ -864,7 +890,9 @@ form.auth-form {
     font-style: italic;
 }
 
+
 /*--- Profile-Tabs ---*/
+
 .profile-tab-selector {
     display: flex;
     justify-content: space-between;
@@ -886,7 +914,9 @@ form.auth-form {
     color: white;
 }
 
+
 /*--- Profile-Tab-Content ---*/
+
 .profile-tab-contents {
     background-color: white;
     padding: 1em 0;
@@ -897,7 +927,9 @@ form.auth-form {
     justify-content: center;
 }
 
+
 /*--- Profile-Tab-About-Me ---*/
+
 .profile-tab-content-about-me {
     flex-direction: column;
     align-items: center;
@@ -933,7 +965,9 @@ form.auth-form {
     font-style: italic;
 }
 
+
 /*--- Reader ---*/
+
 .reader-side-panel {
     display: flex;
     position: fixed;
@@ -999,7 +1033,7 @@ form.auth-form {
     right: 1em;
 }
 
-.reader-navigator > div {
+.reader-navigator>div {
     margin: 1em;
 }
 
@@ -1029,15 +1063,42 @@ form.auth-form {
     opacity: 0.5;
 }
 
+.like-button {
+    border: none;
+    border-radius: 1em;
+    padding: 1em;
+    font-weight: bold;
+    display: block;
+    margin: 0 auto;
+    color: white;
+}
+
+.like-button:hover {
+    cursor: pointer;
+}
+
+.is-liked {
+    background-color: var(--ternary-color);
+}
+
+.is-not-liked {
+    background-color: var(--main-color);
+}
+
+
 /*--- Utilities ---*/
+
 .wrapper {
-    margin-right: auto; /* 1 */
-    margin-left: auto; /* 1 */
-
-    max-width: 1400px; /* 2 */
-
-    padding-right: 10px; /* 3 */
-    padding-left: 10px; /* 3 */
+    margin-right: auto;
+    /* 1 */
+    margin-left: auto;
+    /* 1 */
+    max-width: 1400px;
+    /* 2 */
+    padding-right: 10px;
+    /* 3 */
+    padding-left: 10px;
+    /* 3 */
 }
 
 .center-box {
